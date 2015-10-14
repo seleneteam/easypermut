@@ -1,11 +1,13 @@
 package etrs.selene.easypermut.model.entities;
 
 import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -18,20 +20,30 @@ import etrs.selene.easypermut.model.commons.GeneratedUUID;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity(name = "avis")
 @EqualsAndHashCode(of = "id")
-public class Avis implements Serializable {
+public class Avis implements Serializable
+{
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedUUID
-    @Column(name = "id")
-    String id;
+	/**
+	 * Identifiant de l'avis.
+	 */
+	@Id
+	@GeneratedUUID
+	@Column(columnDefinition = "VARCHAR(36)", name = "id")
+	String id;
 
-    @Column(name = "contenu")
-    String contenu;
+	/**
+	 * Contenu de l'avis.
+	 */
+	@Column(name = "contenu")
+	String contenu;
 
-    @JoinColumn(name = "utilisateur_id")
-    @ManyToOne
-    Utilisateur utilisateur;
+	/**
+	 * Utilisateur concerné par l'avis.
+	 */
+	@JoinColumn(name = "utilisateur_id")
+	@ManyToOne
+	Utilisateur utilisateur;
 
 }

@@ -23,13 +23,19 @@ import etrs.selene.easypermut.model.commons.GeneratedUUID;
 public class Grade implements Serializable
 {
 	private static final long serialVersionUID = 1L;
-	
+
+	/**
+	 * Identifiant du grade.
+	 */
 	@Id
 	@GeneratedUUID
 	@Column(columnDefinition = "VARCHAR(36)", name = "id")
 	String id;
-
+	
+	/**
+	 * Libelle du grade.
+	 */
 	@Column(name = "grade")
 	String grade;
-	
+
 }

@@ -23,15 +23,24 @@ import etrs.selene.easypermut.model.commons.GeneratedUUID;
 public class Specialite implements Serializable
 {
 	private static final long serialVersionUID = 1L;
-	
+
+	/**
+	 * Identifiant de la spécialité.
+	 */
 	@Id
 	@GeneratedUUID
 	@Column(columnDefinition = "VARCHAR(36)", name = "id")
 	String id;
-
+	
+	/**
+	 * Libelle de la spécialité.
+	 */
 	@Column(name = "libelle")
 	String libelle;
-
+	
+	/**
+	 * Numéro de la specialité.
+	 */
 	@Column(name = "numeroSpe")
 	String numeroSpe;
 }

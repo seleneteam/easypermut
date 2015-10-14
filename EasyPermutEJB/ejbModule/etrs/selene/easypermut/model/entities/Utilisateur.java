@@ -26,31 +26,55 @@ public class Utilisateur implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Identifiant de l'utilisateur.
+	 */
 	@Id
 	@GeneratedUUID
 	@Column(columnDefinition = "VARCHAR(36)", name = "id")
 	String id;
 
+	/**
+	 * Nom de l'utilisateur.
+	 */
 	@Column(name = "nom")
 	String nom;
 	
+	/**
+	 * Prenom de l'utiisateur.
+	 */
 	@Column(name = "prenom")
 	String prenom;
 	
+	/**
+	 * NIA de l'utilisateur.
+	 */
 	@Column(name = "nia")
 	String nia;
 	
+	/**
+	 * Mail de l'utilisateur.
+	 */
 	@Column(name = "mail")
 	String mail;
 
+	/**
+	 * Grade de l'utilisateur.
+	 */
 	@ManyToOne
 	@JoinColumn(name = "grade_id")
 	Grade grade;
 
+	/**
+	 * Specialite de l'utilisateur.
+	 */
 	@ManyToOne
 	@JoinColumn(name = "specialite_id")
 	Specialite specialite;
 
+	/**
+	 * Poste occupé par l'utilisateur.
+	 */
 	@ManyToOne
 	@JoinColumn(name = "poste_id")
 	Poste poste;

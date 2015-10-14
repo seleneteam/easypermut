@@ -25,34 +25,34 @@ import etrs.selene.easypermut.model.commons.GeneratedUUID;
 public class Utilisateur implements Serializable
 {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedUUID
 	@Column(columnDefinition = "VARCHAR(36)", name = "id")
 	String id;
-	
+
 	@Column(name = "nom")
 	String nom;
-
+	
 	@Column(name = "prenom")
 	String prenom;
-
+	
 	@Column(name = "nia")
 	String nia;
-
+	
 	@Column(name = "mail")
 	String mail;
-	
-	@ManyToOne
-	@JoinColumn(name = "grade")
-	Grade grade;
-	
-	@ManyToOne
-	@JoinColumn(name = "specialite")
-	Specialite specialite;
-	
-	@ManyToOne
-	@JoinColumn(name = "poste")
-	Poste poste;
 
+	@ManyToOne
+	@JoinColumn(name = "grade_id")
+	Grade grade;
+
+	@ManyToOne
+	@JoinColumn(name = "specialite_id")
+	Specialite specialite;
+
+	@ManyToOne
+	@JoinColumn(name = "poste_id")
+	Poste poste;
+	
 }

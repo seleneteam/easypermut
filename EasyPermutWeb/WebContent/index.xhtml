@@ -5,43 +5,4 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       template="/WEB-INF/templates/standard.xhtml">
-
-
-	<ui:define name="title">Page Accueil - Selene Team</ui:define>
-	
-	<ui:define name="content">
-		<h:form>
-			<p:fieldset legend="Ajouter une personne" style="margin-bottom:20px">
-				<p:panelGrid columns="3">
-				
-					<p:outputLabel value="Nom" for="inputNom" />
-					<p:inputText id="inputNom" value="#{indexPageBean.personne.nom}" required="true" requiredMessage="Le nom de la personne est requise"/>
-					<p:message for="inputNom" />
-	
-					<p:outputLabel value="Prenom" for="inputPrenom" />
-					<p:inputText id="inputPrenom" value="#{indexPageBean.personne.prenom}" required="true" requiredMessage="Le prénom de la personne est requise"/>
-					<p:message for="inputPrenom" />
-
-				</p:panelGrid>
-			</p:fieldset>
-			<p:commandButton value="Ajouter" update="@form :form_datatable_personnes" icon="ui-icon-disk" actionListener="#{indexPageBean.ajouterPersonne()}" />		
-		</h:form>
-		
-		<p:separator />
-		<h:form id="form_datatable_personnes">
-			<p:dataTable id="datatable_personnes" var="p" value="#{indexPageBean.lstPersonnes}">
-				<p:column headerText="Photo">
-					<h:outputText value="test" />
-				</p:column>
-
-				<p:column headerText="Nom">
-					<h:outputText value="#{p.nom}" />
-				</p:column>
-				
-				<p:column headerText="Prénom">
-					<h:outputText value="#{p.prenom}" />
-				</p:column>
-			</p:dataTable>
-		</h:form>
-	</ui:define>
 </ui:composition>

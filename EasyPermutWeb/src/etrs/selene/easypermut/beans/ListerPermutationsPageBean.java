@@ -77,4 +77,8 @@ public class ListerPermutationsPageBean implements Serializable {
         return lstPermutSpecifique;
     }
 
+    public void choisirPermutation(DemandePermutation permutation) {
+        utilisateur.setEstInteresse(true);
+        permutation.setUtilisateurInteresse(utilisateur);
+    }
 }

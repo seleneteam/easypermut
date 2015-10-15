@@ -1,12 +1,10 @@
 package etrs.selene.easypermut.model.entities;
 
 import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -14,28 +12,33 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import etrs.selene.easypermut.model.commons.GeneratedUUID;
 
+/**
+ * Classe représentant l'entitée Grade.
+ * 
+ * @author SGT Mora Leo
+ *
+ */
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @NoArgsConstructor
 @EqualsAndHashCode(of = "id")
 @Entity
 @Table(name = "grade")
-public class Grade implements Serializable
-{
-	private static final long serialVersionUID = 1L;
+public class Grade implements Serializable {
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * Identifiant du grade.
-	 */
-	@Id
-	@GeneratedUUID
-	@Column(columnDefinition = "VARCHAR(36)", name = "id")
-	String id;
-	
-	/**
-	 * Libelle du grade.
-	 */
-	@Column(name = "grade")
-	String grade;
+    /**
+     * Identifiant du grade.
+     */
+    @Id
+    @GeneratedUUID
+    @Column(columnDefinition = "VARCHAR(36)", name = "id")
+    String id;
+
+    /**
+     * Libelle du grade.
+     */
+    @Column(name = "grade")
+    String grade;
 
 }

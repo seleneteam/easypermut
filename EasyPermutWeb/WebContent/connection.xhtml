@@ -34,15 +34,16 @@
 					<h:form role="form">
 						<p:outputLabel value="Identifiant" for="champIdentifiant" />
 						<br />
-						<p:inputText id="champIdentifiant" value="" />
+						<p:inputText id="champIdentifiant" value="#{identificationPageBean.utilisateur.identifiantAnudef}" />
 						<p:message for="champIdentifiant" />
 		
 						<p:outputLabel value="Mot de passe" for="champMotdepasse" />
 						<br />
-						<p:inputText id="champMotdepasse" value="" />
+						<p:inputText id="champMotdepasse" />
 						<p:message for="champMotdepasse" />
 						<br/>
 						<p:commandButton ajax="false" value="Connexion" 
+							action="#{identificationPageBean.connexion()}"
 							icon="ui-icon-person" />
 					</h:form>
 				</div>

@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<h:outputStylesheet library="css" name="style.css" />
+	<h:outputStylesheet library="css" name="bootstrap-theme.min.css" />
+	<h:outputStylesheet library="css" name="bootstrap.min.css" />
+	<h:outputStylesheet library="css" name="freelancer.css" />
+
+	<h:outputScript library="js" name="bootstrap.min.js" />
+
+	<title>Connection</title>
+</h:head>
+<h:body>
+	<div class="container">
+		<div class="jumbotron">
+			<h1>Easy Permut'</h1>
+			<p>Authentification</p>
+		</div>
+	</div>
+
+	<section> 
+		<article>
+			<div class="container">
+				<div class="col-md-4"></div>
+				<div class="col-md-4">
+					<p>Veuillez utiliser vos identifiants intradef.</p>
+					<h:form role="form">
+						<p:outputLabel value="Identifiant" for="champIdentifiant" />
+						<br />
+						<p:inputText id="champIdentifiant" value="" />
+						<p:message for="champIdentifiant" />
+		
+						<p:outputLabel value="Mot de passe" for="champMotdepasse" />
+						<br />
+						<p:inputText id="champMotdepasse" value="" />
+						<p:message for="champMotdepasse" />
+						<br/>
+						<p:commandButton ajax="false" value="Connexion" 
+							icon="ui-icon-person" />
+					</h:form>
+				</div>
+				<div class="col-md-4"></div>
+			</div>
+		</article> 
+	</section>
+
+	<footer>
+	<div class="footer-below centre">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">Easy permut' 2015</div>
+			</div>
+		</div>
+	</div>
+	</footer>
+</h:body>
+
+</html>

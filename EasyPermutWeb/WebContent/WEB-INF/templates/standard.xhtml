@@ -1,26 +1,56 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui"> 
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	
+
 	<h:outputStylesheet library="css" name="style.css" />
 	<h:outputStylesheet library="css" name="bootstrap-theme.min.css" />
 	<h:outputStylesheet library="css" name="bootstrap.min.css" />
-	
+	<h:outputStylesheet library="css" name="freelancer.css" />
+
 	<h:outputScript library="js" name="bootstrap.min.js" />
+
+	<title><ui:insert name="title"></ui:insert></title>
+</h:head>
+<h:body>
+	<header>
+		<nav class="navbar navbar-default">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse">
+						<span class="sr-only">Menu</span> <span class="icon-bar"></span> <span
+							class="icon-bar"></span> <span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="">Easy permut'</a>
+				</div>
+
+				<div>
+					<ul class="nav navbar-nav">
+						<li><h:link outcome="">Accueil</h:link></li>
+						<li><h:link outcome="">Liste des permutations</h:link></li>
+						<li><h:link outcome="">Créer une demande</h:link></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</header>
 	
-	<title><ui:insert name="title"></ui:insert></title>		
-</h:head> 
-<h:body> 
-    <ui:insert name="content">
-   	</ui:insert>
+	<ui:insert name="content">
+	</ui:insert>
+	
 	<footer>
-		Easy Permut' - Selene Team
-   </footer>       
-</h:body> 
+		<div class="footer-below">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">Easy permut' 2015</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+</h:body>
 </html>

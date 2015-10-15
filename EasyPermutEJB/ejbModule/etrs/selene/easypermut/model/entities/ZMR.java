@@ -10,7 +10,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import etrs.selene.easypermut.model.commons.GeneratedUUID;
+import net.entetrs.commons.uuid.GeneratedUUID;
 
 /**
  * Classe représentant l'entitée ZMR.

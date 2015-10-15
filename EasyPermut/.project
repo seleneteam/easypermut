@@ -5,6 +5,8 @@
 	<projects>
 		<project>EasyPermutEJB</project>
 		<project>EasyPermutWeb</project>
+		<project>AbstractFacade</project>
+		<project>JsfCommonsTools</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

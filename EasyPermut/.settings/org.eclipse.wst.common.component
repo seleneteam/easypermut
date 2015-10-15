@@ -9,5 +9,11 @@
             <dependent-object/>
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="AbstractFacade.jar" deploy-path="/lib" handle="module:/resource/AbstractFacade/AbstractFacade">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="JsfCommonsTools.jar" deploy-path="/lib" handle="module:/resource/JsfCommonsTools/JsfCommonsTools">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
     </wb-module>
 </project-modules>

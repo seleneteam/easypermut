@@ -46,14 +46,19 @@ public class ImportSingleton {
 
                     Element eElement = (Element) nNode;
 
-                    System.out.println("Id Anudef: " + eElement.getAttribute("idanudef"));
+                    System.out.println("Id Anudef : " + eElement.getAttribute("idanudef"));
                     System.out.println("Grade : " + eElement.getElementsByTagName("grade").item(0).getTextContent());
                     System.out.println("Nom : " + eElement.getElementsByTagName("nom").item(0).getTextContent());
                     System.out.println("Prenom : " + eElement.getElementsByTagName("prenom").item(0).getTextContent());
                     System.out.println("NIA : " + eElement.getElementsByTagName("specialite").item(0).getTextContent());
                     System.out.println("Specialité : " + eElement.getElementsByTagName("nia").item(0).getTextContent());
-                    System.out.println("Poste : " + eElement.getAttribute("nom"));
 
+                    Element ePoste = (Element) eElement.getElementsByTagName("poste").item(0);
+
+                    System.out.println("Poste : " + ePoste.getAttribute("nom"));
+                    System.out.println("Unite : " + ePoste.getElementsByTagName("unite").item(0).getTextContent());
+                    System.out.println("Ville : " + ePoste.getElementsByTagName("ville").item(0).getTextContent());
+                    System.out.println("ZMR : " + ePoste.getElementsByTagName("zmr").item(0).getTextContent());
                 }
             }
 

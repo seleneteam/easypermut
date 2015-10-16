@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/standard.xhtml">
+
+	<ui:define name="title">Liste permutations</ui:define>
+
+	<ui:define name="jumbotron_titre">Permutations</ui:define>
+    <ui:define name="jumbotron_indication">Permutations disponibles</ui:define>
+    			
+	<ui:define name="content">
+		<div class="container">
+			<h:form id="formulaire_datatable">
+				<p:dataTable id="datatable_permutations" var="permutation"
+					value="#{listerPermutationsPageBean.lstDemandesPermutation}">
+					<p:column headerText="Grade">
+						<h:outputText value="#{permutation.utilisateurCreateur.grade}" />
+					</p:column>
+					<p:column headerText="Nom">
+						<h:outputText value="#{permutation.utilisateurCreateur.nom}" />
+					</p:column>
+					<p:column headerText="Base">
+						<h:outputText value="#{permutation.utilisateurCreateur.poste.unite.ville}" />
+					</p:column>
+					<p:column headerText="Poste">
+						<h:outputText value="#{permutation.utilisateurCreateur.poste}" />
+					</p:column>
+				</p:dataTable>
+			</h:form>
+		</div>
+	</ui:define>
+</ui:composition>

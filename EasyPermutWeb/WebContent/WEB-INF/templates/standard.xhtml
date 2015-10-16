@@ -33,13 +33,20 @@
 				<div>
 					<ul class="nav navbar-nav">
 						<li><h:link outcome="/pages/accueil.xhtml">Accueil</h:link></li>
-						<li><h:link outcome="">Liste des permutations</h:link></li>
-						<li><h:link outcome="">Créer une demande</h:link></li>
+						<li><h:link outcome="/pages/listePermutations.xhtml">Liste des permutations</h:link></li>
+						<li><h:link outcome="/pages/creationPermutation.xhtml">Créer une demande</h:link></li>
 					</ul>
 				</div>
 			</div>
 		</nav>
 	</header>
+	
+	<div class="container">
+		<div class="jumbotron">
+			<h1><ui:insert name="jumbotron_titre"></ui:insert></h1>
+			<p><ui:insert name="jumbotron_indication"></ui:insert></p>
+		</div>
+	</div>
 	
 	<ui:insert name="content">
 	</ui:insert>

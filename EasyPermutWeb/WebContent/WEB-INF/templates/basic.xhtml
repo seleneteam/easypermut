@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<h:outputStylesheet library="css" name="normalize.css" />
+	<h:outputStylesheet library="css" name="style.css" />
+	<h:outputStylesheet library="css" name="bootstrap-theme.min.css" />
+	<h:outputStylesheet library="css" name="bootstrap.min.css" />
+	<h:outputStylesheet library="css" name="freelancer.css" />
+
+	<h:outputScript library="js" name="bootstrap.min.js" />
+
+	<title><ui:insert name="title"></ui:insert></title>
+</h:head>
+<h:body>
+	<div class="container">
+		<div class="jumbotron">
+			<h1>Easy Permut'</h1>
+			<ui:insert name="indication"></ui:insert>
+		</div>
+	</div>
+
+	<section> 
+		<article>
+			<div class="container">
+				<div class="col-md-4"></div>
+				<div class="col-md-4">
+					<ui:insert name="content"></ui:insert>
+				</div>
+				<div class="col-md-4"></div>
+			</div>
+		</article> 
+	</section>
+
+	<footer>
+	<div class="footer-below centre">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">Easy permut' 2015</div>
+			</div>
+		</div>
+	</div>
+	</footer>
+</h:body>
+</html>

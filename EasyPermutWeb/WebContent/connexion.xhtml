@@ -1,67 +1,31 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
+<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/basic.xhtml">
 
-<h:head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<ui:define name="title">Connexion</ui:define>
 
-	<h:outputStylesheet library="css" name="normalize.css" />
-	<h:outputStylesheet library="css" name="style.css" />
-	<h:outputStylesheet library="css" name="bootstrap-theme.min.css" />
-	<h:outputStylesheet library="css" name="bootstrap.min.css" />
-	<h:outputStylesheet library="css" name="freelancer.css" />
+	<ui:define name="indication">Authentification</ui:define>
 
-	<h:outputScript library="js" name="bootstrap.min.js" />
+	<ui:define name="content">
+		<p>Veuillez utiliser vos identifiants intradef.</p>
+		<h:form role="form">
+			<p:outputLabel value="Identifiant" for="champIdentifiant" />
+			<br />
+			<p:inputText id="champIdentifiant"
+				value="#{connexionPageBean.utilisateur.identifiantAnudef}" />
+			<p:message for="champIdentifiant" />
 
-	<title>Connection</title>
-</h:head>
-<h:body>
-	<div class="container">
-		<div class="jumbotron">
-			<h1>Easy Permut'</h1>
-			<p>Authentification</p>
-		</div>
-	</div>
-
-	<section> 
-		<article>
-			<div class="container">
-				<div class="col-md-4"></div>
-				<div class="col-md-4">
-					<p>Veuillez utiliser vos identifiants intradef.</p>
-					<h:form role="form">
-						<p:outputLabel value="Identifiant" for="champIdentifiant" />
-						<br />
-						<p:inputText id="champIdentifiant" value="#{connexionPageBean.utilisateur.identifiantAnudef}" />
-						<p:message for="champIdentifiant" />
-		
-						<p:outputLabel value="Mot de passe" for="champMotdepasse" />
-						<br />
-						<p:inputText id="champMotdepasse" />
-						<p:message for="champMotdepasse" />
-						<br/>
-						<p:commandButton ajax="false" value="Connexion" 
-							action="#{connexionPageBean.connexion()}"
-							icon="ui-icon-person" />
-					</h:form>
-				</div>
-				<div class="col-md-4"></div>
-			</div>
-		</article> 
-	</section>
-
-	<footer>
-	<div class="footer-below centre">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">Easy permut' 2015</div>
-			</div>
-		</div>
-	</div>
-	</footer>
-</h:body>
-
-</html>
+			<p:outputLabel value="Mot de passe" for="champMotdepasse" />
+			<br />
+			<p:inputText id="champMotdepasse" />
+			<p:message for="champMotdepasse" />
+			<br />
+			<p:commandButton ajax="false" value="Connexion"
+				action="#{connexionPageBean.connexion()}" icon="ui-icon-person" />
+		</h:form>
+	</ui:define>
+</ui:composition>

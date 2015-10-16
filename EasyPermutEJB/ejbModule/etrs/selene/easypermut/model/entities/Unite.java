@@ -8,9 +8,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import lombok.AccessLevel;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.validator.constraints.Length;
 import etrs.selene.easypermut.model.commons.AbstractEntity;
@@ -21,12 +21,10 @@ import etrs.selene.easypermut.model.commons.AbstractEntity;
  * @author SGT Mora Leo
  *
  */
-@Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @NoArgsConstructor
 @Entity
-@Table(name = "unite")
-@EqualsAndHashCode(of = "id")
+@Table(name = "UNITE")
 public class Unite extends AbstractEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -37,6 +35,8 @@ public class Unite extends AbstractEntity implements Serializable {
     @Column(name = "libelle")
     @Length(min = 1)
     @NotNull
+    @Getter
+    @Setter
     String libelle;
 
     /**
@@ -45,6 +45,8 @@ public class Unite extends AbstractEntity implements Serializable {
     @ManyToOne
     @JoinColumn(name = "ville_id")
     @NotNull
+    @Getter
+    @Setter
     Ville ville;
 
 }

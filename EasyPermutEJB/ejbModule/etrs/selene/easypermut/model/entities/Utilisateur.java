@@ -9,9 +9,9 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import lombok.AccessLevel;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
@@ -22,12 +22,10 @@ import etrs.selene.easypermut.model.commons.AbstractEntity;
  *
  * @author SGT Mora Leo
  */
-@Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @NoArgsConstructor
-@EqualsAndHashCode(of = "id")
 @Entity
-@Table(name = "utilisateur")
+@Table(name = "UTILISATEUR")
 public class Utilisateur extends AbstractEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -38,6 +36,8 @@ public class Utilisateur extends AbstractEntity implements Serializable {
     @Column(name = "identifiantAnudef")
     @Length(min = 1)
     @NotNull
+    @Getter
+    @Setter
     String identifiantAnudef;
 
     /**
@@ -45,6 +45,8 @@ public class Utilisateur extends AbstractEntity implements Serializable {
      */
     @Column(name = "nom")
     @Length(min = 1)
+    @Getter
+    @Setter
     String nom;
 
     /**
@@ -52,6 +54,8 @@ public class Utilisateur extends AbstractEntity implements Serializable {
      */
     @Column(name = "prenom")
     @Length(min = 1)
+    @Getter
+    @Setter
     String prenom;
 
     /**
@@ -59,6 +63,8 @@ public class Utilisateur extends AbstractEntity implements Serializable {
      */
     @Column(name = "nia")
     @Length(min = 6, max = 8)
+    @Getter
+    @Setter
     String nia;
 
     /**
@@ -67,6 +73,8 @@ public class Utilisateur extends AbstractEntity implements Serializable {
     @Column(name = "mail")
     @Email
     @NotNull
+    @Getter
+    @Setter
     String mail;
 
     /**
@@ -74,6 +82,8 @@ public class Utilisateur extends AbstractEntity implements Serializable {
      */
     @ManyToOne
     @JoinColumn(name = "grade_id")
+    @Getter
+    @Setter
     Grade grade;
 
     /**
@@ -81,6 +91,8 @@ public class Utilisateur extends AbstractEntity implements Serializable {
      */
     @ManyToOne
     @JoinColumn(name = "specialite_id")
+    @Getter
+    @Setter
     Specialite specialite;
 
     /**
@@ -88,6 +100,8 @@ public class Utilisateur extends AbstractEntity implements Serializable {
      */
     @OneToOne
     @JoinColumn(name = "poste_id")
+    @Getter
+    @Setter
     Poste poste;
 
     /**
@@ -96,6 +110,8 @@ public class Utilisateur extends AbstractEntity implements Serializable {
      * attendre l'importation de ces données.
      */
     @Column(name = "valide")
+    @Getter
+    @Setter
     Boolean estValide;
 
     /**
@@ -103,5 +119,7 @@ public class Utilisateur extends AbstractEntity implements Serializable {
      * permutation.
      */
     @Column(name = "interesse")
+    @Getter
+    @Setter
     Boolean estInteresse;
 }

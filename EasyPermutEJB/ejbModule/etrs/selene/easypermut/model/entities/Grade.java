@@ -5,9 +5,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import lombok.AccessLevel;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.validator.constraints.Length;
 import etrs.selene.easypermut.model.commons.AbstractEntity;
@@ -18,12 +18,10 @@ import etrs.selene.easypermut.model.commons.AbstractEntity;
  * @author SGT Mora Leo
  *
  */
-@Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @NoArgsConstructor
-@EqualsAndHashCode(of = "id")
 @Entity
-@Table(name = "grade")
+@Table(name = "GRADE")
 public class Grade extends AbstractEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -33,6 +31,8 @@ public class Grade extends AbstractEntity implements Serializable {
      */
     @Column(name = "grade")
     @Length(min = 3, max = 3)
+    @Getter
+    @Setter
     String grade;
 
 }

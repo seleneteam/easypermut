@@ -8,9 +8,9 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import lombok.AccessLevel;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 import etrs.selene.easypermut.model.commons.AbstractEntity;
 
@@ -20,11 +20,9 @@ import etrs.selene.easypermut.model.commons.AbstractEntity;
  * @author SGT Mora Leo
  */
 @NoArgsConstructor
-@Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
-@EqualsAndHashCode(of = "id")
-@Table(name = "demande_permutation")
+@Table(name = "DEMANDE_PERMUTATION")
 public class DemandePermutation extends AbstractEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -35,6 +33,8 @@ public class DemandePermutation extends AbstractEntity implements Serializable {
     @JoinColumn(name = "utilisateur_createur_id")
     @ManyToOne
     @NotNull
+    @Getter
+    @Setter
     Utilisateur utilisateurCreateur;
 
     /**
@@ -42,6 +42,8 @@ public class DemandePermutation extends AbstractEntity implements Serializable {
      */
     @JoinColumn(name = "utilisateur_interesse_id")
     @OneToOne
+    @Getter
+    @Setter
     Utilisateur utilisateurInteresse;
 
     /**
@@ -50,6 +52,8 @@ public class DemandePermutation extends AbstractEntity implements Serializable {
     @ManyToOne
     @JoinColumn(name = "poste_id")
     @NotNull
+    @Getter
+    @Setter
     Poste poste;
 
     /**
@@ -58,6 +62,8 @@ public class DemandePermutation extends AbstractEntity implements Serializable {
     @ManyToOne
     @JoinColumn(name = "unite_id")
     @NotNull
+    @Getter
+    @Setter
     Unite unite;
 
     /**
@@ -66,6 +72,8 @@ public class DemandePermutation extends AbstractEntity implements Serializable {
     @ManyToOne
     @JoinColumn(name = "ville_id")
     @NotNull
+    @Getter
+    @Setter
     Ville ville;
 
     /**
@@ -74,6 +82,8 @@ public class DemandePermutation extends AbstractEntity implements Serializable {
     @ManyToOne
     @JoinColumn(name = "zmr_id")
     @NotNull
+    @Getter
+    @Setter
     ZMR zmr;
 
 }

@@ -9,7 +9,6 @@ import javax.inject.Inject;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import lombok.extern.apachecommons.CommonsLog;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -39,7 +38,6 @@ import etrs.selene.easypermut.model.sessions.ZMRSession;
  */
 @Singleton
 @Startup
-@CommonsLog
 public class ImportSingleton {
 
     @Inject
@@ -151,6 +149,7 @@ public class ImportSingleton {
                         utilisateur.setSpecialite(specialite);
                         utilisateur.setPoste(poste);
                         utilisateur.setEstValide(true);
+                        utilisateur.setInformationsValide(false);
                         facadeUtilisateur.update(utilisateur);
                     }
                 }

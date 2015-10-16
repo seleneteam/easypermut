@@ -174,6 +174,7 @@ public class InitSingleton {
             Utilisateur utilisateur = this.facadeUtilisateur.newInstance();
             utilisateur.setEstValide(true);
             utilisateur.setEstInteresse(false);
+            utilisateur.setInformationsValide(true);
             utilisateur.setGrade(this.facadeGrade.searchFirstResult("grade", this.tabGrade[index]));
             utilisateur.setIdentifiantAnudef(this.tabUtilisateur[index]);
             utilisateur.setMail("random@gouv.fr");
@@ -188,6 +189,7 @@ public class InitSingleton {
 
             Utilisateur utilisateur2 = this.facadeUtilisateur.newInstance();
             utilisateur2.setEstValide(false);
+            utilisateur2.setInformationsValide(true);
             utilisateur2.setEstInteresse(false);
             utilisateur2.setIdentifiantAnudef(this.tabUtilisateur[index]);
             this.facadeUtilisateur.create(utilisateur2);
@@ -196,6 +198,7 @@ public class InitSingleton {
 
             Utilisateur utilisateur3 = this.facadeUtilisateur.newInstance();
             utilisateur3.setEstValide(false);
+            utilisateur3.setInformationsValide(true);
             utilisateur3.setEstInteresse(false);
             utilisateur3.setIdentifiantAnudef(this.tabUtilisateur[index]);
             this.facadeUtilisateur.create(utilisateur3);
@@ -204,12 +207,14 @@ public class InitSingleton {
             Utilisateur utilisateur4 = this.facadeUtilisateur.newInstance();
             utilisateur4.setEstValide(false);
             utilisateur4.setEstInteresse(false);
+            utilisateur4.setInformationsValide(true);
             utilisateur4.setIdentifiantAnudef("test.trynet.21539");
             this.facadeUtilisateur.create(utilisateur4);
             log.info("Utilisateur 4 créé");
 
             Utilisateur utilisateur5 = this.facadeUtilisateur.newInstance();
             utilisateur5.setEstValide(false);
+            utilisateur5.setInformationsValide(true);
             utilisateur5.setEstInteresse(false);
             utilisateur5.setIdentifiantAnudef("wotan.yoshin.56924");
             this.facadeUtilisateur.create(utilisateur5);

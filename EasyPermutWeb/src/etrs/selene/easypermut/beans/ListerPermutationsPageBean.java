@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.RequestScoped;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import lombok.AccessLevel;
@@ -20,10 +20,9 @@ import etrs.selene.easypermut.model.sessions.DemandePermutationSession;
  * Bean de la page d'affichage des permutations.
  * 
  * @author SGT Mora Leo
- *
  */
 @Named
-@RequestScoped
+@ViewScoped
 @Data
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -47,7 +46,17 @@ public class ListerPermutationsPageBean implements Serializable {
      */
     @PostConstruct
     public void init() {
-        utilisateur = (Utilisateur) JsfUtils.getFromFlashScope("_utilisateur");
+        this.utilisateur = (Utilisateur) JsfUtils.getFromFlashScope("_utilisateur");
+    }
+
+    /**
+     * Methude de mise en FlashScope de l'utilisateur.
+     *
+     * @param utilisateur
+     *            L'utilisateur a mettre dans le FlashScope.
+     */
+    public void flashUtilisateur(final Utilisateur utilisateur) {
+        JsfUtils.putInFlashScope("_utilisateur", utilisateur);
     }
 
     /**
@@ -66,7 +75,7 @@ public class ListerPermutationsPageBean implements Serializable {
      * @return Une liste de permutation.
      */
     public List<DemandePermutation> getLstDemandesPermutationSpecifiques() {
-        if (utilisateur.getEstInteresse() == false) {
+        if (this.utilisateur.getEstInteresse() == false) {
             List<DemandePermutation> lstPermutSpecifique = new ArrayList<>();
             List<DemandePermutation> lstPermut = this.facadePermutations.search("specilite", utilisateur.getSpecialite());
 
@@ -81,10 +90,37 @@ public class ListerPermutationsPageBean implements Serializable {
         }
     }
 
-    public void choisirPermutation(DemandePermutation permutation) {
-        if (utilisateur.getEstInteresse() == false) {
-            utilisateur.setEstInteresse(true);
+    /**
+     * Methode de choix d'une permutation. Ajoute l'utilisateura la permutation.
+     * 
+     * @param permutation
+     * @return La page suivante.
+     */
+    public String choisirPermutation(DemandePermutation permutation) {
+        if (this.utilisateur == null) {
+            return "/connexion.xhtml";
+        }
+        if (this.utilisateur.getEstInteresse() == false) {
+            this.utilisateur.setEstInteresse(true);
             permutation.setUtilisateurInteresse(utilisateur);
         }
+        return "/accueil.xhtml";
+    }
+
+    // TODO Ajouter comments.
+    public String pageCreerPermutation() {
+        if (this.utilisateur == null) {
+            return "/connexion.xhtml";
+        }
+        this.flashUtilisateur(this.utilisateur);
+        return "/creationPermutation.xhtml";
+    }
+
+    public String pageAccueil() {
+        if (this.utilisateur == null) {
+            return "/connexion.xhtml";
+        }
+        this.flashUtilisateur(this.utilisateur);
+        return "/accueil.xhtml";
     }
 }

@@ -118,4 +118,13 @@ public class Utilisateur extends AbstractEntity implements Serializable {
     @Getter
     @Setter
     Boolean estInteresse;
+
+    /**
+     * Definit si l'utilisateur est deja en cours de transaction pour une
+     * permutation.
+     */
+    @Column(name = "informations_valides")
+    @Getter
+    @Setter
+    Boolean informationsValide;
 }

@@ -40,7 +40,7 @@ public class Specialite extends AbstractEntity implements Serializable {
     /**
      * Numéro de la specialité.
      */
-    @Column(name = "numeroSpe")
+    @Column(name = "numero_spe")
     @NotNull
     @Getter
     @Setter

@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
+import javax.inject.Inject;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -14,12 +15,61 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+import etrs.selene.easypermut.model.entities.Grade;
+import etrs.selene.easypermut.model.entities.Poste;
+import etrs.selene.easypermut.model.entities.Specialite;
+import etrs.selene.easypermut.model.entities.Unite;
+import etrs.selene.easypermut.model.entities.Utilisateur;
+import etrs.selene.easypermut.model.entities.Ville;
+import etrs.selene.easypermut.model.entities.ZMR;
+import etrs.selene.easypermut.model.sessions.GradeSession;
+import etrs.selene.easypermut.model.sessions.PosteSession;
+import etrs.selene.easypermut.model.sessions.SpecialiteSession;
+import etrs.selene.easypermut.model.sessions.UniteSession;
+import etrs.selene.easypermut.model.sessions.UtilisateurSession;
+import etrs.selene.easypermut.model.sessions.VilleSession;
+import etrs.selene.easypermut.model.sessions.ZMRSession;
 
+/**
+ * Singleton d'imporation des données depuis un XML (potentiellement Orchestra).
+ * Elle serra lancé tous les jours a 3h du matin.
+ * 
+ * @author SGT Mora Leo
+ *
+ */
 @Singleton
 @Startup
 @CommonsLog
 public class ImportSingleton {
 
+    @Inject
+    GradeSession facadeGrade;
+
+    @Inject
+    PosteSession facadePoste;
+
+    @Inject
+    SpecialiteSession facadeSpecialite;
+
+    @Inject
+    UniteSession facadeUnite;
+
+    @Inject
+    UtilisateurSession facadeUtilisateur;
+
+    @Inject
+    VilleSession facadeVille;
+
+    @Inject
+    ZMRSession facadeZMR;
+
+    /**
+     * Methode d'import des données. Cette methode parse le XML. Si elle
+     * rencontre des informations non présentes dans la base, elle les crée et
+     * les ajoute en BDD.
+     * 
+     */
+    // @Schedule(hour = "3")
     @PostConstruct
     public void recupereDonnees() {
 
@@ -32,33 +82,77 @@ public class ImportSingleton {
             Document doc = dBuilder.parse(fXmlFile);
             doc.getDocumentElement().normalize();
 
-            System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
-
             NodeList nList = doc.getElementsByTagName("militaire");
 
             for (int temp = 0; temp < nList.getLength(); temp++) {
 
                 Node nNode = nList.item(temp);
 
-                System.out.println("\nCurrent Element :" + nNode.getNodeName());
-
                 if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 
-                    Element eElement = (Element) nNode;
+                    Element eMilitaire = (Element) nNode;
+                    Element ePoste = (Element) eMilitaire.getElementsByTagName("poste").item(0);
+                    Element eSpe = (Element) eMilitaire.getElementsByTagName("specialite").item(0);
 
-                    System.out.println("Id Anudef : " + eElement.getAttribute("idanudef"));
-                    System.out.println("Grade : " + eElement.getElementsByTagName("grade").item(0).getTextContent());
-                    System.out.println("Nom : " + eElement.getElementsByTagName("nom").item(0).getTextContent());
-                    System.out.println("Prenom : " + eElement.getElementsByTagName("prenom").item(0).getTextContent());
-                    System.out.println("NIA : " + eElement.getElementsByTagName("specialite").item(0).getTextContent());
-                    System.out.println("Specialité : " + eElement.getElementsByTagName("nia").item(0).getTextContent());
+                    Grade grade;
+                    if ((grade = facadeGrade.searchFirstResult("grade", eMilitaire.getElementsByTagName("grade").item(0).getTextContent())) == null) {
+                        grade = facadeGrade.newInstance();
+                        grade.setGrade(eMilitaire.getElementsByTagName("grade").item(0).getTextContent());
+                        facadeGrade.create(grade);
+                    }
 
-                    Element ePoste = (Element) eElement.getElementsByTagName("poste").item(0);
+                    Specialite specialite;
+                    if ((specialite = facadeSpecialite.searchFirstResult("numeroSpe", eSpe.getAttribute("numero_spe"))) == null) {
+                        specialite = facadeSpecialite.newInstance();
+                        specialite.setNumeroSpe(eSpe.getAttribute("numero_spe"));
+                        specialite.setLibelle(eMilitaire.getElementsByTagName("specialite").item(0).getTextContent());
+                        facadeSpecialite.create(specialite);
+                    }
 
-                    System.out.println("Poste : " + ePoste.getAttribute("nom"));
-                    System.out.println("Unite : " + ePoste.getElementsByTagName("unite").item(0).getTextContent());
-                    System.out.println("Ville : " + ePoste.getElementsByTagName("ville").item(0).getTextContent());
-                    System.out.println("ZMR : " + ePoste.getElementsByTagName("zmr").item(0).getTextContent());
+                    ZMR zmr;
+                    if ((zmr = facadeZMR.searchFirstResult("libelle", ePoste.getElementsByTagName("zmr").item(0).getTextContent())) == null) {
+                        zmr = facadeZMR.newInstance();
+                        zmr.setLibelle(ePoste.getElementsByTagName("zmr").item(0).getTextContent());
+                        facadeZMR.create(zmr);
+                    }
+
+                    Ville ville;
+                    if ((ville = facadeVille.searchFirstResult("nom", ePoste.getElementsByTagName("ville").item(0).getTextContent())) == null) {
+                        ville = facadeVille.newInstance();
+                        ville.setNom(ePoste.getElementsByTagName("ville").item(0).getTextContent());
+                        ville.setZmr(zmr);
+                        facadeVille.create(ville);
+                    }
+
+                    Unite unite;
+                    if ((unite = facadeUnite.searchFirstResult("libelle", ePoste.getElementsByTagName("unite").item(0).getTextContent())) == null) {
+                        unite = facadeUnite.newInstance();
+                        unite.setLibelle(ePoste.getElementsByTagName("unite").item(0).getTextContent());
+                        unite.setVille(ville);
+                        facadeUnite.create(unite);
+                    }
+
+                    Poste poste;
+                    if ((poste = facadePoste.searchFirstResult("libelle", ePoste.getAttribute("nom"))) == null) {
+                        poste = facadePoste.newInstance();
+                        poste.setLibelle(ePoste.getAttribute("nom"));
+                        poste.setUnite(unite);
+                        facadePoste.create(poste);
+                    }
+
+                    Utilisateur utilisateur;
+
+                    if ((utilisateur = facadeUtilisateur.searchFirstResult("identifiantAnudef", eMilitaire.getAttribute("idanudef"))) != null && utilisateur.getEstValide() == false) {
+                        utilisateur.setMail(eMilitaire.getElementsByTagName("email").item(0).getTextContent());
+                        utilisateur.setNia(eMilitaire.getElementsByTagName("nia").item(0).getTextContent());
+                        utilisateur.setNom(eMilitaire.getElementsByTagName("nom").item(0).getTextContent());
+                        utilisateur.setPrenom(eMilitaire.getElementsByTagName("prenom").item(0).getTextContent());
+                        utilisateur.setGrade(grade);
+                        utilisateur.setSpecialite(specialite);
+                        utilisateur.setPoste(poste);
+                        utilisateur.setEstValide(true);
+                        facadeUtilisateur.update(utilisateur);
+                    }
                 }
             }
 

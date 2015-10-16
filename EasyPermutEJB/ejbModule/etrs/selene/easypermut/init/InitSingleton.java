@@ -52,7 +52,7 @@ public class InitSingleton {
     private ZMRSession facadeZMR;
 
     String[] tabGrade = { "caporal", "caporal-chef", "sergent", "adjudant" };
-    String[] tabPoste = { "mecanicien", "electrotechnicien", "previsionniste" };
+    String[] tabPoste = { "mecanicien", "electrotechnichien", "previsionniste" };
     String[] tabNomSpecialite = { "programmeur", "admin-reseaux", "communication" };
     String[] tabSpecialite = { "8300", "8200", "8100" };
     String[] tabUnite = { "edcm", "esta", "dsi" };
@@ -200,6 +200,20 @@ public class InitSingleton {
             utilisateur3.setIdentifiantAnudef(this.tabUtilisateur[index]);
             this.facadeUtilisateur.create(utilisateur3);
             log.info("Utilisateur " + this.tabUtilisateur[index] + " créé");
+
+            Utilisateur utilisateur4 = this.facadeUtilisateur.newInstance();
+            utilisateur4.setEstValide(false);
+            utilisateur4.setEstInteresse(false);
+            utilisateur4.setIdentifiantAnudef("test.trynet.21539");
+            this.facadeUtilisateur.create(utilisateur4);
+            log.info("Utilisateur 4 créé");
+
+            Utilisateur utilisateur5 = this.facadeUtilisateur.newInstance();
+            utilisateur5.setEstValide(false);
+            utilisateur5.setEstInteresse(false);
+            utilisateur5.setIdentifiantAnudef("wotan.yoshin.56924");
+            this.facadeUtilisateur.create(utilisateur5);
+            log.info("Utilisateur 5 créé");
 
         } else {
             log.info("La table utilisateur contient déja des éléments");

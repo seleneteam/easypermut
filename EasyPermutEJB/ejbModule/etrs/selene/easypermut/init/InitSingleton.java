@@ -200,6 +200,7 @@ public class InitSingleton
 
 			Utilisateur utilisateur = this.facadeUtilisateur.newInstance();
 			utilisateur.setEstValide(true);
+			utilisateur.setEstInteresse(false);
 			utilisateur.setGrade(this.facadeGrade.searchFirstResult("grade", this.tabGrade[index]));
 			utilisateur.setIdentifiantAnudef(this.tabUtilisateur[index]);
 			utilisateur.setMail("random@gouv.fr");
@@ -214,6 +215,7 @@ public class InitSingleton
 
 			Utilisateur utilisateur2 = this.facadeUtilisateur.newInstance();
 			utilisateur2.setEstValide(false);
+			utilisateur2.setEstInteresse(false);
 			utilisateur2.setIdentifiantAnudef(this.tabUtilisateur[index]);
 			this.facadeUtilisateur.create(utilisateur2);
 			log.info("Utilisateur " + this.tabUtilisateur[index] + " créé");
@@ -221,6 +223,7 @@ public class InitSingleton
 			
 			Utilisateur utilisateur3 = this.facadeUtilisateur.newInstance();
 			utilisateur3.setEstValide(false);
+			utilisateur3.setEstInteresse(false);
 			utilisateur3.setIdentifiantAnudef(this.tabUtilisateur[index]);
 			this.facadeUtilisateur.create(utilisateur3);
 			log.info("Utilisateur " + this.tabUtilisateur[index] + " créé");

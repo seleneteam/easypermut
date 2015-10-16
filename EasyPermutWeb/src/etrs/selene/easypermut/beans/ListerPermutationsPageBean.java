@@ -66,19 +66,25 @@ public class ListerPermutationsPageBean implements Serializable {
      * @return Une liste de permutation.
      */
     public List<DemandePermutation> getLstDemandesPermutationSpecifiques() {
-        List<DemandePermutation> lstPermutSpecifique = new ArrayList<>();
-        List<DemandePermutation> lstPermut = this.facadePermutations.search("specilite", utilisateur.getSpecialite());
+        if (utilisateur.getEstInteresse() == false) {
+            List<DemandePermutation> lstPermutSpecifique = new ArrayList<>();
+            List<DemandePermutation> lstPermut = this.facadePermutations.search("specilite", utilisateur.getSpecialite());
 
-        for (DemandePermutation demandePermutation : lstPermut) {
-            if (demandePermutation.getUtilisateurCreateur().getGrade() == this.utilisateur.getGrade()) {
-                lstPermutSpecifique.add(demandePermutation);
+            for (DemandePermutation demandePermutation : lstPermut) {
+                if (demandePermutation.getUtilisateurCreateur().getGrade() == this.utilisateur.getGrade()) {
+                    lstPermutSpecifique.add(demandePermutation);
+                }
             }
+            return lstPermutSpecifique;
+        } else {
+            return null;
         }
-        return lstPermutSpecifique;
     }
 
     public void choisirPermutation(DemandePermutation permutation) {
-        utilisateur.setEstInteresse(true);
-        permutation.setUtilisateurInteresse(utilisateur);
+        if (utilisateur.getEstInteresse() == false) {
+            utilisateur.setEstInteresse(true);
+            permutation.setUtilisateurInteresse(utilisateur);
+        }
     }
 }

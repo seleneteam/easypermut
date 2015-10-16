@@ -1,19 +1,18 @@
 package etrs.selene.easypermut.model.entities;
 
 import java.io.Serializable;
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import net.entetrs.commons.uuid.GeneratedUUID;
+import etrs.selene.easypermut.model.commons.AbstractEntity;
 
 /**
  * Classe représentant l'entitée DemandePermutation.
@@ -26,23 +25,16 @@ import net.entetrs.commons.uuid.GeneratedUUID;
 @Entity
 @EqualsAndHashCode(of = "id")
 @Table(name = "demande_permutation")
-public class DemandePermutation implements Serializable {
+public class DemandePermutation extends AbstractEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
-    /**
-     * Identifiant de la demande de permutation.
-     */
-    @Id
-    @GeneratedUUID
-    @Column(columnDefinition = "VARCHAR(36)", name = "id")
-    String id;
 
     /**
      * Utilisateur ayant créé la demande de permutation.
      */
     @JoinColumn(name = "utilisateur_createur_id")
     @ManyToOne
+    @NotNull
     Utilisateur utilisateurCreateur;
 
     /**
@@ -57,6 +49,7 @@ public class DemandePermutation implements Serializable {
      */
     @ManyToOne
     @JoinColumn(name = "poste_id")
+    @NotNull
     Poste poste;
 
     /**
@@ -64,6 +57,7 @@ public class DemandePermutation implements Serializable {
      */
     @ManyToOne
     @JoinColumn(name = "unite_id")
+    @NotNull
     Unite unite;
 
     /**
@@ -71,6 +65,7 @@ public class DemandePermutation implements Serializable {
      */
     @ManyToOne
     @JoinColumn(name = "ville_id")
+    @NotNull
     Ville ville;
 
     /**
@@ -78,6 +73,7 @@ public class DemandePermutation implements Serializable {
      */
     @ManyToOne
     @JoinColumn(name = "zmr_id")
+    @NotNull
     ZMR zmr;
 
 }

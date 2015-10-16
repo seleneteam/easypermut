@@ -3,17 +3,19 @@ package etrs.selene.easypermut.model.entities;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import net.entetrs.commons.uuid.GeneratedUUID;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
+import etrs.selene.easypermut.model.commons.AbstractEntity;
 
 /**
  * Classe représentant l'entitée Utilisateur.
@@ -26,45 +28,45 @@ import net.entetrs.commons.uuid.GeneratedUUID;
 @EqualsAndHashCode(of = "id")
 @Entity
 @Table(name = "utilisateur")
-public class Utilisateur implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class Utilisateur extends AbstractEntity implements Serializable {
 
-    /**
-     * Identifiant de l'utilisateur.
-     */
-    @Id
-    @GeneratedUUID
-    @Column(columnDefinition = "VARCHAR(36)", name = "id")
-    String id;
+    private static final long serialVersionUID = 1L;
 
     /**
      * Identifiant Anudef de l'utilisateur.
      */
     @Column(name = "identifiantAnudef")
+    @Length(min = 1)
+    @NotNull
     String identifiantAnudef;
 
     /**
      * Nom de l'utilisateur.
      */
     @Column(name = "nom")
+    @Length(min = 1)
     String nom;
 
     /**
      * Prenom de l'utiisateur.
      */
     @Column(name = "prenom")
+    @Length(min = 1)
     String prenom;
 
     /**
      * NIA de l'utilisateur.
      */
     @Column(name = "nia")
+    @Length(min = 6, max = 8)
     String nia;
 
     /**
      * Mail de l'utilisateur.
      */
     @Column(name = "mail")
+    @Email
+    @NotNull
     String mail;
 
     /**

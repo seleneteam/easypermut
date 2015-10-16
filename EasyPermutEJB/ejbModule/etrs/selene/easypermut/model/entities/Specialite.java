@@ -3,14 +3,15 @@ package etrs.selene.easypermut.model.entities;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import net.entetrs.commons.uuid.GeneratedUUID;
+import org.hibernate.validator.constraints.Length;
+import etrs.selene.easypermut.model.commons.AbstractEntity;
 
 /**
  * Classe représentant l'entitée Specialite.
@@ -24,26 +25,22 @@ import net.entetrs.commons.uuid.GeneratedUUID;
 @EqualsAndHashCode(of = "id")
 @Entity
 @Table(name = "specialite")
-public class Specialite implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class Specialite extends AbstractEntity implements Serializable {
 
-    /**
-     * Identifiant de la spécialité.
-     */
-    @Id
-    @GeneratedUUID
-    @Column(columnDefinition = "VARCHAR(36)", name = "id")
-    String id;
+    private static final long serialVersionUID = 1L;
 
     /**
      * Libelle de la spécialité.
      */
     @Column(name = "libelle")
+    @Length(min = 1)
+    @NotNull
     String libelle;
 
     /**
      * Numéro de la specialité.
      */
     @Column(name = "numeroSpe")
+    @NotNull
     String numeroSpe;
 }

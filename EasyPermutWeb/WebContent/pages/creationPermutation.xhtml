@@ -16,6 +16,7 @@
 			<h:form>
 				<div class="col-md-6">
 					<h:outputText value="Votre profil" />
+					<br />
 
 					<p:outputLabel value="Nom" for="champNom" />
 					<br />
@@ -69,16 +70,21 @@
 				</div>
 				<div class="col-md-6">
 					<h:outputText value="Vos préférences de mutation" />
-					<h:panelGrid columns="3">
-						<p:outputLabel value="Choix" id="labelChoix" />
-						<p:message for="labelChoix" />
+					<br />
+					<p:outputLabel value="Choix" id="labelChoix" />
+					<p:message for="labelChoix" />
+					<br />
 
-						<p:outputLabel value="Titre" for="champTitre" />
-						<p:inputText id="champTitre" required="true"
-							value="#{cc.attrs.jeuVideo.titre}">
-						</p:inputText>
-						<p:message for="champTitre" display="Titre obligatoire" />
-					</h:panelGrid>
+					<p:outputLabel value="ZMR" for="listeZMR" />
+					<br/>
+					<p:selectOneMenu id="listeZMR"
+						value="#{creerPermutationPageBean.permutation.zmr}">
+						<f:selectItems value="#{creerPermutationPageBean.listeZMR}"
+							var="zmr" itemLabel="#{zmr.libelle}" itemValue="zmr" />
+					</p:selectOneMenu>
+					<p:message for="listeZMR" />
+
+
 				</div>
 			</h:form>
 		</div>

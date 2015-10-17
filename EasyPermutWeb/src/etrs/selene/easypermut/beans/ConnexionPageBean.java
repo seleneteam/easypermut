@@ -27,20 +27,20 @@ import etrs.selene.easypermut.model.sessions.UtilisateurSession;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class ConnexionPageBean implements Serializable
 {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * L'utilisateur dont l'identifiant anudef est present dans le formulaire.
 	 */
 	Utilisateur utilisateur;
-	
+
 	/**
 	 * {@link UtilisateurSession}
 	 */
 	@Inject
 	UtilisateurSession facadeUtilisateur;
-	
+
 	/**
 	 * Methode de post-construction. Instancie un nouvel utilisateur.
 	 */
@@ -49,7 +49,7 @@ public class ConnexionPageBean implements Serializable
 	{
 		this.utilisateur = this.facadeUtilisateur.newInstance();
 	}
-	
+
 	/**
 	 * Methude de mise en FlashScope de l'utilisateur.
 	 *
@@ -60,9 +60,9 @@ public class ConnexionPageBean implements Serializable
 	{
 		JsfUtils.putInFlashScope("_utilisateur", utilisateur);
 	}
-	
+
 	/**
-	 * Methode de connexion. Si l'utilisateur existe et que il est validé (voir
+	 * Methode de connexion. Si l'utilisateur existe et qu'il est validé (voir
 	 * {@link Utilisateur#getEstValide()}) redirige vers la page d'accueil de
 	 * l'application. Si l'utilisateur existe, qu'il est valide mais qu'il n'a
 	 * pas verifié ces informations, le redirige vers la page de validation des
@@ -76,12 +76,13 @@ public class ConnexionPageBean implements Serializable
 	{
 		String redirectedUrl;
 		Utilisateur utilisateurATester = this.facadeUtilisateur.searchFirstResult("identifiantAnudef", this.utilisateur.getIdentifiantAnudef().toLowerCase());
-		
+
 		if (utilisateurATester != null && utilisateurATester.getEstValide() == true)
 		{
-			if (this.utilisateur.getInformationsValide() == true)
+			if (utilisateurATester.getInformationsValide() == true)
 			{
 				redirectedUrl = "./pages/accueil.xhtml";
+				System.out.println("TTTTTTTTTTEEEEEEEEEESSSSSSSSSSTTTTTTTTTT");
 			}
 			else
 			{
@@ -89,7 +90,7 @@ public class ConnexionPageBean implements Serializable
 				redirectedUrl = "";
 			}
 			this.flashUtilisateur(utilisateurATester);
-			
+
 		}
 		else if (utilisateurATester != null && utilisateurATester.getEstValide() == false)
 		{
@@ -102,7 +103,7 @@ public class ConnexionPageBean implements Serializable
 			this.facadeUtilisateur.create(this.utilisateur);
 			redirectedUrl = "./pages/validation.xhtml";
 		}
-		
+
 		return redirectedUrl;
 	}
 }

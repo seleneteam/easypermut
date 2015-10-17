@@ -39,7 +39,7 @@ public class CreerPermutationPageBean implements Serializable
 	 */
 	@Inject
 	DemandePermutationSession facadePermutations;
-
+	
 	/**
 	 * {@link ZMRSession}
 	 */
@@ -73,7 +73,7 @@ public class CreerPermutationPageBean implements Serializable
 	}
 	
 	/**
-	 * Methude de mise en FlashScope de l'utilisateur.
+	 * Methode de mise en FlashScope de l'utilisateur.
 	 *
 	 * @param utilisateur
 	 *            L'utilisateur a mettre dans le FlashScope.
@@ -84,7 +84,7 @@ public class CreerPermutationPageBean implements Serializable
 	}
 	
 	/**
-	 * Methode de reation d'une permutation.
+	 * Methode de creation d'une permutation.
 	 *
 	 * @return La page suivante.
 	 */
@@ -92,6 +92,8 @@ public class CreerPermutationPageBean implements Serializable
 	{
 		if (this.utilisateur == null)
 			return "/connexion.xhtml";
+		
+		System.out.println("TESTTTTEDEDEFef");
 		this.permutation.setUtilisateurCreateur(this.utilisateur);
 		this.facadePermutations.create(this.permutation);
 		this.flashUtilisateur(this.utilisateur);

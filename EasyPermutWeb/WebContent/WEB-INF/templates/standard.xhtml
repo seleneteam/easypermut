@@ -27,14 +27,14 @@
 						<span class="sr-only">Menu</span> <span class="icon-bar"></span> <span
 							class="icon-bar"></span> <span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="">Easy permut'</a>
+					<h:link class="navbar-brand" onclick="#{navBarBean.reflasherUtilisateur()}" outcome="/pages/accueil.xhtml" >Easy permut'</h:link>
 				</div>
 
 				<div>
 					<ul class="nav navbar-nav">
-						<li><h:link outcome="/pages/accueil.xhtml">Accueil</h:link></li>
-						<li><h:link outcome="/pages/listePermutations.xhtml">Liste des permutations</h:link></li>
-						<li><h:link outcome="/pages/creationPermutation.xhtml">Créer une demande</h:link></li>
+						<li><h:link onclick="#{navBarBean.reflasherUtilisateur()}" outcome="/pages/accueil.xhtml" >Accueil</h:link></li>
+						<li><h:link onclick="#{navBarBean.reflasherUtilisateur()}" outcome="/pages/listePermutations.xhtml">Liste des permutations</h:link></li>
+						<li><h:link onclick="#{navBarBean.reflasherUtilisateur()}" outcome="/pages/creationPermutation.xhtml">Créer une demande</h:link></li>
 					</ul>
 				</div>
 			</div>

@@ -21,50 +21,49 @@
 					<p:outputLabel value="Nom" for="champNom" />
 					<br />
 					<p:inputText id="champNom"
-						value="#{creerPermutationPageBean.permutation.utilisateurCreateur.nom}"
+						value="#{creerPermutationPageBean.utilisateur.nom}"
 						disabled="true" />
 					<p:message for="champNom" />
 
 					<p:outputLabel value="Prenom" for="champPrenom" />
 					<br />
 					<p:inputText id="champPrenom"
-						value="#{creerPermutationPageBean.permutation.utilisateurCreateur.prenom}"
+						value="#{creerPermutationPageBean.utilisateur.prenom}"
 						disabled="true" />
 					<p:message for="champPrenom" />
-
 
 					<p:outputLabel value="Grade" for="champGrade" />
 					<br />
 					<p:inputText id="champGrade"
-						value="#{creerPermutationPageBean.permutation.utilisateurCreateur.grade}"
+						value="#{creerPermutationPageBean.utilisateur.grade.grade}"
 						disabled="true" />
 					<p:message for="champGrade" />
 
 					<p:outputLabel value="NIA" for="champNIA" />
 					<br />
 					<p:inputText id="champNIA"
-						value="#{creerPermutationPageBean.permutation.utilisateurCreateur.nia}"
+						value="#{creerPermutationPageBean.utilisateur.nia}"
 						disabled="true" />
 					<p:message for="champNIA" />
 
 					<p:outputLabel value="ZMR" for="champZMR" />
 					<br />
 					<p:inputText id="champZMR"
-						value="#{creerPermutationPageBean.permutation.utilisateurCreateur.poste.unite.ville.zmr}"
+						value="#{creerPermutationPageBean.utilisateur.poste.unite.ville.zmr.libelle}"
 						disabled="true" />
 					<p:message for="champZMR" />
 
 					<p:outputLabel value="Unite" for="champUnite" />
 					<br />
 					<p:inputText id="champUnite"
-						value="#{creerPermutationPageBean.permutation.utilisateurCreateur.poste.unite}"
+						value="#{creerPermutationPageBean.utilisateur.poste.unite.libelle}"
 						disabled="true" />
 					<p:message for="champUnite" />
 
 					<p:outputLabel value="Poste" for="champPoste" />
 					<br />
 					<p:inputText id="champPoste"
-						value="#{creerPermutationPageBean.permutation.utilisateurCreateur.poste}"
+						value="#{creerPermutationPageBean.utilisateur.poste.libelle}"
 						disabled="true" />
 					<p:message for="champPoste" />
 				</div>
@@ -76,15 +75,17 @@
 					<br />
 
 					<p:outputLabel value="ZMR" for="listeZMR" />
-					<br/>
+					<br />
 					<p:selectOneMenu id="listeZMR"
-						value="#{creerPermutationPageBean.permutation.zmr}">
+						value="#{creerPermutationPageBean.permutation.zmr}" >
 						<f:selectItems value="#{creerPermutationPageBean.listeZMR}"
 							var="zmr" itemLabel="#{zmr.libelle}" itemValue="zmr" />
 					</p:selectOneMenu>
-					<p:message for="listeZMR" />
+					<p:message for="listeZMR" />			
 
-
+				</div>
+				<div class="col-md-12 centre">
+					 <h:commandButton value="Submit" action="#{creerPermutationPageBean.}" icon="ui-icon-check" />
 				</div>
 			</h:form>
 		</div>

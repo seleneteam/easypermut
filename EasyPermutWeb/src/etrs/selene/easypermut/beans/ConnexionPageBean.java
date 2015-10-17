@@ -82,7 +82,6 @@ public class ConnexionPageBean implements Serializable
 			if (utilisateurATester.getInformationsValide() == true)
 			{
 				redirectedUrl = "./pages/accueil.xhtml";
-				System.out.println("TTTTTTTTTTEEEEEEEEEESSSSSSSSSSTTTTTTTTTT");
 			}
 			else
 			{

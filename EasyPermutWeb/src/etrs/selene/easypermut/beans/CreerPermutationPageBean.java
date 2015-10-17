@@ -14,11 +14,13 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import net.entetrs.commons.jsf.JsfUtils;
 import etrs.selene.easypermut.model.entities.DemandePermutation;
+import etrs.selene.easypermut.model.entities.Poste;
 import etrs.selene.easypermut.model.entities.Unite;
 import etrs.selene.easypermut.model.entities.Utilisateur;
 import etrs.selene.easypermut.model.entities.Ville;
 import etrs.selene.easypermut.model.entities.ZMR;
 import etrs.selene.easypermut.model.sessions.DemandePermutationSession;
+import etrs.selene.easypermut.model.sessions.PosteSession;
 import etrs.selene.easypermut.model.sessions.UniteSession;
 import etrs.selene.easypermut.model.sessions.VilleSession;
 import etrs.selene.easypermut.model.sessions.ZMRSession;
@@ -35,38 +37,46 @@ import etrs.selene.easypermut.model.sessions.ZMRSession;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class CreerPermutationPageBean implements Serializable
 {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * {@link DemandePermutationSession}
 	 */
 	@Inject
 	DemandePermutationSession facadePermutations;
-	
+
 	@Inject
 	ZMRSession facadeZmr;
-	
+
 	@Inject
 	VilleSession facadeVille;
-	
+
 	@Inject
 	UniteSession facadeUnite;
 	
+	@Inject
+	PosteSession facadePoste;
+
 	/**
 	 * La permutation qui sera crée.
 	 */
 	DemandePermutation permutation;
-	
+
 	/**
 	 * Utilisateur connecté.
 	 */
 	Utilisateur utilisateur;
 
+	/**
+	 * Poste désiré.
+	 */
+	Poste poste;
+
 	List<ZMR> listeZMR;
 	List<Ville> listeVille;
 	List<Unite> listeUnite;
-	
+
 	/**
 	 * Methode de post-construction. Recupere l'utilisateur du FlashScope.
 	 */
@@ -78,8 +88,9 @@ public class CreerPermutationPageBean implements Serializable
 		this.listeZMR = this.facadeZmr.readAll();
 		this.listeVille = this.facadeVille.readAll();
 		this.listeUnite = this.facadeUnite.readAll();
+		this.poste = this.facadePoste.newInstance();
 	}
-	
+
 	/**
 	 * Methode de mise en FlashScope de l'utilisateur.
 	 *
@@ -90,7 +101,7 @@ public class CreerPermutationPageBean implements Serializable
 	{
 		JsfUtils.putInFlashScope("_utilisateur", utilisateur);
 	}
-	
+
 	/**
 	 * Methode de creation d'une permutation.
 	 *
@@ -98,30 +109,18 @@ public class CreerPermutationPageBean implements Serializable
 	 */
 	public String creerDemande()
 	{
+
 		if (this.utilisateur == null)
 			return "/connexion.xhtml";
-		
-		System.out.println("TESTTTTEDEDEFef");
+		this.poste.setUnite(this.permutation.getUnite());
+		System.out.println(this.poste.getId());
 		this.permutation.setUtilisateurCreateur(this.utilisateur);
+		this.permutation.setPoste(this.poste);
+
 		this.facadePermutations.create(this.permutation);
 		this.flashUtilisateur(this.utilisateur);
-		return "/accueil.xhtml";
+		return "/pages/accueil.xhtml";
+
 	}
-	
-	// TODO Ajouter comments.
-	public String pageListePermutation()
-	{
-		if (this.utilisateur == null)
-			return "/connexion.xhtml";
-		this.flashUtilisateur(this.utilisateur);
-		return "/listePermutations.xhtml";
-	}
-	
-	public String pageAccueil()
-	{
-		if (this.utilisateur == null)
-			return "/connexion.xhtml";
-		this.flashUtilisateur(this.utilisateur);
-		return "/accueil.xhtml";
-	}
+
 }

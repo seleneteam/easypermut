@@ -14,9 +14,13 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import net.entetrs.commons.jsf.JsfUtils;
 import etrs.selene.easypermut.model.entities.DemandePermutation;
+import etrs.selene.easypermut.model.entities.Unite;
 import etrs.selene.easypermut.model.entities.Utilisateur;
+import etrs.selene.easypermut.model.entities.Ville;
 import etrs.selene.easypermut.model.entities.ZMR;
 import etrs.selene.easypermut.model.sessions.DemandePermutationSession;
+import etrs.selene.easypermut.model.sessions.UniteSession;
+import etrs.selene.easypermut.model.sessions.VilleSession;
 import etrs.selene.easypermut.model.sessions.ZMRSession;
 
 /**
@@ -40,11 +44,14 @@ public class CreerPermutationPageBean implements Serializable
 	@Inject
 	DemandePermutationSession facadePermutations;
 	
-	/**
-	 * {@link ZMRSession}
-	 */
 	@Inject
 	ZMRSession facadeZmr;
+	
+	@Inject
+	VilleSession facadeVille;
+	
+	@Inject
+	UniteSession facadeUnite;
 	
 	/**
 	 * La permutation qui sera crée.
@@ -55,11 +62,10 @@ public class CreerPermutationPageBean implements Serializable
 	 * Utilisateur connecté.
 	 */
 	Utilisateur utilisateur;
-	
-	/**
-	 * Liste de zmr pour la checkliste zmr.
-	 */
+
 	List<ZMR> listeZMR;
+	List<Ville> listeVille;
+	List<Unite> listeUnite;
 	
 	/**
 	 * Methode de post-construction. Recupere l'utilisateur du FlashScope.
@@ -70,6 +76,8 @@ public class CreerPermutationPageBean implements Serializable
 		this.utilisateur = (Utilisateur)JsfUtils.getFromFlashScope("_utilisateur");
 		this.permutation = this.facadePermutations.newInstance();
 		this.listeZMR = this.facadeZmr.readAll();
+		this.listeVille = this.facadeVille.readAll();
+		this.listeUnite = this.facadeUnite.readAll();
 	}
 	
 	/**

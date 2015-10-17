@@ -75,17 +75,32 @@
 					<br />
 
 					<p:outputLabel value="ZMR" for="listeZMR" />
-					<br />
 					<p:selectOneMenu id="listeZMR"
-						value="#{creerPermutationPageBean.permutation.zmr}" >
-						<f:selectItems value="#{creerPermutationPageBean.listeZMR}"
-							var="zmr" itemLabel="#{zmr.libelle}" itemValue="zmr" />
+						value="#{creerPermutationPageBean.permutation.zmr}" converter="#{genericConverter}">
+						<f:selectItems value="#{creerPermutationPageBean.listeZMR}" />
 					</p:selectOneMenu>
-					<p:message for="listeZMR" />			
+					<p:message for="listeZMR" />
+					
+					<p:outputLabel value="Ville" for="listeVille" />
+					<p:selectOneMenu id="listeVille"
+						value="#{creerPermutationPageBean.permutation.ville}" converter="#{genericConverter}">
+						<f:selectItems value="#{creerPermutationPageBean.listeVille}" />
+					</p:selectOneMenu>
+					<p:message for="listeVille" />
+					
+					<p:outputLabel value="Unite" for="listeUnite" />
+					<p:selectOneMenu id="listeUnite"
+						value="#{creerPermutationPageBean.permutation.unite}" converter="#{genericConverter}">
+						<f:selectItems value="#{creerPermutationPageBean.listeUnite}" />
+					</p:selectOneMenu>
+					<p:message for="listeUnite" />
+
 
 				</div>
 				<div class="col-md-12 centre">
-					 <h:commandButton value="Submit" action="#{creerPermutationPageBean.}" icon="ui-icon-check" />
+					<h:commandButton value="Submit"
+						action="#{creerPermutationPageBean.creerDemande()}"
+						icon="ui-icon-check" />
 				</div>
 			</h:form>
 		</div>

@@ -25,9 +25,9 @@ import etrs.selene.easypermut.model.commons.AbstractEntity;
 @Table(name = "GRADE")
 public class Grade extends AbstractEntity implements Serializable
 {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * Libelle du grade.
 	 */
@@ -36,5 +36,11 @@ public class Grade extends AbstractEntity implements Serializable
 	@Getter
 	@Setter
 	String grade;
-	
+
+	@Override
+	public String toString()
+	{
+		return this.grade;
+	}
+
 }

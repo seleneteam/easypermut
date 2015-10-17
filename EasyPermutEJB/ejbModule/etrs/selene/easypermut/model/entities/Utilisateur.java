@@ -32,9 +32,9 @@ import etrs.selene.easypermut.model.commons.AbstractEntity;
 @Table(name = "UTILISATEUR")
 public class Utilisateur extends AbstractEntity implements Serializable
 {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * Identifiant Anudef de l'utilisateur.
 	 */
@@ -44,7 +44,7 @@ public class Utilisateur extends AbstractEntity implements Serializable
 	@Getter
 	@Setter
 	String identifiantAnudef;
-	
+
 	/**
 	 * Nom de l'utilisateur.
 	 */
@@ -52,7 +52,7 @@ public class Utilisateur extends AbstractEntity implements Serializable
 	@Getter
 	@Setter
 	String nom;
-	
+
 	/**
 	 * Prenom de l'utiisateur.
 	 */
@@ -60,7 +60,7 @@ public class Utilisateur extends AbstractEntity implements Serializable
 	@Getter
 	@Setter
 	String prenom;
-	
+
 	/**
 	 * NIA de l'utilisateur.
 	 */
@@ -68,7 +68,7 @@ public class Utilisateur extends AbstractEntity implements Serializable
 	@Getter
 	@Setter
 	String nia;
-	
+
 	/**
 	 * Mail de l'utilisateur.
 	 */
@@ -77,7 +77,7 @@ public class Utilisateur extends AbstractEntity implements Serializable
 	@Getter
 	@Setter
 	String mail;
-	
+
 	/**
 	 * Grade de l'utilisateur.
 	 */
@@ -86,7 +86,7 @@ public class Utilisateur extends AbstractEntity implements Serializable
 	@Getter
 	@Setter
 	Grade grade;
-	
+
 	/**
 	 * Specialite de l'utilisateur.
 	 */
@@ -95,7 +95,7 @@ public class Utilisateur extends AbstractEntity implements Serializable
 	@Getter
 	@Setter
 	Specialite specialite;
-	
+
 	/**
 	 * Poste occupé par l'utilisateur.
 	 */
@@ -104,7 +104,7 @@ public class Utilisateur extends AbstractEntity implements Serializable
 	@Getter
 	@Setter
 	Poste poste;
-	
+
 	/**
 	 * Definit si l'utilisateur peut se connecter a l'application ou non. false
 	 * si les données de l'utilisateur on été importées. true si il doit
@@ -114,7 +114,7 @@ public class Utilisateur extends AbstractEntity implements Serializable
 	@Getter
 	@Setter
 	Boolean estValide;
-	
+
 	/**
 	 * Definit si l'utilisateur est deja en cours de transaction pour une
 	 * permutation.
@@ -123,7 +123,7 @@ public class Utilisateur extends AbstractEntity implements Serializable
 	@Getter
 	@Setter
 	Boolean estInteresse;
-	
+
 	/**
 	 * Definit si l'utilisateur à validé ses informations.
 	 */
@@ -131,4 +131,10 @@ public class Utilisateur extends AbstractEntity implements Serializable
 	@Getter
 	@Setter
 	Boolean informationsValide;
+
+	@Override
+	public String toString()
+	{
+		return this.nom;
+	}
 }

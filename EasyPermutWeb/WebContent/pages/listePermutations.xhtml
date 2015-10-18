@@ -15,7 +15,7 @@
 		<div class="container">
 			<h:form id="permutations_datatable">
 				<p:dataTable id="datatable_permutations" var="permutation"
-					value="#{listerPermutationsPageBean.lstDemandesPermutation}">
+					value="#{listerPermutationsPageBean.lstDemandesPermutationValides}">
 					
 						<p:column headerText="Grade">
 							<h:outputText value="#{permutation.utilisateurCreateur.grade}" />

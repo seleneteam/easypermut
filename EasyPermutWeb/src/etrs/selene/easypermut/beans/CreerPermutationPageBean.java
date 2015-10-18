@@ -119,6 +119,7 @@ public class CreerPermutationPageBean implements Serializable
 
 		this.facadePermutations.create(this.permutation);
 		this.flashUtilisateur(this.utilisateur);
+		JsfUtils.sendGrowlMessage("Demande de permutation crée");
 		return "/pages/accueil.xhtml";
 
 	}

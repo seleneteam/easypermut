@@ -15,6 +15,7 @@ import net.entetrs.commons.jsf.JsfUtils;
 import etrs.selene.easypermut.model.entities.DemandePermutation;
 import etrs.selene.easypermut.model.entities.Utilisateur;
 import etrs.selene.easypermut.model.sessions.DemandePermutationSession;
+import etrs.selene.easypermut.model.sessions.UtilisateurSession;
 
 /**
  * Bean de la page d'affichage des permutations.
@@ -37,9 +38,21 @@ public class ListerPermutationsPageBean implements Serializable {
     DemandePermutationSession facadePermutations;
 
     /**
+     * {@link UtilisateurSession}
+     */
+    @Inject
+    UtilisateurSession facadeUtilisateur;
+
+    /**
      * Utilisateur connecté.
      */
     Utilisateur utilisateur;
+
+    /**
+     * La demannde de permutation selectionée pour les details et pour
+     * l'acceptation.
+     */
+    DemandePermutation demandePermutationSelectionee;
 
     /**
      * Methode de post-construction. Recupere l'utilisateur du FlashScope.
@@ -47,6 +60,7 @@ public class ListerPermutationsPageBean implements Serializable {
     @PostConstruct
     public void init() {
         this.utilisateur = (Utilisateur) JsfUtils.getFromFlashScope("_utilisateur");
+        this.demandePermutationSelectionee = this.facadePermutations.newInstance();
     }
 
     /**
@@ -69,6 +83,22 @@ public class ListerPermutationsPageBean implements Serializable {
     }
 
     /**
+     * Retourne la liste des permutations sans celles en cours de transaction.
+     * 
+     * @return Une liste de permutation valide.
+     */
+    public List<DemandePermutation> getLstDemandesPermutationValides() {
+        List<DemandePermutation> lstPermutValides = new ArrayList<>();
+
+        for (DemandePermutation demandePermutation : this.facadePermutations.readAll()) {
+            if (demandePermutation.getUtilisateurInteresse() == null) {
+                lstPermutValides.add(demandePermutation);
+            }
+        }
+        return lstPermutValides;
+    }
+
+    /**
      * Retourne la liste des permutations compatibles avec l'utilisateur. Donc,
      * de meme grade et de meme spécilité.
      * 
@@ -81,7 +111,9 @@ public class ListerPermutationsPageBean implements Serializable {
 
             for (DemandePermutation demandePermutation : lstPermut) {
                 if (demandePermutation.getUtilisateurCreateur().getGrade() == this.utilisateur.getGrade()) {
-                    lstPermutSpecifique.add(demandePermutation);
+                    if (demandePermutation.getUtilisateurInteresse() == null) {
+                        lstPermutSpecifique.add(demandePermutation);
+                    }
                 }
             }
             return lstPermutSpecifique;
@@ -96,13 +128,15 @@ public class ListerPermutationsPageBean implements Serializable {
      * @param permutation
      * @return La page suivante.
      */
-    public String choisirPermutation(DemandePermutation permutation) {
+    public String choisirPermutation() {
         if (this.utilisateur == null) {
             return "/connexion.xhtml";
         }
         if (this.utilisateur.getEstInteresse() == false) {
             this.utilisateur.setEstInteresse(true);
-            permutation.setUtilisateurInteresse(utilisateur);
+            this.demandePermutationSelectionee.setUtilisateurInteresse(this.utilisateur);
+            this.facadePermutations.update(this.demandePermutationSelectionee);
+            this.facadeUtilisateur.update(this.utilisateur);
         }
         return "/accueil.xhtml";
     }
@@ -123,4 +157,9 @@ public class ListerPermutationsPageBean implements Serializable {
         this.flashUtilisateur(this.utilisateur);
         return "/accueil.xhtml";
     }
+
+    public void givePermutSelected(DemandePermutation permutation) {
+        this.demandePermutationSelectionee = permutation;
+    }
+
 }

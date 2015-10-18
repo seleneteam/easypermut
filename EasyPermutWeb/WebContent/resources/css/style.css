@@ -1,5 +1,9 @@
 @CHARSET "UTF-8";
 
+body {
+	margin-bottom: 100px;
+}
+
 article
 {
 	margin-bottom: 50px;
@@ -16,4 +20,18 @@ footer
 .centre
 {
 	text-align: center;
+}
+
+.center-elem {
+	margin: 0 auto 0 auto;
+}
+
+.btn-primary {
+	border: none !important;
+    background: #233140 !important;
+    color: #ffffff !important;
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active {
+    background: #384553 !important;
 }

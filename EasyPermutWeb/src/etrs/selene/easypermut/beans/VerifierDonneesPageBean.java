@@ -65,5 +65,4 @@ public class VerifierDonneesPageBean implements Serializable {
         this.flashUtilisateur(utilisateur);
         return "/accueil.xhtml";
     }
-    // TODO Ajouter liens ???
 }

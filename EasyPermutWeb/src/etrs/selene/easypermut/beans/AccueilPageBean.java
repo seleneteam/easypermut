@@ -56,7 +56,11 @@ public class AccueilPageBean implements Serializable {
         JsfUtils.putInFlashScope("_utilisateur", utilisateur);
     }
 
-    // TODO Ajouter comments.
+    /**
+     * Navigation entre les pages.
+     * 
+     * @return La page a ateindre en fonction du cas.
+     */
     public String pageCreerPermutation() {
         if (this.utilisateur == null) {
             return "/connexion.xhtml";
@@ -65,6 +69,11 @@ public class AccueilPageBean implements Serializable {
         return "/creationPermutation.xhtml";
     }
 
+    /**
+     * Navigation entre les pages.
+     * 
+     * @return La page a ateindre en fonction du cas.
+     */
     public String pageListePermutation() {
         if (this.utilisateur == null) {
             return "/connexion.xhtml";

@@ -141,7 +141,11 @@ public class ListerPermutationsPageBean implements Serializable {
         return "/accueil.xhtml";
     }
 
-    // TODO Ajouter comments.
+    /**
+     * Navigation entre les pages.
+     * 
+     * @return La page a ateindre en fonction du cas.
+     */
     public String pageCreerPermutation() {
         if (this.utilisateur == null) {
             return "/connexion.xhtml";
@@ -150,6 +154,11 @@ public class ListerPermutationsPageBean implements Serializable {
         return "/creationPermutation.xhtml";
     }
 
+    /**
+     * Navigation entre les pages.
+     * 
+     * @return La page a ateindre en fonction du cas.
+     */
     public String pageAccueil() {
         if (this.utilisateur == null) {
             return "/connexion.xhtml";
@@ -158,7 +167,7 @@ public class ListerPermutationsPageBean implements Serializable {
         return "/accueil.xhtml";
     }
 
-    public void givePermutSelected(DemandePermutation permutation) {
+    public void selectionerPermutation(DemandePermutation permutation) {
         this.demandePermutationSelectionee = permutation;
     }
 

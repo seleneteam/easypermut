@@ -15,7 +15,7 @@
 		<div class="container">
 			<h:form id="permutations_datatable">
 				<p:dataTable id="datatable_permutations" var="permutation"
-					value="#{listerPermutationsPageBean.lstDemandesPermutation}">
+					value="#{listerPermutationsPageBean.lstDemandesPermutationValides}">
 					
 						<p:column headerText="Grade">
 							<h:outputText value="#{permutation.utilisateurCreateur.grade}" />
@@ -41,7 +41,7 @@
 			</h:form>
 		</div>
 		
-		<p:dialog header="Detail d'une permutation" widgetVar="detailPermut" modal="true" height="400" closable="false">
+		<p:dialog header="Detail d'une permutation" widgetVar="detailPermut" modal="true" height="250" closable="false" resizable="false">
 			<h:form id="testId">
 			<table>
 			
@@ -64,7 +64,7 @@
 				
 				<p:outputLabel value="Mail : " />
 				<p:outputLabel value="#{listerPermutationsPageBean.demandePermutationSelectionee.utilisateurCreateur.mail}" />
-				
+				<br />
 				<p:commandButton value="Accepter" icon="ui-icon-person" styleClass="btn-primary" action="#{listerPermutationsPageBean.choisirPermutation()}" update=":permutations_datatable" ajax="false"/>
 				<p:commandButton value="Fermer" icon="ui-icon-person" onclick="PF('detailPermut').hide();" />	
 

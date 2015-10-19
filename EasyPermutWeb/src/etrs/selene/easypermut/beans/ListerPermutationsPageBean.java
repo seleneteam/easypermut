@@ -123,7 +123,8 @@ public class ListerPermutationsPageBean implements Serializable {
     }
 
     /**
-     * Methode de choix d'une permutation. Ajoute l'utilisateura la permutation.
+     * Methode de choix d'une permutation. Ajoute l'utilisateur a la
+     * permutation.
      * 
      * @param permutation
      * @return La page suivante.
@@ -137,8 +138,9 @@ public class ListerPermutationsPageBean implements Serializable {
             this.demandePermutationSelectionee.setUtilisateurInteresse(this.utilisateur);
             this.facadePermutations.update(this.demandePermutationSelectionee);
             this.facadeUtilisateur.update(this.utilisateur);
+            JsfUtils.sendGrowlMessage("Vous avez choisi la permutation de %s", this.demandePermutationSelectionee.getUtilisateurCreateur().getNom());
         }
-        return "/accueil.xhtml";
+        return "/pages/accueil.xhtml";
     }
 
     /**
@@ -151,7 +153,7 @@ public class ListerPermutationsPageBean implements Serializable {
             return "/connexion.xhtml";
         }
         this.flashUtilisateur(this.utilisateur);
-        return "/creationPermutation.xhtml";
+        return "/pages/creationPermutation.xhtml";
     }
 
     /**
@@ -167,6 +169,12 @@ public class ListerPermutationsPageBean implements Serializable {
         return "/accueil.xhtml";
     }
 
+    /**
+     * Sélectionne une ermutation pour les details et l'acceptation.
+     * 
+     * @param permutation
+     *            La permutation.
+     */
     public void selectionerPermutation(DemandePermutation permutation) {
         this.demandePermutationSelectionee = permutation;
     }

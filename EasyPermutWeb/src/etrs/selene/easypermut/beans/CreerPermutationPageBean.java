@@ -2,12 +2,10 @@ package etrs.selene.easypermut.beans;
 
 import java.io.Serializable;
 import java.util.List;
-
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -35,93 +33,87 @@ import etrs.selene.easypermut.model.sessions.ZMRSession;
 @Data
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class CreerPermutationPageBean implements Serializable
-{
+public class CreerPermutationPageBean implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * {@link DemandePermutationSession}
-	 */
-	@Inject
-	DemandePermutationSession facadePermutations;
+    /**
+     * {@link DemandePermutationSession}
+     */
+    @Inject
+    DemandePermutationSession facadePermutations;
 
-	@Inject
-	ZMRSession facadeZmr;
+    @Inject
+    ZMRSession facadeZmr;
 
-	@Inject
-	VilleSession facadeVille;
+    @Inject
+    VilleSession facadeVille;
 
-	@Inject
-	UniteSession facadeUnite;
-	
-	@Inject
-	PosteSession facadePoste;
+    @Inject
+    UniteSession facadeUnite;
 
-	/**
-	 * La permutation qui sera crée.
-	 */
-	DemandePermutation permutation;
+    @Inject
+    PosteSession facadePoste;
 
-	/**
-	 * Utilisateur connecté.
-	 */
-	Utilisateur utilisateur;
+    /**
+     * La permutation qui sera crée.
+     */
+    DemandePermutation permutation;
 
-	/**
-	 * Poste désiré.
-	 */
-	Poste poste;
+    /**
+     * Utilisateur connecté.
+     */
+    Utilisateur utilisateur;
 
-	List<ZMR> listeZMR;
-	List<Ville> listeVille;
-	List<Unite> listeUnite;
+    /**
+     * Poste désiré.
+     */
+    Poste poste;
 
-	/**
-	 * Methode de post-construction. Recupere l'utilisateur du FlashScope.
-	 */
-	@PostConstruct
-	public void init()
-	{
-		this.utilisateur = (Utilisateur)JsfUtils.getFromFlashScope("_utilisateur");
-		this.permutation = this.facadePermutations.newInstance();
-		this.listeZMR = this.facadeZmr.readAll();
-		this.listeVille = this.facadeVille.readAll();
-		this.listeUnite = this.facadeUnite.readAll();
-		this.poste = this.facadePoste.newInstance();
-	}
+    List<ZMR> listeZMR;
+    List<Ville> listeVille;
+    List<Unite> listeUnite;
 
-	/**
-	 * Methode de mise en FlashScope de l'utilisateur.
-	 *
-	 * @param utilisateur
-	 *            L'utilisateur a mettre dans le FlashScope.
-	 */
-	public void flashUtilisateur(final Utilisateur utilisateur)
-	{
-		JsfUtils.putInFlashScope("_utilisateur", utilisateur);
-	}
+    /**
+     * Methode de post-construction. Recupere l'utilisateur du FlashScope.
+     */
+    @PostConstruct
+    public void init() {
+        this.utilisateur = (Utilisateur) JsfUtils.getFromFlashScope("_utilisateur");
+        this.permutation = this.facadePermutations.newInstance();
+        this.listeZMR = this.facadeZmr.readAll();
+        this.listeVille = this.facadeVille.readAll();
+        this.listeUnite = this.facadeUnite.readAll();
+        this.poste = this.facadePoste.newInstance();
+    }
 
-	/**
-	 * Methode de creation d'une permutation.
-	 *
-	 * @return La page suivante.
-	 */
-	public String creerDemande()
-	{
+    /**
+     * Methode de mise en FlashScope de l'utilisateur.
+     *
+     * @param utilisateur
+     *            L'utilisateur a mettre dans le FlashScope.
+     */
+    public void flashUtilisateur(final Utilisateur utilisateur) {
+        JsfUtils.putInFlashScope("_utilisateur", utilisateur);
+    }
 
-		if (this.utilisateur == null)
-			return "/connexion.xhtml";
-		this.poste.setUnite(this.permutation.getUnite());
-		System.out.println(this.poste.getId());
-		this.permutation.setUtilisateurCreateur(this.utilisateur);
-		this.permutation.setPoste(this.poste);
+    /**
+     * Methode de creation d'une permutation.
+     *
+     * @return La page suivante.
+     */
+    public String creerDemande() {
 
-		this.facadePermutations.create(this.permutation);
-		this.flashUtilisateur(this.utilisateur);
-		JsfUtils.sendGrowlMessage("Demande de permutation crée");
-		return "/pages/accueil.xhtml";
+        if (this.utilisateur == null)
+            return "/connexion.xhtml";
+        this.poste.setUnite(this.permutation.getUnite());
+        this.permutation.setUtilisateurCreateur(this.utilisateur);
+        this.permutation.setPoste(this.poste);
+        this.facadePermutations.create(this.permutation);
+        this.flashUtilisateur(this.utilisateur);
+        JsfUtils.sendGrowlMessage("Demande de permutation crée");
+        return "/pages/accueil.xhtml";
 
-	}
+    }
 
 }

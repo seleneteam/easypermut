@@ -25,6 +25,8 @@ import etrs.selene.easypermut.model.sessions.UtilisateurSession;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class AccueilPageBean implements Serializable {
 
+    // TODO Supprimer Page
+
     private static final long serialVersionUID = 1L;
 
     /**

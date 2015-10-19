@@ -92,6 +92,8 @@ public class ImportSingleton {
                     Element ePoste = (Element) eMilitaire.getElementsByTagName("poste").item(0);
                     Element eSpe = (Element) eMilitaire.getElementsByTagName("specialite").item(0);
 
+                    System.err.println("GETTING NODE >> " + eMilitaire.getElementsByTagName("nom").item(0).getTextContent());
+
                     Grade grade;
                     if ((grade = facadeGrade.searchFirstResult("grade", eMilitaire.getElementsByTagName("grade").item(0).getTextContent())) == null) {
                         grade = facadeGrade.newInstance();
@@ -149,7 +151,8 @@ public class ImportSingleton {
                         utilisateur.setSpecialite(specialite);
                         utilisateur.setPoste(poste);
                         utilisateur.setEstValide(true);
-                        utilisateur.setInformationsValide(false);
+                        // TODO Put False !
+                        utilisateur.setInformationsValide(true);
                         facadeUtilisateur.update(utilisateur);
                     }
                 }

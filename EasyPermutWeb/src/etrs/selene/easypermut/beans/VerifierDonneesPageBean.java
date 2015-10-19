@@ -45,10 +45,10 @@ public class VerifierDonneesPageBean implements Serializable
 	}
 
 	/**
-	 * Methude de mise en FlashScope de l'utilisateur.
+	 * Methode de mise en FlashScope de l'utilisateur.
 	 *
 	 * @param utilisateur
-	 *            L'utilisateur a mettre dans le FlashScope.
+	 *            L'utilisateur à mettre dans le FlashScope.
 	 */
 	public void flashUtilisateur(final Utilisateur utilisateur)
 	{

@@ -9,68 +9,93 @@
 	<ui:define name="title">Liste permutations</ui:define>
 
 	<ui:define name="jumbotron_titre">Permutations</ui:define>
-    <ui:define name="jumbotron_indication">Permutations disponibles</ui:define>
-    			
+	<ui:define name="jumbotron_indication">Permutations disponibles</ui:define>
+
 	<ui:define name="content">
+
 		<div class="container">
-			<h:form id="permutations_datatable">
-				<p:dataTable id="datatable_permutations" var="permutation"
-					value="#{listerPermutationsPageBean.lstDemandesPermutationValides}">
-					
-						<p:column headerText="Grade">
-							<h:outputText value="#{permutation.utilisateurCreateur.grade}" />
-						</p:column>
-						<p:column headerText="Nom">
-							<h:outputText value="#{permutation.utilisateurCreateur.nom}" />
-						</p:column>
-						<p:column headerText="Base">
-							<h:outputText value="#{permutation.ville}" />
-						</p:column>
-						<p:column headerText="Poste">
-							<h:outputText value="#{permutation.poste}" />
-						</p:column>
-						
-						<p:column headerText="Action">
-							
-							<p:commandButton value="Details" icon="ui-icon-person" styleClass="btn-primary center-elem" onclick="PF('detailPermut').show();" actionListener="#{listerPermutationsPageBean.selectionerPermutation(permutation)}" update=":testId" >
-							</p:commandButton>
-							
-						</p:column>
-					
-				</p:dataTable>
-			</h:form>
+			<p:dataTable var="permutation"
+				value="#{listerPermutationsPageBean.lstDemandesPermutationValides}"
+				rows="10" paginator="true"
+				paginatorTemplate="{CurrentPageReport} {PreviousPageLink} {PageLinks} {NextPageLink}" id="permutationTable">
+				<p:column headerText="Nom">
+					<h:outputText value="#{permutation.utilisateurCreateur}" />
+				</p:column>
+
+				<p:column filterBy="#{permutation.zmr}" headerText="ZMR" footerText="in"
+					filterMatchMode="in">
+					<f:facet name="filter">
+						<p:selectCheckboxMenu label="zmr"
+							onchange="PF('permutationTable').filter()" panelStyle="width:125px"
+							scrollHeight="150">
+							<f:selectItems value="#{permutation.zmr.libelle}" />
+						</p:selectCheckboxMenu>
+					</f:facet>
+					<h:outputText value="#{permutation.zmr}" />
+				</p:column>
+
+				<p:column headerText="Ville">
+					<h:outputText value="#{permutation.ville}" />
+				</p:column>
+
+				<p:column headerText="Unite">
+					<h:outputText value="#{permutation.unite}" />
+				</p:column>
+
+				<p:column headerText="Action">
+					<p:commandButton value="Details" icon="ui-icon-person"
+						styleClass="btn-primary center-elem"
+						onclick="PF('detailPermut').show();"
+						actionListener="#{listerPermutationsPageBean.selectionerPermutation(permutation)}"
+						update=":testId">
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
 		</div>
-		
-		<p:dialog header="Detail d'une permutation" widgetVar="detailPermut" modal="true" height="250" closable="false" resizable="false">
+
+		<p:dialog header="Detail d'une permutation" widgetVar="detailPermut"
+			modal="true" height="250" closable="false" resizable="false">
 			<h:form id="testId">
-			<table>
-			
-			</table>
+				<table>
+
+				</table>
 				<h:panelGrid columns="2">
-				<p:outputLabel value="Grade : " />
-				<p:outputLabel value="#{listerPermutationsPageBean.demandePermutationSelectionee.utilisateurCreateur.grade.grade}" />
-				<p:outputLabel value="Nom : " />
-				<p:outputLabel value="#{listerPermutationsPageBean.demandePermutationSelectionee.utilisateurCreateur.nom}" />
-				<p:outputLabel value="Prenom : " />
-				<p:outputLabel value="#{listerPermutationsPageBean.demandePermutationSelectionee.utilisateurCreateur.prenom}" />
-				<p:outputLabel value="NIA : " />
-				<p:outputLabel value="#{listerPermutationsPageBean.demandePermutationSelectionee.utilisateurCreateur.nia}" />
-				<p:outputLabel value="Poste : " />
-				<p:outputLabel value="#{listerPermutationsPageBean.demandePermutationSelectionee.utilisateurCreateur.poste.libelle}" />
-				<p:outputLabel value="Unite : " />
-				<p:outputLabel value="#{listerPermutationsPageBean.demandePermutationSelectionee.utilisateurCreateur.poste.unite.libelle}" />
-				<p:outputLabel value="Site : " />
-				<p:outputLabel value="#{listerPermutationsPageBean.demandePermutationSelectionee.utilisateurCreateur.poste.unite.ville.nom} (#{listerPermutationsPageBean.demandePermutationSelectionee.utilisateurCreateur.poste.unite.ville.zmr.libelle})" />
-				
-				<p:outputLabel value="Mail : " />
-				<p:outputLabel value="#{listerPermutationsPageBean.demandePermutationSelectionee.utilisateurCreateur.mail}" />
-				<br />
-				<p:commandButton value="Accepter" icon="ui-icon-person" styleClass="btn-primary" action="#{listerPermutationsPageBean.choisirPermutation()}" update=":permutations_datatable" ajax="false"/>
-				<p:commandButton value="Fermer" icon="ui-icon-person" onclick="PF('detailPermut').hide();" />	
+					<p:outputLabel value="Grade : " />
+					<p:outputLabel
+						value="#{listerPermutationsPageBean.demandePermutationSelectionee.utilisateurCreateur.grade.grade}" />
+					<p:outputLabel value="Nom : " />
+					<p:outputLabel
+						value="#{listerPermutationsPageBean.demandePermutationSelectionee.utilisateurCreateur.nom}" />
+					<p:outputLabel value="Prenom : " />
+					<p:outputLabel
+						value="#{listerPermutationsPageBean.demandePermutationSelectionee.utilisateurCreateur.prenom}" />
+					<p:outputLabel value="NIA : " />
+					<p:outputLabel
+						value="#{listerPermutationsPageBean.demandePermutationSelectionee.utilisateurCreateur.nia}" />
+					<p:outputLabel value="Poste : " />
+					<p:outputLabel
+						value="#{listerPermutationsPageBean.demandePermutationSelectionee.utilisateurCreateur.poste.libelle}" />
+					<p:outputLabel value="Unite : " />
+					<p:outputLabel
+						value="#{listerPermutationsPageBean.demandePermutationSelectionee.utilisateurCreateur.poste.unite.libelle}" />
+					<p:outputLabel value="Site : " />
+					<p:outputLabel
+						value="#{listerPermutationsPageBean.demandePermutationSelectionee.utilisateurCreateur.poste.unite.ville.nom} (#{listerPermutationsPageBean.demandePermutationSelectionee.utilisateurCreateur.poste.unite.ville.zmr.libelle})" />
+
+					<p:outputLabel value="Mail : " />
+					<p:outputLabel
+						value="#{listerPermutationsPageBean.demandePermutationSelectionee.utilisateurCreateur.mail}" />
+					<br />
+					<p:commandButton value="Accepter" icon="ui-icon-person"
+						styleClass="btn-primary"
+						action="#{listerPermutationsPageBean.choisirPermutation()}"
+						update=":permutations_datatable" ajax="false" />
+					<p:commandButton value="Fermer" icon="ui-icon-person"
+						onclick="PF('detailPermut').hide();" />
 
 				</h:panelGrid>
 			</h:form>
 		</p:dialog>
-		
 	</ui:define>
+
 </ui:composition>

@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -14,6 +16,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import net.entetrs.commons.jsf.JsfUtils;
+
+import org.primefaces.event.SelectEvent;
+
 import etrs.selene.easypermut.model.entities.DemandePermutation;
 import etrs.selene.easypermut.model.entities.Utilisateur;
 import etrs.selene.easypermut.model.sessions.DemandePermutationSession;
@@ -160,7 +165,7 @@ public class ListerPermutationsPageBean implements Serializable
 	}
 	
 	/**
-	 * Sélectionne une ermutation pour les details et l'acceptation.
+	 * Sélectionne une permutation pour les details et l'acceptation.
 	 *
 	 * @param permutation
 	 *            La permutation.
@@ -170,9 +175,10 @@ public class ListerPermutationsPageBean implements Serializable
 		this.demandePermutationSelectionee = permutation;
 	}
 	
-	public long nombreDemandes()
+	public void onRowSelect(final SelectEvent event)
 	{
-		return this.facadePermutations.count();
+		FacesMessage msg = new FacesMessage("Car Selected", ((DemandePermutation)event.getObject()).getId());
+		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
 	
 }

@@ -21,9 +21,9 @@ import etrs.selene.easypermut.model.entities.Utilisateur;
 public class NavBarBean implements Serializable
 {
 	private static final long serialVersionUID = 1L;
-	
+
 	Utilisateur utilisateur;
-	
+
 	/**
 	 * Methode de post-construction. Recupere l'utilisateur du FlashScope.
 	 */
@@ -32,10 +32,10 @@ public class NavBarBean implements Serializable
 	{
 		this.utilisateur = (Utilisateur)JsfUtils.getFromFlashScope("_utilisateur");
 	}
-	
+
 	/**
 	 * Methode de redirection pour la page d'accueil.
-	 * 
+	 *
 	 * @return La page vers laquelle l'utilisateur sera redirige en fonction du
 	 *         cas.
 	 */
@@ -49,10 +49,10 @@ public class NavBarBean implements Serializable
 			return "/pages/accueil.xhtml";
 		}
 	}
-	
+
 	/**
 	 * Methode de redirection pour la page de creation d'une permutation.
-	 * 
+	 *
 	 * @return La page vers laquelle l'utilisateur sera redirige en fonction du
 	 *         cas.
 	 */
@@ -66,10 +66,10 @@ public class NavBarBean implements Serializable
 			return "/pages/creationPermutation.xhtml";
 		}
 	}
-	
+
 	/**
 	 * Methode de redirection pour la page de la liste des permutations.
-	 * 
+	 *
 	 * @return La page vers laquelle l'utilisateur sera redirige en fonction du
 	 *         cas.
 	 */
@@ -83,7 +83,24 @@ public class NavBarBean implements Serializable
 			return "/pages/listePermutations.xhtml";
 		}
 	}
-	
+
+	/**
+	 * Methode de redirection pour la page de statistiques.
+	 *
+	 * @return La page vers laquelle l'utilisateur sera redirige en fonction du
+	 *         cas.
+	 */
+	public String pageStatistiques()
+	{
+		if (this.utilisateur == null)
+			return "/connexion.xhtml";
+		else
+		{
+			this.reflasherUtilisateur();
+			return "/pages/statistiques.xhtml";
+		}
+	}
+
 	/**
 	 * Methode permettant de reflasher un utilisateur.
 	 */
@@ -91,5 +108,5 @@ public class NavBarBean implements Serializable
 	{
 		JsfUtils.putInFlashScope("_utilisateur", this.utilisateur);
 	}
-	
+
 }

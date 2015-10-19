@@ -51,14 +51,14 @@ public class InitSingleton {
     @Inject
     private ZMRSession facadeZMR;
 
-    String[] tabGrade = { "caporal", "caporal-chef", "sergent", "adjudant" };
-    String[] tabPoste = { "mecanicien", "electrotechnichien", "previsionniste" };
-    String[] tabNomSpecialite = { "programmeur", "admin-reseaux", "communication" };
+    String[] tabGrade = { "Caporal", "Caporal-Chef", "Sergent", "Adjudant" };
+    String[] tabPoste = { "Mecanicien", "Electrotechnichien", "Previsionniste" };
+    String[] tabNomSpecialite = { "Programmeur", "Admin-Reseaux", "Communication" };
     String[] tabSpecialite = { "8300", "8200", "8100" };
-    String[] tabUnite = { "edcm", "esta", "dsi" };
-    String[] tabUtilisateur = { "didier", "serge", "cecile" };
-    String[] tabVille = { "paris", "rennes", "bordeaux" };
-    String[] tabZMR = { "paris", "rennes", "bordeaux" };
+    String[] tabUnite = { "EDCM", "ESTA", "DSI" };
+    String[] tabUtilisateur = { "Didier", "Serge", "Cecile" };
+    String[] tabVille = { "Paris", "Rennes", "Bordeaux" };
+    String[] tabZMR = { "Creil", "Rennes-Angers", "Bordeaux-Cazaux" };
 
     @PostConstruct
     public void init() {

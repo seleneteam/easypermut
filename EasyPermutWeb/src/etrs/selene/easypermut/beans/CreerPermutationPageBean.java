@@ -104,8 +104,9 @@ public class CreerPermutationPageBean implements Serializable {
      */
     public String creerDemande() {
 
-        if (this.utilisateur == null)
+        if (this.utilisateur == null) {
             return "/connexion.xhtml";
+        }
         this.poste.setUnite(this.permutation.getUnite());
         this.permutation.setUtilisateurCreateur(this.utilisateur);
         this.permutation.setPoste(this.poste);

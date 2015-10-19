@@ -9,22 +9,21 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 	<h:outputStylesheet library="css" name="normalize.css" />
-	<h:outputStylesheet library="css" name="style.css" />
-	<h:outputStylesheet library="css" name="bootstrap-theme.min.css" />
 	<h:outputStylesheet library="css" name="bootstrap.min.css" />
 	<h:outputStylesheet library="css" name="freelancer.css" />
+	<h:outputStylesheet library="css" name="style.css" />
 
 	<h:outputScript library="js" name="bootstrap.min.js" />
 
 	<title><ui:insert name="title"></ui:insert></title>
 </h:head>
 <h:body>
-	<div class="container">
-		<div class="jumbotron">
-			<h1>Easy Permut'</h1>
-			<ui:insert name="indication"></ui:insert>
+		<div class="intro">
+			<div class="container">
+				<h1>Easy Permut'</h1>
+				<p class="intro-p"><ui:insert name="indication"></ui:insert></p>
+			</div>
 		</div>
-	</div>
 
 	<section> 
 		<article>
@@ -38,14 +37,12 @@
 		</article> 
 	</section>
 
-	<footer>
-	<div class="footer-below centre">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">Easy permut' 2015</div>
-			</div>
+	<div class="footer-self">
+		<div class="footer-self navbar navbar-default navbar-fixed-bottom">
+    		<div class="container">
+      			<p class="navbar-text pull-left color-white">Selene Team - Easy Permut' 2015</p>
+    		</div>
 		</div>
 	</div>
-	</footer>
 </h:body>
 </html>

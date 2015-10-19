@@ -30,6 +30,51 @@ public class NavBarBean implements Serializable {
     }
 
     /**
+     * Methode de redirection pour la page d'accueil.
+     * 
+     * @return La page vers laquelle l'utilisateur sera redirige en fonction du
+     *         cas.
+     */
+    public String pageAccueil() {
+        if (this.utilisateur == null) {
+            return "/connexion.xhtml";
+        } else {
+            reflasherUtilisateur();
+            return "/pages/acccueil.xhtml";
+        }
+    }
+
+    /**
+     * Methode de redirection pour la page de creation d'une permutation.
+     * 
+     * @return La page vers laquelle l'utilisateur sera redirige en fonction du
+     *         cas.
+     */
+    public String pageCreation() {
+        if (this.utilisateur == null) {
+            return "/connexion.xhtml";
+        } else {
+            reflasherUtilisateur();
+            return "/pages/creationPermutation.xhtml";
+        }
+    }
+
+    /**
+     * Methode de redirection pour la page de la liste des permutations.
+     * 
+     * @return La page vers laquelle l'utilisateur sera redirige en fonction du
+     *         cas.
+     */
+    public String pageLister() {
+        if (this.utilisateur == null) {
+            return "/connexion.xhtml";
+        } else {
+            reflasherUtilisateur();
+            return "/pages/listePermutations.xhtml";
+        }
+    }
+
+    /**
      * Methode permettant de reflasher un utilisateur.
      */
     public void reflasherUtilisateur() {

@@ -128,8 +128,10 @@
 							<div class="col-md-4">
 								<p:selectOneMenu id="listeZMR"
 									value="#{creerPermutationPageBean.permutation.zmr}"
-									converter="#{genericConverter}">
-									<f:selectItems value="#{creerPermutationPageBean.listeZMR}" />
+									converter="#{genericConverter}" valueChangeListener="#{creerPermutationPageBean.chargerVilles}" 
+									onchange="submit()" immediate="false">
+									<f:selectItem itemLabel="Selectionnez" noSelectionOption="true" itemDisabled="true"/>
+									<f:selectItems value="#{creerPermutationPageBean.listeZMR}" var="zmrSelected" />
 								</p:selectOneMenu>
 							</div>
 							<div class="col-md-4">
@@ -145,7 +147,10 @@
 							<div class="col-md-4">
 								<p:selectOneMenu id="listeVille"
 									value="#{creerPermutationPageBean.permutation.ville}"
-									converter="#{genericConverter}">
+									converter="#{genericConverter}" disabled="true" binding="#{creerPermutationPageBean.somVille}"
+									valueChangeListener="#{creerPermutationPageBean.chargerUnitees}"
+									onchange="submit()" immediate="false">
+									<f:selectItem itemLabel="Selectionnez" noSelectionOption="true" itemDisabled="true"/>
 									<f:selectItems value="#{creerPermutationPageBean.listeVille}" />
 								</p:selectOneMenu>
 							</div>
@@ -162,7 +167,9 @@
 							<div class="col-md-4">
 								<p:selectOneMenu id="listeUnite"
 									value="#{creerPermutationPageBean.permutation.unite}"
-									converter="#{genericConverter}">
+									converter="#{genericConverter}" disabled="true" immediate="false"
+									binding="#{creerPermutationPageBean.somUnitee}">
+									<f:selectItem itemLabel="Selectionnez" noSelectionOption="true" itemDisabled="true"/>
 									<f:selectItems value="#{creerPermutationPageBean.listeUnite}" />
 								</p:selectOneMenu>
 							</div>
@@ -178,7 +185,8 @@
 							</div>
 							<div class="col-md-4">
 								<p:inputText id="inputPoste"
-									value="#{creerPermutationPageBean.poste.libelle}" styleClass="full-size" />
+									value="#{creerPermutationPageBean.poste.libelle}" styleClass="full-size" 
+									immediate="false" />
 							</div>
 							<div class="col-md-4">
 								<p:message for="inputPoste" />

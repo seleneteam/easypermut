@@ -58,7 +58,7 @@ public class InitSingleton {
     String[] tabUnite = { "EDCM", "ESTA", "DSI" };
     String[] tabUtilisateur = { "Didier", "Serge", "Cecile" };
     String[] tabVille = { "Paris", "Rennes", "Bordeaux" };
-    String[] tabZMR = { "Creil", "Rennes-Angers", "Bordeaux-Cazaux" };
+    String[] tabZMR = { "Creil", "Angers-Rennes", "Bordeaux-Cazaux" };
 
     @PostConstruct
     public void init() {

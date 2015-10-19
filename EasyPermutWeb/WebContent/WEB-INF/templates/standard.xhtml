@@ -18,45 +18,56 @@
 	<title><ui:insert name="title"></ui:insert></title>
 </h:head>
 <h:body>
-	<p:growl id="growl" showDetail="false" life="3000" /> 
-<div class="bcolor-grey">
-	<header class="container">
-		<nav class="navbar navbar-default">
-			<div class="container-fluid">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle" data-toggle="collapse">
-						<span class="sr-only">Menu</span> <span class="icon-bar"></span> <span
-							class="icon-bar"></span> <span class="icon-bar"></span>
-					</button>
-					<h:link class="navbar-brand color-blue" outcome="#{navBarBean.pageAccueil()}" >Easy permut'</h:link>
-				</div>
+	<p:growl id="growl" showDetail="false" life="3000" />
+	<div class="bcolor-grey">
+		<header class="container">
+			<nav class="navbar navbar-default">
+				<div class="container-fluid">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle" data-toggle="collapse">
+							<span class="sr-only">Menu</span> <span class="icon-bar"></span>
+							<span class="icon-bar"></span> <span class="icon-bar"></span>
+						</button>
+						<h:link class="navbar-brand color-blue"
+							outcome="#{navBarBean.pageAccueil()}">Easy permut'</h:link>
+					</div>
 
-				<div>
-					<ul class="nav navbar-nav">
-						<li><h:link styleClass="color-blue" outcome="#{navBarBean.pageAccueil()}" >Accueil</h:link></li>
-						<li><h:link styleClass="color-blue" outcome="#{navBarBean.pageLister()}" >Liste des permutations</h:link></li>
-						<li><h:link styleClass="color-blue" outcome="#{navBarBean.pageCreation()}" >Créer une demande</h:link></li>
-					</ul>
+					<div>
+						<ul class="nav navbar-nav">
+							<li><h:link styleClass="color-blue"
+									outcome="#{navBarBean.pageAccueil()}">Accueil</h:link></li>
+							<li><h:link styleClass="color-blue"
+									outcome="#{navBarBean.pageLister()}">Liste des permutations</h:link></li>
+							<li><h:link styleClass="color-blue"
+									outcome="#{navBarBean.pageCreation()}">Créer une demande</h:link></li>
+						</ul>
+					</div>
 				</div>
-			</div>
-		</nav>
-	</header>
+			</nav>
+		</header>
 	</div>
-	
+
 	<div class="intro">
-			<div class="container">
-				<h1><ui:insert name="jumbotron_titre" /></h1>
-				<p class="intro-p"><ui:insert name="jumbotron_indication" /></p>
-			</div>
+		<div class="container">
+			<h1>
+				<ui:insert name="jumbotron_titre" />
+			</h1>
+			<p class="intro-p">
+				<ui:insert name="jumbotron_indication" />
+			</p>
 		</div>
-	
+	</div>
+
 	<ui:insert name="content">
 	</ui:insert>
 	<div class="footer-self">
 		<div class="footer-self navbar navbar-default navbar-fixed-bottom">
-    		<div class="container">
-      			<p class="center-element navbar-text color-white">Selene Team - Easy Permut' 2015</p>
-    		</div>
+			<div class="col-md-4"></div>
+			<div class="col-md-4">
+				<p class="center-element navbar-text color-white">Selene Team -
+					Easy Permut' 2015</p>
+			</div>
+			<div class="col-md-4"></div>
 		</div>
 	</div>
 </h:body>

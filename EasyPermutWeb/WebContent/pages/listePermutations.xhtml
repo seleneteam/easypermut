@@ -15,22 +15,15 @@
 
 		<div class="container">
 			<p:dataTable var="permutation"
-				value="#{listerPermutationsPageBean.lstDemandesPermutationValides}"
+				value="#{listerPermutationsPageBean.lstDemandesPermutationSpecifiques}"
 				rows="10" paginator="true"
-				paginatorTemplate="{CurrentPageReport} {PreviousPageLink} {PageLinks} {NextPageLink}" id="permutationTable">
+				paginatorTemplate="{CurrentPageReport} {PreviousPageLink} {PageLinks} {NextPageLink}"
+				id="permutationTable">
 				<p:column headerText="Nom">
 					<h:outputText value="#{permutation.utilisateurCreateur}" />
 				</p:column>
 
-				<p:column filterBy="#{permutation.zmr}" headerText="ZMR" footerText="in"
-					filterMatchMode="in">
-					<f:facet name="filter">
-						<p:selectCheckboxMenu label="zmr"
-							onchange="PF('permutationTable').filter()" panelStyle="width:125px"
-							scrollHeight="150">
-							<f:selectItems value="#{permutation.zmr.libelle}" />
-						</p:selectCheckboxMenu>
-					</f:facet>
+				<p:column headerText="Zmr">
 					<h:outputText value="#{permutation.zmr}" />
 				</p:column>
 

@@ -20,22 +20,23 @@ import etrs.selene.easypermut.model.sessions.UtilisateurSession;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class StatBean implements Serializable
 {
-
-	private static final long serialVersionUID = 1L;
 	
+	private static final long serialVersionUID = 1L;
+
 	@Inject
 	UtilisateurSession facadeUtilisateur;
-	
+
 	@Inject
 	DemandePermutationSession facadeDemande;
-
+	
 	public long nombreUtilisateurs()
 	{
 		return this.facadeUtilisateur.count();
 	}
-
+	
 	public long nombreDemandes()
 	{
 		return this.facadeDemande.count();
 	}
+	
 }

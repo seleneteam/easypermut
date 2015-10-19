@@ -1,7 +1,5 @@
 package etrs.selene.easypermut.model.entities;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -26,11 +24,11 @@ import etrs.selene.easypermut.model.commons.AbstractEntity;
 @NoArgsConstructor
 @Entity
 @Table(name = "SPECIALITE")
-public class Specialite extends AbstractEntity implements Serializable
+public class Specialite extends AbstractEntity
 {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * Libelle de la spécialité.
 	 */
@@ -40,7 +38,7 @@ public class Specialite extends AbstractEntity implements Serializable
 	@Getter
 	@Setter
 	String libelle;
-	
+
 	/**
 	 * Numéro de la specialité.
 	 */
@@ -49,10 +47,12 @@ public class Specialite extends AbstractEntity implements Serializable
 	@Getter
 	@Setter
 	String numeroSpe;
-	
+
 	@Override
 	public String toString()
 	{
-		return this.libelle;
+		StringBuilder sb = new StringBuilder();
+		sb.append(this.libelle);
+		return sb.toString();
 	}
 }

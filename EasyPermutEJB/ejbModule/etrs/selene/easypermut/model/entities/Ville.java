@@ -1,7 +1,5 @@
 package etrs.selene.easypermut.model.entities;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -28,11 +26,11 @@ import etrs.selene.easypermut.model.commons.AbstractEntity;
 @NoArgsConstructor
 @Entity
 @Table(name = "VILLE")
-public class Ville extends AbstractEntity implements Serializable
+public class Ville extends AbstractEntity
 {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * Nom de la ville.
 	 */
@@ -42,7 +40,7 @@ public class Ville extends AbstractEntity implements Serializable
 	@Getter
 	@Setter
 	String nom;
-	
+
 	/**
 	 * ZMR dans laquelle la ville est située.
 	 */
@@ -52,10 +50,12 @@ public class Ville extends AbstractEntity implements Serializable
 	@Getter
 	@Setter
 	ZMR zmr;
-	
+
 	@Override
 	public String toString()
 	{
-		return this.nom;
+		StringBuilder sb = new StringBuilder();
+		sb.append(this.nom);
+		return sb.toString();
 	}
 }

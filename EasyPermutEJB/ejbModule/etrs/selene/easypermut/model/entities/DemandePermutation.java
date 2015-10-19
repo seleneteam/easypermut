@@ -1,7 +1,5 @@
 package etrs.selene.easypermut.model.entities;
 
-import java.io.Serializable;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -26,11 +24,11 @@ import etrs.selene.easypermut.model.commons.AbstractEntity;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
 @Table(name = "DEMANDE_PERMUTATION")
-public class DemandePermutation extends AbstractEntity implements Serializable
+public class DemandePermutation extends AbstractEntity
 {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * Utilisateur ayant créé la demande de permutation.
 	 */
@@ -40,7 +38,7 @@ public class DemandePermutation extends AbstractEntity implements Serializable
 	@Getter
 	@Setter
 	Utilisateur utilisateurCreateur;
-	
+
 	/**
 	 * Utilisateur intéressé par la demande.
 	 */
@@ -49,7 +47,7 @@ public class DemandePermutation extends AbstractEntity implements Serializable
 	@Getter
 	@Setter
 	Utilisateur utilisateurInteresse;
-	
+
 	/**
 	 * Poste occupé par le créateur de la demande.
 	 */
@@ -58,7 +56,7 @@ public class DemandePermutation extends AbstractEntity implements Serializable
 	@Getter
 	@Setter
 	Poste poste;
-	
+
 	/**
 	 * Unité du créateur de la demande.
 	 */
@@ -68,7 +66,7 @@ public class DemandePermutation extends AbstractEntity implements Serializable
 	@Getter
 	@Setter
 	Unite unite;
-	
+
 	/**
 	 * Ville du créateur de la demande.
 	 */
@@ -78,7 +76,7 @@ public class DemandePermutation extends AbstractEntity implements Serializable
 	@Getter
 	@Setter
 	Ville ville;
-	
+
 	/**
 	 * Zone de mutation de référence du créateur de la demande.
 	 */
@@ -88,5 +86,5 @@ public class DemandePermutation extends AbstractEntity implements Serializable
 	@Getter
 	@Setter
 	ZMR zmr;
-	
+
 }

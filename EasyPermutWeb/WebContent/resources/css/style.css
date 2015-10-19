@@ -74,3 +74,14 @@ nav {
 	padding-top: 20px;
 }
 
+.full-size {
+	width: 100%;
+}
+
+.ui-selectonemenu {
+     width: 100% !important;
+}
+
+.ui-selectonemenu-label {
+     width: 100% !important;
+}  

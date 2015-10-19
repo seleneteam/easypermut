@@ -14,100 +14,184 @@
 	<ui:define name="content">
 		<div class="container">
 			<h:form>
-				<div class="col-md-6">
-					<h:outputText value="Votre profil" />
-					<br />
+				<div class="row">
+					<div class="col-md-6">
+						<p:outputLabel value="Vos informations :" />
+						<br /> <br />
+						<div class="row">
+							<div class="col-md-4">
+								<p:outputLabel value="Nom" for="champNom" />
+							</div>
+							<div class="col-md-4">
+								<p:inputText id="champNom"
+									value="#{creerPermutationPageBean.utilisateur.nom}"
+									disabled="true" />
+								<p:message for="champNom" />
+							</div>
+							<div class="col-md-4"></div>
+						</div>
 
-					<p:outputLabel value="Nom" for="champNom" />
-					<br />
-					<p:inputText id="champNom"
-						value="#{creerPermutationPageBean.utilisateur.nom}"
-						disabled="true" />
-					<p:message for="champNom" />
+						<br />
+						<div class="row">
+							<div class="col-md-4">
+								<p:outputLabel value="Prenom" for="champPrenom" />
+							</div>
+							<div class="col-md-4">
+								<p:inputText id="champPrenom"
+									value="#{creerPermutationPageBean.utilisateur.prenom}"
+									disabled="true" />
+								<p:message for="champPrenom" />
+							</div>
+							<div class="col-md-4"></div>
+						</div>
 
-					<p:outputLabel value="Prenom" for="champPrenom" />
-					<br />
-					<p:inputText id="champPrenom"
-						value="#{creerPermutationPageBean.utilisateur.prenom}"
-						disabled="true" />
-					<p:message for="champPrenom" />
+						<br />
+						<div class="row">
+							<div class="col-md-4">
+								<p:outputLabel value="Grade" for="champGrade" />
+							</div>
+							<div class="col-md-4">
+								<p:inputText id="champGrade"
+									value="#{creerPermutationPageBean.utilisateur.grade.grade}"
+									disabled="true" />
+								<p:message for="champGrade" />
+							</div>
+							<div class="col-md-4"></div>
+						</div>
 
-					<p:outputLabel value="Grade" for="champGrade" />
-					<br />
-					<p:inputText id="champGrade"
-						value="#{creerPermutationPageBean.utilisateur.grade.grade}"
-						disabled="true" />
-					<p:message for="champGrade" />
+						<br />
+						<div class="row">
+							<div class="col-md-4">
+								<p:outputLabel value="NIA" for="champNIA" />
+							</div>
+							<div class="col-md-4">
+								<p:inputText id="champNIA"
+									value="#{creerPermutationPageBean.utilisateur.nia}"
+									disabled="true" />
+								<p:message for="champNIA" />
+							</div>
+							<div class="col-md-4"></div>
+						</div>
 
-					<p:outputLabel value="NIA" for="champNIA" />
-					<br />
-					<p:inputText id="champNIA"
-						value="#{creerPermutationPageBean.utilisateur.nia}"
-						disabled="true" />
-					<p:message for="champNIA" />
+						<br />
+						<div class="row">
+							<div class="col-md-4">
+								<p:outputLabel value="ZMR" for="champZMR" />
+							</div>
+							<div class="col-md-4">
+								<p:inputText id="champZMR"
+									value="#{creerPermutationPageBean.utilisateur.poste.unite.ville.zmr.libelle}"
+									disabled="true" />
+								<p:message for="champZMR" />
+							</div>
+							<div class="col-md-4"></div>
+						</div>
 
-					<p:outputLabel value="ZMR" for="champZMR" />
-					<br />
-					<p:inputText id="champZMR"
-						value="#{creerPermutationPageBean.utilisateur.poste.unite.ville.zmr.libelle}"
-						disabled="true" />
-					<p:message for="champZMR" />
+						<br />
+						<div class="row">
+							<div class="col-md-4">
+								<p:outputLabel value="Unite" for="champUnite" />
+							</div>
+							<div class="col-md-4">
+								<p:inputText id="champUnite"
+									value="#{creerPermutationPageBean.utilisateur.poste.unite.libelle}"
+									disabled="true" />
+								<p:message for="champUnite" />
+							</div>
+							<div class="col-md-4"></div>
+						</div>
 
-					<p:outputLabel value="Unite" for="champUnite" />
-					<br />
-					<p:inputText id="champUnite"
-						value="#{creerPermutationPageBean.utilisateur.poste.unite.libelle}"
-						disabled="true" />
-					<p:message for="champUnite" />
+						<br />
+						<div class="row">
+							<div class="col-md-4">
+								<p:outputLabel value="Poste" for="champPoste" />
+							</div>
+							<div class="col-md-4">
+								<p:inputText id="champPoste"
+									value="#{creerPermutationPageBean.utilisateur.poste.libelle}"
+									disabled="true" />
+								<p:message for="champPoste" />
+							</div>
+							<div class="col-md-4"></div>
+						</div>
 
-					<p:outputLabel value="Poste" for="champPoste" />
-					<br />
-					<p:inputText id="champPoste"
-						value="#{creerPermutationPageBean.utilisateur.poste.libelle}"
-						disabled="true" />
-					<p:message for="champPoste" />
-				</div>
-				<div class="col-md-6">
-					<h:outputText value="Vos préférences de mutation" />
-					<br />
-					<p:outputLabel value="Choix" id="labelChoix" />
-					<p:message for="labelChoix" />
-					<br />
+					</div>
+					<div class="col-md-6">
+						<p:outputLabel value="Vos préférences de mutation" id="labelChoix" />
+						<br />
+						<br />
 
-					<p:outputLabel value="ZMR" for="listeZMR" />
-					<p:selectOneMenu id="listeZMR"
-						value="#{creerPermutationPageBean.permutation.zmr}"
-						converter="#{genericConverter}">
-						<f:selectItems value="#{creerPermutationPageBean.listeZMR}" />
-					</p:selectOneMenu>
-					<p:message for="listeZMR" />
+						<div class="row">
+							<div class="col-md-4">
+								<p:outputLabel value="ZMR" for="listeZMR" />
+							</div>
+							<div class="col-md-4">
+								<p:selectOneMenu id="listeZMR"
+									value="#{creerPermutationPageBean.permutation.zmr}"
+									converter="#{genericConverter}">
+									<f:selectItems value="#{creerPermutationPageBean.listeZMR}" />
+								</p:selectOneMenu>
+							</div>
+							<div class="col-md-4">
+								<p:message for="listeZMR" />
+							</div>
+						</div>
+						<br />
 
-					<p:outputLabel value="Ville" for="listeVille" />
-					<p:selectOneMenu id="listeVille"
-						value="#{creerPermutationPageBean.permutation.ville}"
-						converter="#{genericConverter}">
-						<f:selectItems value="#{creerPermutationPageBean.listeVille}" />
-					</p:selectOneMenu>
-					<p:message for="listeVille" />
+						<div class="row">
+							<div class="col-md-4">
+								<p:outputLabel value="Ville" for="listeVille" />
+							</div>
+							<div class="col-md-4">
+								<p:selectOneMenu id="listeVille"
+									value="#{creerPermutationPageBean.permutation.ville}"
+									converter="#{genericConverter}">
+									<f:selectItems value="#{creerPermutationPageBean.listeVille}" />
+								</p:selectOneMenu>
+							</div>
+							<div class="col-md-4">
+								<p:message for="listeVille" />
+							</div>
+						</div>
+						<br />
 
-					<p:outputLabel value="Unite" for="listeUnite" />
-					<p:selectOneMenu id="listeUnite"
-						value="#{creerPermutationPageBean.permutation.unite}"
-						converter="#{genericConverter}">
-						<f:selectItems value="#{creerPermutationPageBean.listeUnite}" />
-					</p:selectOneMenu>
-					<p:message for="listeUnite" />
+						<div class="row">
+							<div class="col-md-4">
+								<p:outputLabel value="Unite" for="listeUnite" />
+							</div>
+							<div class="col-md-4">
+								<p:selectOneMenu id="listeUnite"
+									value="#{creerPermutationPageBean.permutation.unite}"
+									converter="#{genericConverter}">
+									<f:selectItems value="#{creerPermutationPageBean.listeUnite}" />
+								</p:selectOneMenu>
+							</div>
+							<div class="col-md-4">
+								<p:message for="listeUnite" />
+							</div>
+						</div>
+						<br />
 
-					<p:outputLabel value="Poste" for="inputPoste" />
-					<p:inputText id="inputPoste"
-						value="#{creerPermutationPageBean.poste.libelle}" />
-					<p:message for="inputPoste" />
+						<div class="row">
+							<div class="col-md-4">
+								<p:outputLabel value="Poste" for="inputPoste" />
+							</div>
+							<div class="col-md-4">
+								<p:inputText id="inputPoste"
+									value="#{creerPermutationPageBean.poste.libelle}" styleClass="full-size" />
+							</div>
+							<div class="col-md-4">
+								<p:message for="inputPoste" />
+							</div>
+						</div>
 
-				</div>
-				<div class="col-md-12 centre">
-					<h:commandButton value="Créer"
-						action="#{creerPermutationPageBean.creerDemande()}"
-						icon="ui-icon-check" styleClass="btn-lg btn-primary" />
+					</div>
+					<div class="col-md-12 centre">
+						<h:commandButton value="Créer"
+							action="#{creerPermutationPageBean.creerDemande()}"
+							icon="ui-icon-check" styleClass="btn-lg btn-primary" />
+					</div>
+
 				</div>
 			</h:form>
 		</div>

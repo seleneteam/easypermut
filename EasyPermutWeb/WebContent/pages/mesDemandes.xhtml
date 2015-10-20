@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/standard.xhtml">
+
+	<ui:define name="title">Mes demandes</ui:define>
+
+	<ui:define name="jumbotron_titre">Mes demandes</ui:define>
+	<ui:define name="jumbotron_indication">La liste des demandes me concernant</ui:define>
+
+	<ui:define name="content">
+		<div class="container">
+			<h:outputText value="Demande qui m'intéresse :" />
+		</div>
+		<div class="container">
+			<p:dataTable var="permutation"
+				value="#{mesDemandesBean.demandeEnCours}">
+				<p:column headerText="Nom du créateur">
+					<h:outputText value="#{permutation.utilisateurCreateur}" />
+				</p:column>
+
+				<p:column headerText="Zmr du créateur">
+					<h:outputText value="#{permutation.zmr}" />
+				</p:column>
+
+				<p:column headerText="Ville du créateur">
+					<h:outputText value="#{permutation.ville}" />
+				</p:column>
+
+				<p:column headerText="Unite du créateur">
+					<h:outputText value="#{permutation.unite}" />
+				</p:column>
+			</p:dataTable>
+		</div>
+	</ui:define>
+
+</ui:composition>

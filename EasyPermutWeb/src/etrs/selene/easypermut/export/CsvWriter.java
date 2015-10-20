@@ -9,11 +9,9 @@ import etrs.selene.easypermut.model.entities.DemandePermutation;
 
 public final class CsvWriter
 {
-	private static final String fileName = "/home/codeur/Bureau/export.csv";
-
 	public static void genererCsv(final List<DemandePermutation> setDemandePermutations)
 	{
-		try (PrintWriter pw = new PrintWriter(fileName))
+		try (PrintWriter pw = new PrintWriter("#{resource['docs:export.csv']}"))
 		{
 			pw.println("Createur,Interessé,zmr,ville,unité,poste");
 			for (DemandePermutation demandePermutation : setDemandePermutations)

@@ -44,15 +44,27 @@ public class CreerPermutationPageBean implements Serializable {
     @Inject
     DemandePermutationSession facadePermutations;
 
+    /**
+     * {@link ZMRSession}
+     */
     @Inject
     ZMRSession facadeZmr;
 
+    /**
+     * {@link VilleSession}
+     */
     @Inject
     VilleSession facadeVille;
 
+    /**
+     * {@link UniteSession}
+     */
     @Inject
     UniteSession facadeUnite;
 
+    /**
+     * {@link PosteSession}
+     */
     @Inject
     PosteSession facadePoste;
 
@@ -86,27 +98,6 @@ public class CreerPermutationPageBean implements Serializable {
      */
     List<Unite> listeUnite;
 
-    //
-    // /**
-    // * La ZMR sélectionée par l'utilisateur.
-    // */
-    // ZMR zmr;
-    //
-    // /**
-    // * La ville sélectionée par l'utilisateur.
-    // */
-    // Ville ville;
-    //
-    // /**
-    // * Le bouton select menu de l'unitée.
-    // */
-    // SelectOneMenu somUnitee;
-    //
-    // /**
-    // * Le bouton select menu de la ville.
-    // */
-    // SelectOneMenu somVille;
-
     /**
      * Methode de post-construction. Recupere l'utilisateur du FlashScope et
      * initialise les champs a remplir.
@@ -115,9 +106,6 @@ public class CreerPermutationPageBean implements Serializable {
     public void init() {
         this.utilisateur = (Utilisateur) JsfUtils.getFromFlashScope("_utilisateur");
         this.permutation = this.facadePermutations.newInstance();
-
-        // this.zmr = this.facadeZmr.newInstance();
-        // this.ville = this.facadeVille.newInstance();
         this.poste = this.facadePoste.newInstance();
 
         this.listeZMR = this.facadeZmr.readAll();
@@ -149,6 +137,9 @@ public class CreerPermutationPageBean implements Serializable {
         this.poste.setUnite(this.permutation.getUnite());
         this.permutation.setUtilisateurCreateur(this.utilisateur);
         this.permutation.setPoste(this.poste);
+        if ((this.poste = this.facadePoste.searchFirstResult("libelle", this.poste.getLibelle())) != null) {
+            this.facadePoste.create(this.poste);
+        }
         this.facadePermutations.create(this.permutation);
         this.flashUtilisateur(this.utilisateur);
         JsfUtils.sendGrowlMessage("Demande de permutation crée");
@@ -156,8 +147,10 @@ public class CreerPermutationPageBean implements Serializable {
         return "/pages/accueil.xhtml";
     }
 
+    /**
+     * Methode de chargement des villes en fonction de la ZMR selectionée.
+     */
     public void chargerVilles() {
-        // this.zmr = (ZMR) event.getNewValue();
         this.permutation.setVille(null);
         this.permutation.setUnite(null);
         if (this.permutation.getZmr() != null) {
@@ -168,8 +161,10 @@ public class CreerPermutationPageBean implements Serializable {
         this.listeUnite = new LinkedList<>();
     }
 
+    /**
+     * Methode de chargement des unitées en fonction des la Ville sélectionée.
+     */
     public void chargerUnitees() {
-        // this.ville = (Ville) event.getNewValue();
         this.permutation.setUnite(null);
         if (this.permutation.getVille() != null) {
             this.listeUnite = facadeUnite.search("ville", this.permutation.getVille());

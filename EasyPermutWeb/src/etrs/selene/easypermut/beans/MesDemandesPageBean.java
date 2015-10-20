@@ -21,7 +21,7 @@ import etrs.selene.easypermut.model.sessions.DemandePermutationSession;
 @Data
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class mesDemandesBean implements Serializable
+public class MesDemandesPageBean implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 

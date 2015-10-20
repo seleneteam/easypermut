@@ -28,7 +28,7 @@ import etrs.selene.easypermut.model.sessions.UtilisateurSession;
 @Data
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class StatBean implements Serializable
+public class StatsPageBean implements Serializable
 {
 
 	private static final long serialVersionUID = 1L;

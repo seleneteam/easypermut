@@ -41,6 +41,7 @@ public class NavBarBean implements Serializable
 	 */
 	public String pageAccueil()
 	{
+		this.init();
 		if (this.utilisateur == null)
 			return "/connexion.xhtml";
 		else
@@ -58,6 +59,7 @@ public class NavBarBean implements Serializable
 	 */
 	public String pageCreation()
 	{
+		this.init();
 		if (this.utilisateur == null)
 			return "/connexion.xhtml";
 		else
@@ -75,6 +77,7 @@ public class NavBarBean implements Serializable
 	 */
 	public String pageLister()
 	{
+		this.init();
 		if (this.utilisateur == null)
 			return "/connexion.xhtml";
 		else
@@ -92,6 +95,7 @@ public class NavBarBean implements Serializable
 	 */
 	public String pageStatistiques()
 	{
+		this.init();
 		if (this.utilisateur == null)
 			return "/connexion.xhtml";
 		else
@@ -109,6 +113,7 @@ public class NavBarBean implements Serializable
 	 */
 	public String pageMesDemandes()
 	{
+		this.init();
 		if (this.utilisateur == null)
 			return "/connexion.xhtml";
 		else

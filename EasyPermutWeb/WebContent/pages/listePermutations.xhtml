@@ -39,7 +39,7 @@
 					<p:commandButton value="Details" icon="ui-icon-person"
 						styleClass="btn-primary center-elem"
 						onclick="PF('detailPermut').show();"
-						actionListener="#{listerPermutationsPageBean.selectionerPermutation(permutation)}"
+						actionListener="#{listerPermutationsPageBean.ajouterDetail(permutation)}"
 						update=":testId">
 					</p:commandButton>
 				</p:column>
@@ -79,7 +79,7 @@
 					<p:outputLabel
 						value="#{listerPermutationsPageBean.demandePermutationSelectionee.utilisateurCreateur.mail}" />
 					<br />
-					<p:commandButton value="Accepter" icon="ui-icon-person"
+					<p:commandButton value="Choisir" icon="ui-icon-person"
 						styleClass="btn-primary"
 						action="#{listerPermutationsPageBean.choisirPermutation()}"
 						update=":permutations_datatable" ajax="false" />

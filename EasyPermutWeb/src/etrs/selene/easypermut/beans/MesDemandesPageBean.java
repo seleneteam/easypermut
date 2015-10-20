@@ -1,6 +1,7 @@
 package etrs.selene.easypermut.beans;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
@@ -24,14 +25,16 @@ import etrs.selene.easypermut.model.sessions.DemandePermutationSession;
 public class MesDemandesPageBean implements Serializable
 {
 	private static final long serialVersionUID = 1L;
-
+	
 	@Inject
 	DemandePermutationSession facadeDemandePermutation;
-
+	
 	Utilisateur utilisateur;
-
+	
 	DemandePermutation demandeEnCours;
 
+	List<DemandePermutation> lstDemandesPassees;
+	
 	/**
 	 * Methode de post-construction. Recupere l'utilisateur du FlashScope.
 	 */
@@ -40,6 +43,7 @@ public class MesDemandesPageBean implements Serializable
 	{
 		this.utilisateur = (Utilisateur)JsfUtils.getFromFlashScope("_utilisateur");
 		this.demandeEnCours = this.facadeDemandePermutation.searchFirstResult("utilisateurInteresse", this.utilisateur);
+		this.lstDemandesPassees = this.facadeDemandePermutation.listeMesDemandes(this.utilisateur);
 	}
-
+	
 }

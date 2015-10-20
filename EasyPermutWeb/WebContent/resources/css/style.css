@@ -85,3 +85,9 @@ nav {
 .ui-selectonemenu-label {
      width: 100% !important;
 }  
+
+.titre
+{
+	font-size: 30px;
+	text-align: center;
+}

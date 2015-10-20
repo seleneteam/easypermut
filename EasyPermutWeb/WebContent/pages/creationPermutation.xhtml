@@ -13,7 +13,7 @@
 
 	<ui:define name="content">
 		<div class="container">
-			<h:form>
+			<h:form id="formCreerPermutation">
 				<div class="row">
 					<div class="col-md-6">
 						<p:outputLabel value="Vos informations :" />
@@ -117,7 +117,7 @@
 
 					</div>
 					<div class="col-md-6">
-						<p:outputLabel value="Vos préférences de mutation" id="labelChoix" />
+						<p:outputLabel value="Vos préférences de mutation : " id="labelChoix" />
 						<br />
 						<br />
 
@@ -128,10 +128,11 @@
 							<div class="col-md-4">
 								<p:selectOneMenu id="listeZMR"
 									value="#{creerPermutationPageBean.permutation.zmr}"
-									converter="#{genericConverter}" valueChangeListener="#{creerPermutationPageBean.chargerVilles}" 
-									onchange="submit()" immediate="false">
-									<f:selectItem itemLabel="Selectionnez" noSelectionOption="true" itemDisabled="true"/>
+									converter="#{genericConverter}" >
+									<f:selectItem itemLabel="Selectionnez" itemDisabled="true" value="#{null}" />
 									<f:selectItems value="#{creerPermutationPageBean.listeZMR}" var="zmrSelected" />
+									<p:ajax event="change" update=":formCreerPermutation:listeVille :formCreerPermutation:listeUnite"
+									listener="#{creerPermutationPageBean.chargerVilles}" />
 								</p:selectOneMenu>
 							</div>
 							<div class="col-md-4">
@@ -147,11 +148,11 @@
 							<div class="col-md-4">
 								<p:selectOneMenu id="listeVille"
 									value="#{creerPermutationPageBean.permutation.ville}"
-									converter="#{genericConverter}" disabled="true" binding="#{creerPermutationPageBean.somVille}"
-									valueChangeListener="#{creerPermutationPageBean.chargerUnitees}"
-									onchange="submit()" immediate="false">
-									<f:selectItem itemLabel="Selectionnez" noSelectionOption="true" itemDisabled="true"/>
+									converter="#{genericConverter}" disabled="#{creerPermutationPageBean.listeVille.isEmpty()}" >
+									<f:selectItem itemLabel="Selectionnez" itemDisabled="true" value="#{null}" />
 									<f:selectItems value="#{creerPermutationPageBean.listeVille}" />
+									<p:ajax event="change" update=":formCreerPermutation:listeUnite"
+									listener="#{creerPermutationPageBean.chargerUnitees}" />
 								</p:selectOneMenu>
 							</div>
 							<div class="col-md-4">
@@ -167,9 +168,8 @@
 							<div class="col-md-4">
 								<p:selectOneMenu id="listeUnite"
 									value="#{creerPermutationPageBean.permutation.unite}"
-									converter="#{genericConverter}" disabled="true" immediate="false"
-									binding="#{creerPermutationPageBean.somUnitee}">
-									<f:selectItem itemLabel="Selectionnez" noSelectionOption="true" itemDisabled="true"/>
+									converter="#{genericConverter}" disabled="#{creerPermutationPageBean.listeUnite.isEmpty()}">
+									<f:selectItem itemLabel="Selectionnez" itemDisabled="true" value="#{null}"/>
 									<f:selectItems value="#{creerPermutationPageBean.listeUnite}" />
 								</p:selectOneMenu>
 							</div>

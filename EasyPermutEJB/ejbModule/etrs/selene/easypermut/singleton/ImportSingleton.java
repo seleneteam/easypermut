@@ -71,93 +71,93 @@ public class ImportSingleton {
     @PostConstruct
     public void recupereDonnees() {
 
+        File fXmlFile;
+
         try {
-            File fXmlFile = new File("/home/codeur/Bureau/test/data.xml");
-            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder dBuilder;
+            if ((fXmlFile = new File("/home/codeur/Bureau/test/data.xml")) != null) {
+                DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+                DocumentBuilder dBuilder;
 
-            dBuilder = dbFactory.newDocumentBuilder();
-            Document doc = dBuilder.parse(fXmlFile);
-            doc.getDocumentElement().normalize();
+                dBuilder = dbFactory.newDocumentBuilder();
+                Document doc = dBuilder.parse(fXmlFile);
+                doc.getDocumentElement().normalize();
 
-            NodeList nList = doc.getElementsByTagName("militaire");
+                NodeList nList = doc.getElementsByTagName("militaire");
 
-            for (int temp = 0; temp < nList.getLength(); temp++) {
+                for (int temp = 0; temp < nList.getLength(); temp++) {
 
-                Node nNode = nList.item(temp);
+                    Node nNode = nList.item(temp);
 
-                if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+                    if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 
-                    Element eMilitaire = (Element) nNode;
-                    Element ePoste = (Element) eMilitaire.getElementsByTagName("poste").item(0);
-                    Element eSpe = (Element) eMilitaire.getElementsByTagName("specialite").item(0);
+                        Element eMilitaire = (Element) nNode;
+                        Element ePoste = (Element) eMilitaire.getElementsByTagName("poste").item(0);
+                        Element eSpe = (Element) eMilitaire.getElementsByTagName("specialite").item(0);
 
-                    System.err.println("GETTING NODE >> " + eMilitaire.getElementsByTagName("nom").item(0).getTextContent());
+                        Grade grade;
+                        if ((grade = facadeGrade.searchFirstResult("grade", eMilitaire.getElementsByTagName("grade").item(0).getTextContent())) == null) {
+                            grade = facadeGrade.newInstance();
+                            grade.setGrade(eMilitaire.getElementsByTagName("grade").item(0).getTextContent());
+                            facadeGrade.create(grade);
+                        }
 
-                    Grade grade;
-                    if ((grade = facadeGrade.searchFirstResult("grade", eMilitaire.getElementsByTagName("grade").item(0).getTextContent())) == null) {
-                        grade = facadeGrade.newInstance();
-                        grade.setGrade(eMilitaire.getElementsByTagName("grade").item(0).getTextContent());
-                        facadeGrade.create(grade);
-                    }
+                        Specialite specialite;
+                        if ((specialite = facadeSpecialite.searchFirstResult("numeroSpe", eSpe.getAttribute("numero_spe"))) == null) {
+                            specialite = facadeSpecialite.newInstance();
+                            specialite.setNumeroSpe(eSpe.getAttribute("numero_spe"));
+                            specialite.setLibelle(eMilitaire.getElementsByTagName("specialite").item(0).getTextContent());
+                            facadeSpecialite.create(specialite);
+                        }
 
-                    Specialite specialite;
-                    if ((specialite = facadeSpecialite.searchFirstResult("numeroSpe", eSpe.getAttribute("numero_spe"))) == null) {
-                        specialite = facadeSpecialite.newInstance();
-                        specialite.setNumeroSpe(eSpe.getAttribute("numero_spe"));
-                        specialite.setLibelle(eMilitaire.getElementsByTagName("specialite").item(0).getTextContent());
-                        facadeSpecialite.create(specialite);
-                    }
+                        ZMR zmr;
+                        if ((zmr = facadeZMR.searchFirstResult("libelle", ePoste.getElementsByTagName("zmr").item(0).getTextContent())) == null) {
+                            zmr = facadeZMR.newInstance();
+                            zmr.setLibelle(ePoste.getElementsByTagName("zmr").item(0).getTextContent());
+                            facadeZMR.create(zmr);
+                        }
 
-                    ZMR zmr;
-                    if ((zmr = facadeZMR.searchFirstResult("libelle", ePoste.getElementsByTagName("zmr").item(0).getTextContent())) == null) {
-                        zmr = facadeZMR.newInstance();
-                        zmr.setLibelle(ePoste.getElementsByTagName("zmr").item(0).getTextContent());
-                        facadeZMR.create(zmr);
-                    }
+                        Ville ville;
+                        if ((ville = facadeVille.searchFirstResult("nom", ePoste.getElementsByTagName("ville").item(0).getTextContent())) == null) {
+                            ville = facadeVille.newInstance();
+                            ville.setNom(ePoste.getElementsByTagName("ville").item(0).getTextContent());
+                            ville.setZmr(zmr);
+                            facadeVille.create(ville);
+                        }
 
-                    Ville ville;
-                    if ((ville = facadeVille.searchFirstResult("nom", ePoste.getElementsByTagName("ville").item(0).getTextContent())) == null) {
-                        ville = facadeVille.newInstance();
-                        ville.setNom(ePoste.getElementsByTagName("ville").item(0).getTextContent());
-                        ville.setZmr(zmr);
-                        facadeVille.create(ville);
-                    }
+                        Unite unite;
+                        if ((unite = facadeUnite.searchFirstResult("libelle", ePoste.getElementsByTagName("unite").item(0).getTextContent())) == null) {
+                            unite = facadeUnite.newInstance();
+                            unite.setLibelle(ePoste.getElementsByTagName("unite").item(0).getTextContent());
+                            unite.setVille(ville);
+                            facadeUnite.create(unite);
+                        }
 
-                    Unite unite;
-                    if ((unite = facadeUnite.searchFirstResult("libelle", ePoste.getElementsByTagName("unite").item(0).getTextContent())) == null) {
-                        unite = facadeUnite.newInstance();
-                        unite.setLibelle(ePoste.getElementsByTagName("unite").item(0).getTextContent());
-                        unite.setVille(ville);
-                        facadeUnite.create(unite);
-                    }
+                        Poste poste;
+                        if ((poste = facadePoste.searchFirstResult("libelle", ePoste.getAttribute("nom"))) == null) {
+                            poste = facadePoste.newInstance();
+                            poste.setLibelle(ePoste.getAttribute("nom"));
+                            poste.setUnite(unite);
+                            facadePoste.create(poste);
+                        }
 
-                    Poste poste;
-                    if ((poste = facadePoste.searchFirstResult("libelle", ePoste.getAttribute("nom"))) == null) {
-                        poste = facadePoste.newInstance();
-                        poste.setLibelle(ePoste.getAttribute("nom"));
-                        poste.setUnite(unite);
-                        facadePoste.create(poste);
-                    }
+                        Utilisateur utilisateur;
 
-                    Utilisateur utilisateur;
-
-                    if ((utilisateur = facadeUtilisateur.searchFirstResult("identifiantAnudef", eMilitaire.getAttribute("idanudef"))) != null && utilisateur.getEstValide() == false) {
-                        utilisateur.setMail(eMilitaire.getElementsByTagName("email").item(0).getTextContent());
-                        utilisateur.setNia(eMilitaire.getElementsByTagName("nia").item(0).getTextContent());
-                        utilisateur.setNom(eMilitaire.getElementsByTagName("nom").item(0).getTextContent());
-                        utilisateur.setPrenom(eMilitaire.getElementsByTagName("prenom").item(0).getTextContent());
-                        utilisateur.setGrade(grade);
-                        utilisateur.setSpecialite(specialite);
-                        utilisateur.setPoste(poste);
-                        utilisateur.setEstValide(true);
-                        // TODO Put False !
-                        utilisateur.setInformationsValide(true);
-                        facadeUtilisateur.update(utilisateur);
+                        if ((utilisateur = facadeUtilisateur.searchFirstResult("identifiantAnudef", eMilitaire.getAttribute("idanudef"))) != null && utilisateur.getEstValide() == false) {
+                            utilisateur.setMail(eMilitaire.getElementsByTagName("email").item(0).getTextContent());
+                            utilisateur.setNia(eMilitaire.getElementsByTagName("nia").item(0).getTextContent());
+                            utilisateur.setNom(eMilitaire.getElementsByTagName("nom").item(0).getTextContent());
+                            utilisateur.setPrenom(eMilitaire.getElementsByTagName("prenom").item(0).getTextContent());
+                            utilisateur.setGrade(grade);
+                            utilisateur.setSpecialite(specialite);
+                            utilisateur.setPoste(poste);
+                            utilisateur.setEstValide(true);
+                            // TODO Put False !
+                            utilisateur.setInformationsValide(true);
+                            facadeUtilisateur.update(utilisateur);
+                        }
                     }
                 }
             }
-
         } catch (ParserConfigurationException | SAXException | IOException e) {
             e.printStackTrace();
         }

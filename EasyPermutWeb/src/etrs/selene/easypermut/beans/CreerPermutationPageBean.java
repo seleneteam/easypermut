@@ -1,9 +1,9 @@
 package etrs.selene.easypermut.beans;
 
 import java.io.Serializable;
+import java.util.LinkedList;
 import java.util.List;
 import javax.annotation.PostConstruct;
-import javax.faces.event.ValueChangeEvent;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -12,7 +12,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import net.entetrs.commons.jsf.JsfUtils;
-import org.primefaces.component.selectonemenu.SelectOneMenu;
 import etrs.selene.easypermut.model.entities.DemandePermutation;
 import etrs.selene.easypermut.model.entities.Poste;
 import etrs.selene.easypermut.model.entities.Unite;
@@ -87,37 +86,43 @@ public class CreerPermutationPageBean implements Serializable {
      */
     List<Unite> listeUnite;
 
-    /**
-     * La ZMR sélectionée par l'utilisateur.
-     */
-    ZMR zmr;
+    //
+    // /**
+    // * La ZMR sélectionée par l'utilisateur.
+    // */
+    // ZMR zmr;
+    //
+    // /**
+    // * La ville sélectionée par l'utilisateur.
+    // */
+    // Ville ville;
+    //
+    // /**
+    // * Le bouton select menu de l'unitée.
+    // */
+    // SelectOneMenu somUnitee;
+    //
+    // /**
+    // * Le bouton select menu de la ville.
+    // */
+    // SelectOneMenu somVille;
 
     /**
-     * La ville sélectionée par l'utilisateur.
-     */
-    Ville ville;
-
-    /**
-     * Le bouton select menu de l'unitée.
-     */
-    SelectOneMenu somUnitee;
-
-    /**
-     * Le bouton select menu de la ville.
-     */
-    SelectOneMenu somVille;
-
-    /**
-     * Methode de post-construction. Recupere l'utilisateur du FlashScope.
+     * Methode de post-construction. Recupere l'utilisateur du FlashScope et
+     * initialise les champs a remplir.
      */
     @PostConstruct
     public void init() {
         this.utilisateur = (Utilisateur) JsfUtils.getFromFlashScope("_utilisateur");
         this.permutation = this.facadePermutations.newInstance();
-        this.zmr = this.facadeZmr.newInstance();
-        this.ville = this.facadeVille.newInstance();
-        this.listeZMR = this.facadeZmr.readAll();
+
+        // this.zmr = this.facadeZmr.newInstance();
+        // this.ville = this.facadeVille.newInstance();
         this.poste = this.facadePoste.newInstance();
+
+        this.listeZMR = this.facadeZmr.readAll();
+        this.listeVille = new LinkedList<>();
+        this.listeUnite = new LinkedList<>();
     }
 
     /**
@@ -151,16 +156,26 @@ public class CreerPermutationPageBean implements Serializable {
         return "/pages/accueil.xhtml";
     }
 
-    public void chargerVilles(ValueChangeEvent event) {
-        this.zmr = (ZMR) event.getNewValue();
-        this.listeVille = facadeVille.search("zmr", this.zmr);
-        this.somVille.setDisabled(false);
-
+    public void chargerVilles() {
+        // this.zmr = (ZMR) event.getNewValue();
+        this.permutation.setVille(null);
+        this.permutation.setUnite(null);
+        if (this.permutation.getZmr() != null) {
+            this.listeVille = facadeVille.search("zmr", this.permutation.getZmr());
+        } else {
+            this.listeVille = new LinkedList<>();
+        }
+        this.listeUnite = new LinkedList<>();
     }
 
-    public void chargerUnitees(ValueChangeEvent event) {
-        this.ville = (Ville) event.getNewValue();
-        this.listeUnite = facadeUnite.search("ville", this.ville);
-        this.somUnitee.setDisabled(false);
+    public void chargerUnitees() {
+        // this.ville = (Ville) event.getNewValue();
+        this.permutation.setUnite(null);
+        if (this.permutation.getVille() != null) {
+            this.listeUnite = facadeUnite.search("ville", this.permutation.getVille());
+        } else {
+            this.listeUnite = new LinkedList<>();
+        }
+
     }
 }

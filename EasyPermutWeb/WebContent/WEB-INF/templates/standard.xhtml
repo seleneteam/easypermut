@@ -51,8 +51,11 @@
 								<ul class="dropdown-menu">
 									<li><h:link styleClass="color-blue"
 									outcome="#{navBarBean.pageMesDemandes()}">Mes demandes</h:link></li>
-									<li><h:link styleClass="color-blue"
-									outcome="#{navBarBean.pageMesDemandes()}">Deconnexion</h:link></li>
+									<li>
+									<h:form>
+										<p:commandLink action="#{navBarBean.deconnexion()}" value="Deconnexion" />
+									</h:form>
+									</li>
 								</ul></li>
 						</ul>
 					</div>

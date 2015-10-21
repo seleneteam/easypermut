@@ -126,7 +126,6 @@ public class CreerPermutationPageBean implements Serializable {
      * @return La page suivante.
      */
     public String creerDemande() {
-
         if (this.utilisateur == null)
             return "/connexion.xhtml";
 

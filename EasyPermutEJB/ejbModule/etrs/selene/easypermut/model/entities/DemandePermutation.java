@@ -7,7 +7,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,67 +23,68 @@ import etrs.selene.easypermut.model.commons.AbstractEntity;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
 @Table(name = "DEMANDE_PERMUTATION")
-public class DemandePermutation extends AbstractEntity
-{
-	
-	private static final long serialVersionUID = 1L;
-	
-	/**
-	 * Utilisateur ayant créé la demande de permutation.
-	 */
-	@JoinColumn(name = "utilisateur_createur_id")
-	@ManyToOne
-	@NotNull
-	@Getter
-	@Setter
-	Utilisateur utilisateurCreateur;
-	
-	/**
-	 * Utilisateur intéressé par la demande.
-	 */
-	@JoinColumn(name = "utilisateur_interesse_id")
-	@OneToOne
-	@Getter
-	@Setter
-	Utilisateur utilisateurInteresse;
-	
-	/**
-	 * Poste souhaité par le créateur de la demande.
-	 */
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "poste_id")
-	@Getter
-	@Setter
-	Poste poste;
-	
-	/**
-	 * Unité souhaité par le créateur de la demande.
-	 */
-	@ManyToOne
-	@JoinColumn(name = "unite_id")
-	@NotNull
-	@Getter
-	@Setter
-	Unite unite;
-	
-	/**
-	 * Ville souhaité par le créateur de la demande.
-	 */
-	@ManyToOne
-	@JoinColumn(name = "ville_id")
-	@NotNull
-	@Getter
-	@Setter
-	Ville ville;
-	
-	/**
-	 * Zone de mutation de référence souhaité par le créateur de la demande.
-	 */
-	@ManyToOne
-	@JoinColumn(name = "zmr_id")
-	@NotNull
-	@Getter
-	@Setter
-	ZMR zmr;
-	
+// @NamedQueries({ @NamedQuery(name = "", query = ""), @NamedQuery(name = "",
+// query = ""), @NamedQuery(name = "", query = "") })
+public class DemandePermutation extends AbstractEntity {
+
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * Utilisateur ayant créé la demande de permutation.
+     */
+    @JoinColumn(name = "utilisateur_createur_id")
+    @ManyToOne
+    @NotNull
+    @Getter
+    @Setter
+    Utilisateur utilisateurCreateur;
+
+    /**
+     * Utilisateur intéressé par la demande.
+     */
+    @JoinColumn(name = "utilisateur_interesse_id")
+    @OneToOne
+    @Getter
+    @Setter
+    Utilisateur utilisateurInteresse;
+
+    /**
+     * Poste souhaité par le créateur de la demande.
+     */
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "poste_id")
+    @Getter
+    @Setter
+    Poste poste;
+
+    /**
+     * Unité souhaité par le créateur de la demande.
+     */
+    @ManyToOne
+    @JoinColumn(name = "unite_id")
+    @NotNull
+    @Getter
+    @Setter
+    Unite unite;
+
+    /**
+     * Ville souhaité par le créateur de la demande.
+     */
+    @ManyToOne
+    @JoinColumn(name = "ville_id")
+    @NotNull
+    @Getter
+    @Setter
+    Ville ville;
+
+    /**
+     * Zone de mutation de référence souhaité par le créateur de la demande.
+     */
+    @ManyToOne
+    @JoinColumn(name = "zmr_id")
+    @NotNull
+    @Getter
+    @Setter
+    ZMR zmr;
+
 }

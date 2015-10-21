@@ -12,8 +12,7 @@ import lombok.experimental.FieldDefaults;
 import etrs.selene.easypermut.model.entities.Utilisateur;
 
 /**
- * Bean permettant de re-flasher un utilisateur lors de son clique sur l'un des
- * items de la navbar.
+ *
  *
  * @author louis-marie Merminod
  */
@@ -23,6 +22,7 @@ import etrs.selene.easypermut.model.entities.Utilisateur;
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class NavBarBean implements Serializable {
+
     private static final long serialVersionUID = 1L;
 
     /**
@@ -111,12 +111,24 @@ public class NavBarBean implements Serializable {
      *         cas.
      */
     public String pageMesDemandes() {
+        System.err.println("DEMANDES");
         this.init();
         if (this.utilisateur == null) {
             return "/connexion.xhtml";
         } else {
             return "/pages/mesDemandes.xhtml";
         }
+    }
+
+    public String deconnexion() {
+        System.err.println("CALLED");
+
+        /*
+         * this.init(); if (this.utilisateur != null) {
+         * FacesContext.getCurrentInstance
+         * ().getExternalContext().invalidateSession(); }
+         */
+        return "/connexion.xhtml";
     }
 
 }

@@ -44,6 +44,12 @@ public class ListerPermutationsPageBean implements Serializable {
     UtilisateurSession facadeUtilisateur;
 
     /**
+     * {@link UtilisateurSessionBean}
+     */
+    @Inject
+    UtilisateurSessionBean sessionUtilisateur;
+
+    /**
      * Utilisateur connecté.
      */
     Utilisateur utilisateur;
@@ -59,18 +65,10 @@ public class ListerPermutationsPageBean implements Serializable {
      */
     @PostConstruct
     public void init() {
-        this.utilisateur = (Utilisateur) JsfUtils.getFromFlashScope("_utilisateur");
+        System.err.println("CONNECTED >>> " + sessionUtilisateur.getUtilisateur().getNom());
+        this.utilisateur = this.sessionUtilisateur.getUtilisateur();
+        System.err.println("UTIL >>>>>>>> " + this.utilisateur.getNom());
         this.demandePermutationSelectionee = this.facadePermutations.newInstance();
-    }
-
-    /**
-     * Methode de mise en FlashScope de l'utilisateur.
-     *
-     * @param utilisateur
-     *            L'utilisateur à mettre dans le FlashScope.
-     */
-    public void flashUtilisateur(final Utilisateur utilisateur) {
-        JsfUtils.putInFlashScope("_utilisateur", utilisateur);
     }
 
     /**
@@ -127,7 +125,6 @@ public class ListerPermutationsPageBean implements Serializable {
             this.facadeUtilisateur.update(this.utilisateur);
             JsfUtils.sendGrowlMessage("Vous avez choisi la permutation de %s", this.demandePermutationSelectionee.getUtilisateurCreateur().getNom());
         }
-        this.flashUtilisateur(this.utilisateur);
 
         return "/pages/accueil.xhtml";
     }
@@ -140,7 +137,6 @@ public class ListerPermutationsPageBean implements Serializable {
      *            La demande de permutation séléctionnée.
      */
     public void ajouterDetail(final DemandePermutation demandePermutation) {
-        this.flashUtilisateur(this.utilisateur);
         this.demandePermutationSelectionee = demandePermutation;
     }
 

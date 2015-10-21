@@ -69,6 +69,12 @@ public class CreerPermutationPageBean implements Serializable {
     PosteSession facadePoste;
 
     /**
+     * {@link UtilisateurSessionBean}
+     */
+    @Inject
+    UtilisateurSessionBean sessionUtilisateur;
+
+    /**
      * La permutation qui sera crée.
      */
     DemandePermutation permutation;
@@ -104,23 +110,16 @@ public class CreerPermutationPageBean implements Serializable {
      */
     @PostConstruct
     public void init() {
-        this.utilisateur = (Utilisateur) JsfUtils.getFromFlashScope("_utilisateur");
+
+        System.err.println("CONNECTED >>> " + sessionUtilisateur.getUtilisateur().getNom());
+        this.utilisateur = this.sessionUtilisateur.getUtilisateur();
+        System.err.println("UTIL >>>>>>>> " + this.utilisateur.getNom());
         this.permutation = this.facadePermutations.newInstance();
         this.poste = this.facadePoste.newInstance();
 
         this.listeZMR = this.facadeZmr.readAll();
         this.listeVille = new LinkedList<>();
         this.listeUnite = new LinkedList<>();
-    }
-
-    /**
-     * Methode de mise en FlashScope de l'utilisateur.
-     *
-     * @param utilisateur
-     *            L'utilisateur à mettre dans le FlashScope.
-     */
-    public void flashUtilisateur(final Utilisateur utilisateur) {
-        JsfUtils.putInFlashScope("_utilisateur", utilisateur);
     }
 
     /**
@@ -140,7 +139,6 @@ public class CreerPermutationPageBean implements Serializable {
             this.facadePoste.create(this.poste);
         }
         this.facadePermutations.create(this.permutation);
-        this.flashUtilisateur(this.utilisateur);
         JsfUtils.sendGrowlMessage("Demande de permutation crée");
 
         return "/pages/accueil.xhtml";

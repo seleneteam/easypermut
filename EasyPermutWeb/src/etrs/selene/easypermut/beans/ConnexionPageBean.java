@@ -77,10 +77,6 @@ public class ConnexionPageBean implements Serializable {
             }
             this.sessionUtilisateur.setUtilisateur(utilisateurATester);
 
-            System.err.println("A TESTER >> " + utilisateurATester.getNom());
-            System.err.println("UTIL >>>>>> " + this.utilisateur.getNom());
-            System.err.println("SESSION >>> " + this.sessionUtilisateur.getUtilisateur().getNom());
-
         } else if (utilisateurATester != null && utilisateurATester.getEstValide() == false) {
             redirectedUrl = "./pages/validationEnCours.xhtml";
         } else {

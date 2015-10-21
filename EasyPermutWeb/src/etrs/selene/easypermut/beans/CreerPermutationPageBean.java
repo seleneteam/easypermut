@@ -111,9 +111,7 @@ public class CreerPermutationPageBean implements Serializable {
     @PostConstruct
     public void init() {
 
-        System.err.println("CONNECTED >>> " + sessionUtilisateur.getUtilisateur().getNom());
         this.utilisateur = this.sessionUtilisateur.getUtilisateur();
-        System.err.println("UTIL >>>>>>>> " + this.utilisateur.getNom());
         this.permutation = this.facadePermutations.newInstance();
         this.poste = this.facadePoste.newInstance();
 

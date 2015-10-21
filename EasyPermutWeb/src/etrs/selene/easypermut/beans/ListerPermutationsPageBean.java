@@ -65,9 +65,7 @@ public class ListerPermutationsPageBean implements Serializable {
      */
     @PostConstruct
     public void init() {
-        System.err.println("CONNECTED >>> " + sessionUtilisateur.getUtilisateur().getNom());
         this.utilisateur = this.sessionUtilisateur.getUtilisateur();
-        System.err.println("UTIL >>>>>>>> " + this.utilisateur.getNom());
         this.demandePermutationSelectionee = this.facadePermutations.newInstance();
     }
 

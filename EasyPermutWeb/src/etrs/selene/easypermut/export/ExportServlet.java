@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -46,40 +47,28 @@ public class ExportServlet extends HttpServlet
 	protected void service(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException
 	{
 		String utilisateur_id = request.getParameter("id");
-		
-		if (utilisateur_id == null)
+
+		if (utilisateur_id != null)
 		{
-			response.sendError(HttpServletResponse.SC_NOT_FOUND);
+			Utilisateur utilisateur = this.facadeUtilisateur.read(utilisateur_id);
+			
+			response.setContentType("text/csv");
+			response.addHeader("Content-Disposition", "attachment; filename=export.csv");
+			PrintWriter pw = response.getWriter();
+			
+			List<DemandePermutation> lst = this.facadeDemandePermutation.listeFiltre(utilisateur);
+			pw.println("Createur,ZMR souhaite,Ville souhaite,Unite souhaite,Poste souhaite,Mail");
+			for (DemandePermutation demandePermutation : lst)
+			{
+				pw.printf("%s,%s,%s,%s,%s,%s\n", demandePermutation.getUtilisateurCreateur(), demandePermutation.getZmr(), demandePermutation.getVille(), demandePermutation.getUnite(), demandePermutation.getPoste(), demandePermutation.getUtilisateurCreateur().getMail());
+			}
+			pw.close();
+			System.out.println("Export effectué");
 		}
 		else
 		{
-			Utilisateur utilisateur = this.facadeUtilisateur.read(utilisateur_id);
-			if (utilisateur == null)
-			{
-				response.sendError(HttpServletResponse.SC_NOT_FOUND);
-			}
-			else
-			{
-				response.setContentType("text/csv");
-				PrintWriter pw = response.getWriter();
-				
-				List<DemandePermutation> lst = this.facadeDemandePermutation.listeFiltre(utilisateur);
-				if (lst.size() == 0)
-				{
-					System.out.printf("Aucune donnée à exporter pour %s", utilisateur.getNom());
-				}
-				else
-				{
-					pw.println("Créateur,ZMR souhaité,ville souhaité,unité souhaité,Poste souhaité,Mail");
-					for (DemandePermutation demandePermutation : lst)
-					{
-						pw.printf("%s,%s,%s,%s,%s\n", demandePermutation.getUtilisateurCreateur(), demandePermutation.getZmr(), demandePermutation.getVille(), demandePermutation.getUnite(), demandePermutation.getPoste());
-					}
-					pw.close();
-					System.out.printf("Export effectué pour %s", utilisateur.getNom());
-				}
-				
-			}
+			RequestDispatcher rd = request.getRequestDispatcher("connexion.xhtml");
+			rd.forward(request, response);
 		}
 		
 	}

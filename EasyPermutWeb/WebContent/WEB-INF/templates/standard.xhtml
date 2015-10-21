@@ -41,11 +41,18 @@
 							<li><h:link styleClass="color-blue"
 									outcome="#{navBarBean.pageCreation()}">Créer une demande</h:link></li>
 							<li><h:link styleClass="color-blue"
-									outcome="#{navBarBean.pageMesDemandes()}">Mes demandes</h:link></li>
+									outcome="#{navBarBean.pageStatistiques()}">Statistiques</h:link></li>
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
-							<li><h:link styleClass="color-blue"
-									outcome="#{navBarBean.pageStatistiques()}">Statistiques</h:link></li>
+
+							<li class="dropdown"><a class="dropdown-toggle"
+								data-toggle="dropdown" href="#" ><h:outputLabel styleClass="color-blue" value="#{navBarBean.utilisateur.nom}" /><span class="caret"></span></a>
+								<ul class="dropdown-menu">
+									<li><h:link styleClass="color-blue"
+									outcome="#{navBarBean.pageMesDemandes()}">Mes demandes</h:link></li>
+									<li><h:link styleClass="color-blue"
+									outcome="#{navBarBean.pageMesDemandes()}">Deconnexion</h:link></li>
+								</ul></li>
 						</ul>
 					</div>
 				</div>

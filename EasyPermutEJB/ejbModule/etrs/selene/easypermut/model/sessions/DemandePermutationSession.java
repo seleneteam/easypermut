@@ -13,7 +13,17 @@ import etrs.selene.easypermut.model.entities.ZMR;
 @Stateless
 public class DemandePermutationSession extends AbstractFacade<DemandePermutation>
 {
-
+	
+	/**
+	 * Permet d'obtenir une liste de demandes de permutation correspondant au
+	 * grade et à la spécialité de l'utilisateur passé en paramètre. La demande
+	 * ne doit pas avoir d'interessé et ne doit pas avoir été créée par
+	 * l'utilisateur.
+	 *
+	 * @param utilisateur
+	 *            L'utilisateur dont on veut les demandes.
+	 * @return La liste des demandes.
+	 */
 	public List<DemandePermutation> listeFiltre(final Utilisateur utilisateur)
 	{
 		Query q = super.getEntityManager().createQuery("SELECT dp FROM DemandePermutation dp WHERE dp.utilisateurCreateur.grade = :grade AND dp.utilisateurCreateur.specialite = :specialite AND dp.utilisateurInteresse IS NULL AND dp.utilisateurCreateur != :createur");
@@ -21,26 +31,42 @@ public class DemandePermutationSession extends AbstractFacade<DemandePermutation
 		q.setParameter("specialite", utilisateur.getSpecialite());
 		q.setParameter("createur", utilisateur);
 		List<DemandePermutation> lst = q.getResultList();
-
+		
 		return lst;
 	}
-	
+
+	/**
+	 * Permet d'obtenir la liste des demandes créées par l'utilisateur passé en
+	 * paramètre.
+	 *
+	 * @param utilisateur
+	 *            L'utilisateur dont on veut les demandes.
+	 * @return La liste des demandes.
+	 */
 	public List<DemandePermutation> listeMesDemandes(final Utilisateur utilisateur)
 	{
 		Query q = super.getEntityManager().createQuery("SELECT dp FROM DemandePermutation dp WHERE dp.utilisateurCreateur.id = :id");
 		q.setParameter("id", utilisateur.getId());
 		List<DemandePermutation> lst = q.getResultList();
-
+		
 		return lst;
 	}
-
+	
+	/**
+	 * Permet d'obtenir le nombre de demandes de permutation pour la ZMR passé
+	 * en paramètre.
+	 *
+	 * @param zmr
+	 *            La ZMR dont on veut le nombre de permutaions.
+	 * @return Le nombre de demandes.
+	 */
 	public Long quantiteDemandesParZMR(final ZMR zmr)
 	{
 		Query q = super.getEntityManager().createQuery("SELECT COUNT(dp) FROM DemandePermutation dp WHERE dp.zmr = :zmr");
 		q.setParameter("zmr", zmr);
 		Long resultat = (Long)q.getSingleResult();
-
+		
 		return resultat;
 	}
-	
+
 }

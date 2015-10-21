@@ -16,7 +16,7 @@ import etrs.selene.easypermut.model.entities.Utilisateur;
 import etrs.selene.easypermut.model.sessions.UtilisateurSession;
 
 /**
- * Bean de la page de connexion a l'application.
+ * Bean de la page de connexion à l'application.
  *
  * @author SGT Mora Leo
  */
@@ -27,20 +27,20 @@ import etrs.selene.easypermut.model.sessions.UtilisateurSession;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class AccueilPageBean implements Serializable
 {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * L'utilisateur dont l'identifiant anudef est present dans le formulaire.
 	 */
 	Utilisateur utilisateur;
-	
+
 	/**
 	 * {@link UtilisateurSession}
 	 */
 	@Inject
 	UtilisateurSession facadeUtilisateur;
-	
+
 	/**
 	 * Methode de post-construction. Instancie un nouvel utilisateur.
 	 */
@@ -49,7 +49,7 @@ public class AccueilPageBean implements Serializable
 	{
 		this.utilisateur = this.facadeUtilisateur.newInstance();
 	}
-	
+
 	/**
 	 * Methude de mise en FlashScope de l'utilisateur.
 	 *
@@ -61,9 +61,4 @@ public class AccueilPageBean implements Serializable
 		JsfUtils.putInFlashScope("_utilisateur", utilisateur);
 	}
 
-	public Long nombreInscrits()
-	{
-		return this.facadeUtilisateur.count();
-	}
-	
 }

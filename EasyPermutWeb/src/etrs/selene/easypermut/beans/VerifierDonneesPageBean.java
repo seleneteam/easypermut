@@ -27,25 +27,31 @@ import etrs.selene.easypermut.model.sessions.UtilisateurSession;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class VerifierDonneesPageBean implements Serializable
 {
-
+	
 	private static final long serialVersionUID = 1L;
-
+	
+	/**
+	 * {@link UtilisateurSession}
+	 */
 	@Inject
 	UtilisateurSession facadeUtilisateur;
-
+	
 	/**
 	 * Utilisateur connecté.
 	 */
 	Utilisateur utilisateur;
-
+	
+	/**
+	 * Méthode de post-construction. Récupère l'utilisateur flashé.
+	 */
 	@PostConstruct
 	public void init()
 	{
 		this.utilisateur = (Utilisateur)JsfUtils.getFromFlashScope("_utilisateur");
 	}
-
+	
 	/**
-	 * Methode de mise en FlashScope de l'utilisateur.
+	 * Méthode de mise en FlashScope de l'utilisateur.
 	 *
 	 * @param utilisateur
 	 *            L'utilisateur à mettre dans le FlashScope.
@@ -54,22 +60,22 @@ public class VerifierDonneesPageBean implements Serializable
 	{
 		JsfUtils.putInFlashScope("_utilisateur", utilisateur);
 	}
-
+	
 	/**
-	 * Methode de sauvegarde des nouvelles données rentrées par l'utilisateur.
+	 * Méthode de sauvegarde des nouvelles données rentrées par l'utilisateur.
 	 *
 	 * @return La page suivante.
 	 */
 	public String sauvegarderDonnees()
 	{
-
+		
 		if (this.utilisateur == null)
 			return "/connexion.xhtml";
 		System.out.println(this.utilisateur.getNom());
 		this.utilisateur.setInformationsValide(true);
 		this.facadeUtilisateur.update(this.utilisateur);
 		this.flashUtilisateur(this.utilisateur);
-
+		
 		return "/pages/accueil.xhtml";
 	}
 }

@@ -16,7 +16,7 @@ import etrs.selene.easypermut.model.entities.Utilisateur;
 import etrs.selene.easypermut.model.sessions.UtilisateurSession;
 
 /**
- * Bean de la page de connexion a l'application.
+ * Bean de la page de connexion à l'application.
  *
  * @author SGT Mora Leo
  */
@@ -27,20 +27,20 @@ import etrs.selene.easypermut.model.sessions.UtilisateurSession;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class ConnexionPageBean implements Serializable
 {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * L'utilisateur dont l'identifiant anudef est present dans le formulaire.
 	 */
 	Utilisateur utilisateur;
-	
+
 	/**
 	 * {@link UtilisateurSession}
 	 */
 	@Inject
 	UtilisateurSession facadeUtilisateur;
-	
+
 	/**
 	 * Methode de post-construction. Instancie un nouvel utilisateur.
 	 */
@@ -49,26 +49,26 @@ public class ConnexionPageBean implements Serializable
 	{
 		this.utilisateur = this.facadeUtilisateur.newInstance();
 	}
-	
+
 	/**
-	 * Methude de mise en FlashScope de l'utilisateur.
+	 * Methode de mise en FlashScope de l'utilisateur.
 	 *
 	 * @param utilisateur
-	 *            L'utilisateur a mettre dans le FlashScope.
+	 *            L'utilisateur à mettre dans le FlashScope.
 	 */
 	public void flashUtilisateur(final Utilisateur utilisateur)
 	{
 		JsfUtils.putInFlashScope("_utilisateur", utilisateur);
 	}
-	
+
 	/**
 	 * Methode de connexion. Si l'utilisateur existe et qu'il est validé (voir
-	 * {@link Utilisateur#getEstValide()}) redirige vers la page d'accueil de
-	 * l'application. Si l'utilisateur existe, qu'il est valide mais qu'il n'a
-	 * pas verifié ces informations, le redirige vers la page de validation des
-	 * informations. Si l'utilisateur existe, mais qu'il n'est pas validé,
-	 * redirige vers une page d'attente. Si l'utilisateur n'existe pas, l'ajoute
-	 * dans la BDD et met son status a non valide.
+	 * {@link Utilisateur#getEstValide()}) il est redirigé vers la page
+	 * d'accueil de l'application. Si l'utilisateur existe, qu'il est valide
+	 * mais qu'il n'a pas verifié ces informations, il est redirigé vers la page
+	 * de validation des informations. Si l'utilisateur existe, mais qu'il n'est
+	 * pas validé, il est redirigé vers une page d'attente. Si l'utilisateur
+	 * n'existe pas, il est ajouté dans la BDD et son statut est non valide.
 	 *
 	 * @return L'URL de redirection en fonction du cas.
 	 */
@@ -76,7 +76,7 @@ public class ConnexionPageBean implements Serializable
 	{
 		String redirectedUrl;
 		Utilisateur utilisateurATester = this.facadeUtilisateur.searchFirstResult("identifiantAnudef", this.utilisateur.getIdentifiantAnudef().toLowerCase());
-		
+
 		if (utilisateurATester != null && utilisateurATester.getEstValide() == true)
 		{
 			if (utilisateurATester.getInformationsValide() == true)
@@ -88,7 +88,7 @@ public class ConnexionPageBean implements Serializable
 				redirectedUrl = "./pages/verification.xhtml";
 			}
 			this.flashUtilisateur(utilisateurATester);
-			
+
 		}
 		else if (utilisateurATester != null && utilisateurATester.getEstValide() == false)
 		{
@@ -101,7 +101,7 @@ public class ConnexionPageBean implements Serializable
 			this.facadeUtilisateur.create(this.utilisateur);
 			redirectedUrl = "./pages/validation.xhtml";
 		}
-		
+
 		return redirectedUrl;
 	}
 }

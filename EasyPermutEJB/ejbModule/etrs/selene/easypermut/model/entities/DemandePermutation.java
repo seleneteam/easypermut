@@ -26,9 +26,9 @@ import etrs.selene.easypermut.model.commons.AbstractEntity;
 @Table(name = "DEMANDE_PERMUTATION")
 public class DemandePermutation extends AbstractEntity
 {
-
+	
 	private static final long serialVersionUID = 1L;
-
+	
 	/**
 	 * Utilisateur ayant créé la demande de permutation.
 	 */
@@ -38,7 +38,7 @@ public class DemandePermutation extends AbstractEntity
 	@Getter
 	@Setter
 	Utilisateur utilisateurCreateur;
-
+	
 	/**
 	 * Utilisateur intéressé par la demande.
 	 */
@@ -47,18 +47,18 @@ public class DemandePermutation extends AbstractEntity
 	@Getter
 	@Setter
 	Utilisateur utilisateurInteresse;
-
+	
 	/**
-	 * Poste occupé par le créateur de la demande.
+	 * Poste souhaité par le créateur de la demande.
 	 */
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "poste_id")
 	@Getter
 	@Setter
 	Poste poste;
-
+	
 	/**
-	 * Unité du créateur de la demande.
+	 * Unité souhaité par le créateur de la demande.
 	 */
 	@ManyToOne
 	@JoinColumn(name = "unite_id")
@@ -66,9 +66,9 @@ public class DemandePermutation extends AbstractEntity
 	@Getter
 	@Setter
 	Unite unite;
-
+	
 	/**
-	 * Ville du créateur de la demande.
+	 * Ville souhaité par le créateur de la demande.
 	 */
 	@ManyToOne
 	@JoinColumn(name = "ville_id")
@@ -76,9 +76,9 @@ public class DemandePermutation extends AbstractEntity
 	@Getter
 	@Setter
 	Ville ville;
-
+	
 	/**
-	 * Zone de mutation de référence du créateur de la demande.
+	 * Zone de mutation de référence souhaité par le créateur de la demande.
 	 */
 	@ManyToOne
 	@JoinColumn(name = "zmr_id")
@@ -86,5 +86,5 @@ public class DemandePermutation extends AbstractEntity
 	@Getter
 	@Setter
 	ZMR zmr;
-
+	
 }

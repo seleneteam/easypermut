@@ -25,18 +25,31 @@ import etrs.selene.easypermut.model.sessions.DemandePermutationSession;
 public class MesDemandesPageBean implements Serializable
 {
 	private static final long serialVersionUID = 1L;
-	
+
+	/**
+	 * {@link DemandePermutationSession}
+	 */
 	@Inject
 	DemandePermutationSession facadeDemandePermutation;
-	
-	Utilisateur utilisateur;
-	
-	DemandePermutation demandeEnCours;
 
-	List<DemandePermutation> lstDemandesPassees;
+	/**
+	 * Utilisateur dont ont veut afficher les informations sur les demandes.
+	 */
+	Utilisateur utilisateur;
+
+	/**
+	 * La demande de permuattion (si elle existe) en cours de traitement.
+	 */
+	DemandePermutation demandeEnCours;
 	
 	/**
-	 * Methode de post-construction. Recupere l'utilisateur du FlashScope.
+	 * Liste de toutes les demandes créées par l'utilisateur.
+	 */
+	List<DemandePermutation> lstDemandesPassees;
+
+	/**
+	 * Methode de post-construction. Recupere l'utilisateur du FlashScope,la
+	 * demande en cours et les demandes passées.
 	 */
 	@PostConstruct
 	public void init()
@@ -45,5 +58,5 @@ public class MesDemandesPageBean implements Serializable
 		this.demandeEnCours = this.facadeDemandePermutation.searchFirstResult("utilisateurInteresse", this.utilisateur);
 		this.lstDemandesPassees = this.facadeDemandePermutation.listeMesDemandes(this.utilisateur);
 	}
-	
+
 }

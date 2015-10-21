@@ -6,12 +6,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
+
 import org.hibernate.validator.constraints.Length;
+
 import etrs.selene.easypermut.model.commons.AbstractEntity;
 
 /**
@@ -23,32 +26,36 @@ import etrs.selene.easypermut.model.commons.AbstractEntity;
 @NoArgsConstructor
 @Entity
 @Table(name = "POSTE")
-public class Poste extends AbstractEntity {
+public class Poste extends AbstractEntity
+{
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Libellé du poste.
-     */
-    @Column(name = "libelle")
-    @Length(min = 1)
-    @NotNull
-    @Getter
-    @Setter
-    String libelle;
+	/**
+	 * Libellé du poste.
+	 */
+	@Column(name = "libelle")
+	@Length(min = 1)
+	@NotNull
+	@Getter
+	@Setter
+	String libelle;
 
-    /**
-     * Unité dans laquelle est le poste.
-     */
-    @ManyToOne
-    @JoinColumn(name = "unite_id")
-    @NotNull
-    @Getter
-    @Setter
-    Unite unite;
+	/**
+	 * Unité dans laquelle est le poste.
+	 */
+	@ManyToOne
+	@JoinColumn(name = "unite_id")
+	@NotNull
+	@Getter
+	@Setter
+	Unite unite;
 
-    @Override
-    public String toString() {
-        return this.libelle;
-    }
+	@Override
+	public String toString()
+	{
+		StringBuilder sb = new StringBuilder();
+		sb.append(this.libelle);
+		return sb.toString();
+	}
 }

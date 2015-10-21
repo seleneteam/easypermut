@@ -11,13 +11,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.primefaces.model.StreamedContent;
-
 import etrs.selene.easypermut.model.entities.DemandePermutation;
+import etrs.selene.easypermut.model.entities.Utilisateur;
 import etrs.selene.easypermut.model.sessions.DemandePermutationSession;
+import etrs.selene.easypermut.model.sessions.UtilisateurSession;
 
 /**
- * Servlet implementation class ExportServlet
+ * Servlet permettant d'exporter les demandes concernant l'utilisateur.
  */
 @WebServlet("/ExportServlet")
 public class ExportServlet extends HttpServlet
@@ -27,7 +27,8 @@ public class ExportServlet extends HttpServlet
 	@Inject
 	private DemandePermutationSession facadeDemandePermutation;
 	
-	private StreamedContent file;
+	@Inject
+	private UtilisateurSession facadeUtilisateur;
 	
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -44,16 +45,43 @@ public class ExportServlet extends HttpServlet
 	@Override
 	protected void service(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException
 	{
-		response.setContentType("text/csv");
-		PrintWriter pw = response.getWriter();
+		String utilisateur_id = request.getParameter("id");
 		
-		List<DemandePermutation> lst = this.facadeDemandePermutation.readAll();
-		for (DemandePermutation demandePermutation : lst)
+		if (utilisateur_id == null)
 		{
-			pw.printf("%s,%s,%s,%s,%s,%s\n", demandePermutation.getUtilisateurCreateur(), demandePermutation.getUtilisateurInteresse(), demandePermutation.getZmr(), demandePermutation.getVille(), demandePermutation.getUnite(), demandePermutation.getPoste());
+			response.sendError(HttpServletResponse.SC_NOT_FOUND);
 		}
-		pw.close();
-		System.out.println("Export effectué");
+		else
+		{
+			Utilisateur utilisateur = this.facadeUtilisateur.read(utilisateur_id);
+			if (utilisateur == null)
+			{
+				response.sendError(HttpServletResponse.SC_NOT_FOUND);
+			}
+			else
+			{
+				response.setContentType("text/csv");
+				PrintWriter pw = response.getWriter();
+				
+				List<DemandePermutation> lst = this.facadeDemandePermutation.listeFiltre(utilisateur);
+				if (lst.size() == 0)
+				{
+					System.out.printf("Aucune donnée à exporter pour %s", utilisateur.getNom());
+				}
+				else
+				{
+					pw.println("Créateur,ZMR souhaité,ville souhaité,unité souhaité,Poste souhaité,Mail");
+					for (DemandePermutation demandePermutation : lst)
+					{
+						pw.printf("%s,%s,%s,%s,%s\n", demandePermutation.getUtilisateurCreateur(), demandePermutation.getZmr(), demandePermutation.getVille(), demandePermutation.getUnite(), demandePermutation.getPoste());
+					}
+					pw.close();
+					System.out.printf("Export effectué pour %s", utilisateur.getNom());
+				}
+				
+			}
+		}
+		
 	}
 	
 }

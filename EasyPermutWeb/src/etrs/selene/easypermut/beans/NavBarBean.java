@@ -13,6 +13,12 @@ import lombok.experimental.FieldDefaults;
 import net.entetrs.commons.jsf.JsfUtils;
 import etrs.selene.easypermut.model.entities.Utilisateur;
 
+/**
+ * Bean permettant de re-flasher un utilisateur lors de son clique sur l'un des
+ * items de la navbar.
+ *
+ * @author louis-marie Merminod
+ */
 @Named
 @ViewScoped
 @Data
@@ -22,10 +28,13 @@ public class NavBarBean implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 	
+	/**
+	 * L'utilisateur à re-flasher.
+	 */
 	Utilisateur utilisateur;
 	
 	/**
-	 * Methode de post-construction. Recupere l'utilisateur du FlashScope.
+	 * Methode de post-construction. Recupère l'utilisateur du FlashScope.
 	 */
 	@PostConstruct
 	public void init()
@@ -34,9 +43,9 @@ public class NavBarBean implements Serializable
 	}
 	
 	/**
-	 * Methode de redirection pour la page d'accueil.
+	 * Methode de redirection vers la page d'accueil.
 	 *
-	 * @return La page vers laquelle l'utilisateur sera redirige en fonction du
+	 * @return La page vers laquelle l'utilisateur sera redirigé en fonction du
 	 *         cas.
 	 */
 	public String pageAccueil()
@@ -52,9 +61,9 @@ public class NavBarBean implements Serializable
 	}
 	
 	/**
-	 * Methode de redirection pour la page de creation d'une permutation.
+	 * Methode de redirection vers la page de création d'une permutation.
 	 *
-	 * @return La page vers laquelle l'utilisateur sera redirige en fonction du
+	 * @return La page vers laquelle l'utilisateur sera redirigé en fonction du
 	 *         cas.
 	 */
 	public String pageCreation()
@@ -70,9 +79,9 @@ public class NavBarBean implements Serializable
 	}
 	
 	/**
-	 * Methode de redirection pour la page de la liste des permutations.
+	 * Methode de redirection vers la page de la liste des permutations.
 	 *
-	 * @return La page vers laquelle l'utilisateur sera redirige en fonction du
+	 * @return La page vers laquelle l'utilisateur sera redirigé en fonction du
 	 *         cas.
 	 */
 	public String pageLister()
@@ -88,9 +97,9 @@ public class NavBarBean implements Serializable
 	}
 	
 	/**
-	 * Methode de redirection pour la page de statistiques.
+	 * Methode de redirection vers la page des statistiques.
 	 *
-	 * @return La page vers laquelle l'utilisateur sera redirige en fonction du
+	 * @return La page vers laquelle l'utilisateur sera redirigé en fonction du
 	 *         cas.
 	 */
 	public String pageStatistiques()
@@ -106,9 +115,9 @@ public class NavBarBean implements Serializable
 	}
 	
 	/**
-	 * Methode de redirection pour la page des demandes personnelles.
+	 * Methode de redirection vers la page des demandes personnelles.
 	 *
-	 * @return La page vers laquelle l'utilisateur sera redirige en fonction du
+	 * @return La page vers laquelle l'utilisateur sera redirigé en fonction du
 	 *         cas.
 	 */
 	public String pageMesDemandes()

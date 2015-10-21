@@ -36,26 +36,32 @@
 					<div>
 						<h:form>
 							<ul class="nav navbar-nav">
-								<li><p:commandLink action="#{navBarBean.redirigerPageLister()}"
-												value="Liste des demandes" /></li>
-								<li><p:commandLink action="#{navBarBean.redirigerPageCreation()}"
-												value="Créer une demande" /></li>
-								<li><p:commandLink action="#{navBarBean.redirigerPageStatistiques()}"
-												value="Statistiques" /></li>
+								<li><p:commandLink
+										action="#{navBarBean.redirigerPageLister()}"
+										value="Liste des demandes" /></li>
+								<li><p:commandLink
+										action="#{navBarBean.redirigerPageCreation()}"
+										value="Créer une demande" /></li>
+								<li><p:commandLink
+										action="#{navBarBean.redirigerPageStatistiques()}"
+										value="Statistiques" /></li>
 							</ul>
-							<ul class="nav navbar-nav navbar-right">
+						</h:form>
+						<h:form>
+						<ul class="nav navbar-nav navbar-right">
 
-								<li class="dropdown"><a class="dropdown-toggle"
-									data-toggle="dropdown" href="#"><h:outputLabel
-											styleClass="color-blue" value="#{navBarBean.utilisateur.nom}" /><span
-										class="caret"></span></a>
-									<ul class="dropdown-menu">
-										<li><p:commandLink action="#{navBarBean.redirigerPageMesDemandes()}"
-												value="Mes demandes" /></li>
-										<li><p:commandLink action="#{navBarBean.seDeconnecter()}"
-												value="Deconnexion" /></li>
-									</ul></li>
-							</ul>
+							<li class="dropdown"><a class="dropdown-toggle"
+								data-toggle="dropdown"><p:outputLabel
+										styleClass="color-blue" value="#{navBarBean.utilisateur.nom}" /><span
+									class="caret"></span></a>
+								<ul class="dropdown-menu">
+									<li><p:commandLink
+											action="#{navBarBean.redirigerPageMesDemandes()}"
+											value="Mes demandes" /></li>
+									<li><p:commandLink action="#{navBarBean.seDeconnecter()}"
+											value="Deconnexion" /></li>
+								</ul></li>
+						</ul>
 						</h:form>
 					</div>
 				</div>

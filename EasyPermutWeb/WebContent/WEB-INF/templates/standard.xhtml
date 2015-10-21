@@ -30,34 +30,33 @@
 							<span class="icon-bar"></span> <span class="icon-bar"></span>
 						</button>
 						<h:link class="navbar-brand color-blue"
-							outcome="#{navBarBean.pageAccueil()}">Easy permut'</h:link>
+							outcome="#{navBarBean.redirigerPageAccueil()}">Easy permut'</h:link>
 					</div>
 
 					<div>
-						<ul class="nav navbar-nav">
-							<li><h:link styleClass="color-blue"
-									outcome="#{navBarBean.pageAccueil()}">Accueil</h:link></li>
-							<li><h:link styleClass="color-blue"
-									outcome="#{navBarBean.pageLister()}">Liste des permutations</h:link></li>
-							<li><h:link styleClass="color-blue"
-									outcome="#{navBarBean.pageCreation()}">Créer une demande</h:link></li>
-							<li><h:link styleClass="color-blue"
-									outcome="#{navBarBean.pageStatistiques()}">Statistiques</h:link></li>
-						</ul>
-						<ul class="nav navbar-nav navbar-right">
+						<h:form>
+							<ul class="nav navbar-nav">
+								<li><p:commandLink action="#{navBarBean.redirigerPageLister()}"
+												value="Liste des demandes" /></li>
+								<li><p:commandLink action="#{navBarBean.redirigerPageCreation()}"
+												value="Créer une demande" /></li>
+								<li><p:commandLink action="#{navBarBean.redirigerPageStatistiques()}"
+												value="Statistiques" /></li>
+							</ul>
+							<ul class="nav navbar-nav navbar-right">
 
-							<li class="dropdown"><a class="dropdown-toggle"
-								data-toggle="dropdown" href="#" ><h:outputLabel styleClass="color-blue" value="#{navBarBean.utilisateur.nom}" /><span class="caret"></span></a>
-								<ul class="dropdown-menu">
-									<li><h:link styleClass="color-blue"
-									outcome="#{navBarBean.pageMesDemandes()}">Mes demandes</h:link></li>
-									<li>
-									<h:form>
-										<p:commandLink action="#{navBarBean.deconnexion()}" value="Deconnexion" />
-									</h:form>
-									</li>
-								</ul></li>
-						</ul>
+								<li class="dropdown"><a class="dropdown-toggle"
+									data-toggle="dropdown" href="#"><h:outputLabel
+											styleClass="color-blue" value="#{navBarBean.utilisateur.nom}" /><span
+										class="caret"></span></a>
+									<ul class="dropdown-menu">
+										<li><p:commandLink action="#{navBarBean.redirigerPageMesDemandes()}"
+												value="Mes demandes" /></li>
+										<li><p:commandLink action="#{navBarBean.seDeconnecter()}"
+												value="Deconnexion" /></li>
+									</ul></li>
+							</ul>
+						</h:form>
 					</div>
 				</div>
 			</nav>

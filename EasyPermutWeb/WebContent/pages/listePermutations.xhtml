@@ -129,12 +129,23 @@
 				</div>
 			</div>
 			
+			<div class="row">
+				<div class="col-md-6">
+					<p:outputLabel value="Self : " />
+				</div>
+				<div class="col-md-6">
+					<p:outputLabel
+						value="#{listerPermutationsPageBean.utilisateur.nom}" />
+				</div>
+			</div>
+			
 			<br />
 			
 			<div class="row">
 				<div class="col-md-6">
 					<p:commandButton value="Fermer"
-						onclick="PF('detailPermut').hide();" />
+						onclick="PF('detailPermut').hide();" 
+						actionListener="#{listerPermutationsPageBean.flashUtilisateur(listerPermutationsPageBean.utilisateur)}" />
 				</div>
 				<div class="col-md-6">
 					<p:commandButton value="Choisir"

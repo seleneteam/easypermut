@@ -117,8 +117,9 @@ public class ListerPermutationsPageBean implements Serializable {
      * @return La page suivante.
      */
     public String choisirPermutation() {
-        if (this.utilisateur == null)
+        if (this.utilisateur == null) {
             return "/connexion.xhtml";
+        }
         if (this.utilisateur.getEstInteresse() == false) {
             this.utilisateur.setEstInteresse(true);
             this.demandePermutationSelectionee.setUtilisateurInteresse(this.utilisateur);
@@ -127,6 +128,7 @@ public class ListerPermutationsPageBean implements Serializable {
             JsfUtils.sendGrowlMessage("Vous avez choisi la permutation de %s", this.demandePermutationSelectionee.getUtilisateurCreateur().getNom());
         }
         this.flashUtilisateur(this.utilisateur);
+
         return "/pages/accueil.xhtml";
     }
 
@@ -138,8 +140,8 @@ public class ListerPermutationsPageBean implements Serializable {
      *            La demande de permutation séléctionnée.
      */
     public void ajouterDetail(final DemandePermutation demandePermutation) {
-        this.demandePermutationSelectionee = demandePermutation;
         this.flashUtilisateur(this.utilisateur);
+        this.demandePermutationSelectionee = demandePermutation;
     }
 
 }

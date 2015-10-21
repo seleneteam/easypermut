@@ -4,6 +4,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -23,8 +25,7 @@ import etrs.selene.easypermut.model.commons.AbstractEntity;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
 @Table(name = "DEMANDE_PERMUTATION")
-// @NamedQueries({ @NamedQuery(name = "", query = ""), @NamedQuery(name = "",
-// query = ""), @NamedQuery(name = "", query = "") })
+@NamedQueries({ @NamedQuery(name = "DemandesPermut.listeSepcifique", query = "SELECT dp FROM DemandePermutation dp WHERE dp.utilisateurCreateur.grade = :grade AND dp.utilisateurCreateur.specialite = :specialite AND dp.utilisateurInteresse IS NULL AND dp.utilisateurCreateur != :createur"), @NamedQuery(name = "DemandesPermut.listeMesDemandes", query = "SELECT dp FROM DemandePermutation dp WHERE dp.utilisateurCreateur.id = :id"), @NamedQuery(name = "DemandesPermut.qtParZMR", query = "SELECT COUNT(dp) FROM DemandePermutation dp WHERE dp.zmr = :zmr") })
 public class DemandePermutation extends AbstractEntity {
 
     private static final long serialVersionUID = 1L;

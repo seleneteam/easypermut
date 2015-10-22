@@ -13,14 +13,37 @@
 
 	<ui:define name="content">
 		<div class="container">
-			<a class="btn btn-primary" href="/EasyPermutWeb/ExportServlet?id=#{statsPageBean.utilisateur.id}">Exporter les demandes</a>
+			<a class="btn btn-primary"
+				href="/EasyPermutWeb/ExportServlet?id=#{statsPageBean.utilisateur.id}">Exporter
+				les demandes</a>
 		</div>
 		<div class="container">
-			<p:chart type="bar" model="#{statsPageBean.graphUtilisateurs}"
-				style="height:300px" />
-			<p:chart type="pie" model="#{statsPageBean.graphDemandes}"
-				style="width:500px;height:400px" />
+			<p:chart type="bar" model="#{statsPageBean.graphUtilisateursParGrade}"
+				style="height:400px" />
 		</div>
+		<br />
+		<br />
+		<br />
+		<div class="container">
+			<div class="col-md-6">
+				<p:chart type="pie" model="#{statsPageBean.graphDemandesParZMR}"
+					style="width:500px;height:400px" />
+			</div>
+			<div class="col-md-6">
+				<p:chart type="pie" model="#{statsPageBean.graphDemandesParSpe}"
+					style="width:500px;height:400px" />
+			</div>
+		</div>
+		<br />
+		<br />
+		<br />
+		<div class="container">
+			<p:chart type="line" model="#{statsPageBean.graphUtilisateursParDate}"
+				style="height:400px;"/>
+		</div>
+		<br />
+		<br />
+		<br />
 	</ui:define>
 
 </ui:composition>

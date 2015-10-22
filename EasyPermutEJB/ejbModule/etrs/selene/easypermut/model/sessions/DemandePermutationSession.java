@@ -5,6 +5,7 @@ import javax.ejb.Stateless;
 import javax.persistence.TypedQuery;
 import etrs.selene.easypermut.model.commons.AbstractFacade;
 import etrs.selene.easypermut.model.entities.DemandePermutation;
+import etrs.selene.easypermut.model.entities.Specialite;
 import etrs.selene.easypermut.model.entities.Utilisateur;
 import etrs.selene.easypermut.model.entities.ZMR;
 
@@ -62,6 +63,23 @@ public class DemandePermutationSession extends AbstractFacade<DemandePermutation
 
         TypedQuery<Long> tq = super.getEntityManager().createNamedQuery("DemandesPermut.qtParZMR", Long.class);
         tq.setParameter("zmr", zmr);
+        Long resultat = tq.getSingleResult();
+
+        return resultat;
+    }
+
+    /**
+     * Permet d'obtenir le nombre de demandes de permutation pour la spécilité
+     * passé en paramètre.
+     *
+     * @param spe
+     *            La Specilite dont on veut le nombre de permutaions.
+     * @return Le nombre de demandes.
+     */
+    public Long quantiteDemandesParSpe(final Specialite spe) {
+
+        TypedQuery<Long> tq = super.getEntityManager().createNamedQuery("DemandesPermut.qtParSpe", Long.class);
+        tq.setParameter("spe", spe);
         Long resultat = tq.getSingleResult();
 
         return resultat;

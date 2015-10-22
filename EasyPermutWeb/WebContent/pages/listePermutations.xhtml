@@ -14,146 +14,173 @@
 	<ui:define name="content">
 
 		<div class="container">
-			<h:outputText value="Vous pouvez exporter ces données via la page des statistiques." />
-			<p:dataTable var="permutation"
-				value="#{listerPermutationsPageBean.lstDemandesPermutationSpecifiques}"
-				rows="10" paginator="true"
-				paginatorTemplate="{CurrentPageReport} {PreviousPageLink} {PageLinks} {NextPageLink}"
-				id="permutationTable">
-				<p:column headerText="Nom">
-					<h:outputText value="#{permutation.utilisateurCreateur}" />
-				</p:column>
+			<h:form>
+				<p:dataTable var="permutation"
+					value="#{listerPermutationsPageBean.lstDemandesPermutationSpecifiques}"
+					rows="20" paginator="true"
+					paginatorTemplate="{CurrentPageReport} {PreviousPageLink} {PageLinks} {NextPageLink} {Exporters}"
+					id="permutationTable">
 
-				<p:column headerText="Zmr">
-					<h:outputText value="#{permutation.zmr}" />
-				</p:column>
+					<f:facet name="{Exporters}">
+						<div style="float: right">
+							<h:commandLink>
+								<p:graphicImage url="#{resource['img:pdf_logo.jpg']}" width="30" />
+								<p:dataExporter type="pdf" target="permutationTable"
+									fileName="export_permutations" />
+							</h:commandLink>
+							<h:commandLink>
+								<p:graphicImage url="#{resource['img:excel.jpg']}" width="30" />
+								<p:dataExporter type="xls" target="permutationTable"
+									fileName="export_permutations" />
+							</h:commandLink>
+							<h:commandLink>
+								<p:graphicImage url="#{resource['img:csv.svg']}" width="30" />
+								<p:dataExporter type="csv" target="permutationTable"
+									fileName="export_permutations" />
+							</h:commandLink>
+							<h:commandLink>
+								<p:graphicImage url="#{resource['img:xml.svg']}" width="30" />
+								<p:dataExporter type="xml" target="permutationTable"
+									fileName="export_permutations" />
+							</h:commandLink>
+						</div>
+					</f:facet>
 
-				<p:column headerText="Ville">
-					<h:outputText value="#{permutation.ville}" />
-				</p:column>
+					<p:column headerText="Nom">
+						<h:outputText value="#{permutation.utilisateurCreateur}" />
+					</p:column>
 
-				<p:column headerText="Unite">
-					<h:outputText value="#{permutation.unite}" />
-				</p:column>
+					<p:column headerText="Zmr">
+						<h:outputText value="#{permutation.zmr}" />
+					</p:column>
 
-				<p:column headerText="Action">
-					<p:commandButton value="Details"
-						styleClass="btn-primary center-elem"
-						onclick="PF('detailPermut').show();"
-						actionListener="#{listerPermutationsPageBean.ajouterDetail(permutation)}"
-						update=":testId">
-					</p:commandButton>
-				</p:column>
-			</p:dataTable>
+					<p:column headerText="Ville">
+						<h:outputText value="#{permutation.ville}" />
+					</p:column>
+
+					<p:column headerText="Unite">
+						<h:outputText value="#{permutation.unite}" />
+					</p:column>
+
+					<p:column headerText="Action" exportable="false">
+						<p:commandButton value="Details"
+							styleClass="btn-primary center-elem"
+							onclick="PF('detailPermut').show();"
+							actionListener="#{listerPermutationsPageBean.ajouterDetail(permutation)}"
+							update=":testId">
+						</p:commandButton>
+					</p:column>
+				</p:dataTable>
+			</h:form>
 		</div>
-
-		<p:dialog header="Detail d'une permutation" styleClass="center" widgetVar="detailPermut"
-			modal="true" height="280" width="400" closable="false" resizable="false">
+		<p:dialog header="Detail d'une permutation" styleClass="center"
+			widgetVar="detailPermut" modal="true" height="280" width="400"
+			closable="false" resizable="false">
 			<h:form id="testId">
-			
-			<div class="row">
-				<div class="col-md-6">
-					<p:outputLabel value="Grade : " />
+
+				<div class="row">
+					<div class="col-md-6">
+						<p:outputLabel value="Grade : " />
+					</div>
+					<div class="col-md-6">
+						<p:outputLabel
+							value="#{listerPermutationsPageBean.demandePermutationSelectionee.utilisateurCreateur.grade.grade}" />
+					</div>
 				</div>
-				<div class="col-md-6">
-					<p:outputLabel value="#{listerPermutationsPageBean.demandePermutationSelectionee.utilisateurCreateur.grade.grade}" />
+
+				<div class="row">
+					<div class="col-md-6">
+						<p:outputLabel value="Nom : " />
+					</div>
+					<div class="col-md-6">
+						<p:outputLabel
+							value="#{listerPermutationsPageBean.demandePermutationSelectionee.utilisateurCreateur.nom}" />
+					</div>
 				</div>
-			</div>
-			
-			<div class="row">
-				<div class="col-md-6">
-					<p:outputLabel value="Nom : " />
+
+				<div class="row">
+					<div class="col-md-6">
+						<p:outputLabel value="Prenom : " />
+					</div>
+					<div class="col-md-6">
+						<p:outputLabel
+							value="#{listerPermutationsPageBean.demandePermutationSelectionee.utilisateurCreateur.prenom}" />
+					</div>
 				</div>
-				<div class="col-md-6">
-					<p:outputLabel
-						value="#{listerPermutationsPageBean.demandePermutationSelectionee.utilisateurCreateur.nom}" />
+
+				<div class="row">
+					<div class="col-md-6">
+						<p:outputLabel value="NIA : " />
+					</div>
+					<div class="col-md-6">
+						<p:outputLabel
+							value="#{listerPermutationsPageBean.demandePermutationSelectionee.utilisateurCreateur.nia}" />
+					</div>
 				</div>
-			</div>
-			
-			<div class="row">
-				<div class="col-md-6">
-					<p:outputLabel value="Prenom : " />
+
+				<div class="row">
+					<div class="col-md-6">
+						<p:outputLabel value="Poste : " />
+					</div>
+					<div class="col-md-6">
+						<p:outputLabel
+							value="#{listerPermutationsPageBean.demandePermutationSelectionee.utilisateurCreateur.poste.libelle}" />
+					</div>
 				</div>
-				<div class="col-md-6">
-					<p:outputLabel
-						value="#{listerPermutationsPageBean.demandePermutationSelectionee.utilisateurCreateur.prenom}" />
+
+				<div class="row">
+					<div class="col-md-6">
+						<p:outputLabel value="Unitée : " />
+					</div>
+					<div class="col-md-6">
+						<p:outputLabel
+							value="#{listerPermutationsPageBean.demandePermutationSelectionee.utilisateurCreateur.poste.unite.libelle}" />
+					</div>
 				</div>
-			</div>
-			
-			<div class="row">
-				<div class="col-md-6">
-					<p:outputLabel value="NIA : " />
+
+				<div class="row">
+					<div class="col-md-6">
+						<p:outputLabel value="Site : " />
+					</div>
+					<div class="col-md-6">
+						<p:outputLabel
+							value="#{listerPermutationsPageBean.demandePermutationSelectionee.utilisateurCreateur.poste.unite.ville.nom} (#{listerPermutationsPageBean.demandePermutationSelectionee.utilisateurCreateur.poste.unite.ville.zmr.libelle})" />
+					</div>
 				</div>
-				<div class="col-md-6">
-					<p:outputLabel
-						value="#{listerPermutationsPageBean.demandePermutationSelectionee.utilisateurCreateur.nia}" />
+
+				<div class="row">
+					<div class="col-md-6">
+						<p:outputLabel value="Mail : " />
+					</div>
+					<div class="col-md-6">
+						<p:outputLabel
+							value="#{listerPermutationsPageBean.demandePermutationSelectionee.utilisateurCreateur.mail}" />
+					</div>
 				</div>
-			</div>
-			
-			<div class="row">
-				<div class="col-md-6">
-					<p:outputLabel value="Poste : " />
+
+				<div class="row">
+					<div class="col-md-6">
+						<p:outputLabel value="Self : " />
+					</div>
+					<div class="col-md-6">
+						<p:outputLabel
+							value="#{listerPermutationsPageBean.utilisateur.nom}" />
+					</div>
 				</div>
-				<div class="col-md-6">
-					<p:outputLabel
-						value="#{listerPermutationsPageBean.demandePermutationSelectionee.utilisateurCreateur.poste.libelle}" />
+
+				<br />
+
+				<div class="row">
+					<div class="col-md-6">
+						<p:commandButton value="Fermer"
+							onclick="PF('detailPermut').hide();" />
+					</div>
+					<div class="col-md-6">
+						<p:commandButton value="Choisir" styleClass="btn-primary"
+							action="#{listerPermutationsPageBean.choisirPermutation()}"
+							update=":permutations_datatable" ajax="false" />
+					</div>
 				</div>
-			</div>
-			
-			<div class="row">
-				<div class="col-md-6">
-					<p:outputLabel value="Unitée : " />
-				</div>
-				<div class="col-md-6">
-					<p:outputLabel
-						value="#{listerPermutationsPageBean.demandePermutationSelectionee.utilisateurCreateur.poste.unite.libelle}" />
-				</div>
-			</div>
-			
-			<div class="row">
-				<div class="col-md-6">
-					<p:outputLabel value="Site : " />
-				</div>
-				<div class="col-md-6">
-					<p:outputLabel
-						value="#{listerPermutationsPageBean.demandePermutationSelectionee.utilisateurCreateur.poste.unite.ville.nom} (#{listerPermutationsPageBean.demandePermutationSelectionee.utilisateurCreateur.poste.unite.ville.zmr.libelle})" />
-				</div>
-			</div>
-			
-			<div class="row">
-				<div class="col-md-6">
-					<p:outputLabel value="Mail : " />
-				</div>
-				<div class="col-md-6">
-					<p:outputLabel
-						value="#{listerPermutationsPageBean.demandePermutationSelectionee.utilisateurCreateur.mail}" />
-				</div>
-			</div>
-			
-			<div class="row">
-				<div class="col-md-6">
-					<p:outputLabel value="Self : " />
-				</div>
-				<div class="col-md-6">
-					<p:outputLabel
-						value="#{listerPermutationsPageBean.utilisateur.nom}" />
-				</div>
-			</div>
-			
-			<br />
-			
-			<div class="row">
-				<div class="col-md-6">
-					<p:commandButton value="Fermer"
-						onclick="PF('detailPermut').hide();"/>
-				</div>
-				<div class="col-md-6">
-					<p:commandButton value="Choisir"
-						styleClass="btn-primary"
-						action="#{listerPermutationsPageBean.choisirPermutation()}"
-						update=":permutations_datatable" ajax="false" />
-				</div>
-			</div>
 			</h:form>
 		</p:dialog>
 	</ui:define>

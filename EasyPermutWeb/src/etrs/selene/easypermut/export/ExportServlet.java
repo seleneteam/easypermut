@@ -50,17 +50,17 @@ public class ExportServlet extends HttpServlet
 
 		if (utilisateur_id != null)
 		{
-			Utilisateur utilisateur = this.facadeUtilisateur.read(utilisateur_id);
 			
 			response.setContentType("text/csv");
 			response.addHeader("Content-Disposition", "attachment; filename=export.csv");
 			PrintWriter pw = response.getWriter();
 			
-			List<DemandePermutation> lst = this.facadeDemandePermutation.listeFiltre(utilisateur);
-			pw.println("Createur,ZMR souhaite,Ville souhaite,Unite souhaite,Poste souhaite,Mail");
+			List<DemandePermutation> lst = this.facadeDemandePermutation.readAll();
+			pw.println("Grade,Createur,Specialite,ZMR,Ville,Unite,Poste,ZMR souhaite,Ville souhaite,Unite souhaite,Poste souhaite,Mail");
 			for (DemandePermutation demandePermutation : lst)
 			{
-				pw.printf("%s,%s,%s,%s,%s,%s\n", demandePermutation.getUtilisateurCreateur(), demandePermutation.getZmr(), demandePermutation.getVille(), demandePermutation.getUnite(), demandePermutation.getPoste(), demandePermutation.getUtilisateurCreateur().getMail());
+				Utilisateur utilisateur = demandePermutation.getUtilisateurCreateur();
+				pw.printf("%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\n", utilisateur.getGrade(), utilisateur, utilisateur.getSpecialite(), utilisateur.getPoste().getUnite().getVille().getZmr(), utilisateur.getPoste().getUnite().getVille(), utilisateur.getPoste().getUnite(), utilisateur.getPoste(), demandePermutation.getZmr(), demandePermutation.getVille(), demandePermutation.getUnite(), demandePermutation.getPoste(), utilisateur.getMail());
 			}
 			pw.close();
 			System.out.println("Export effectué");

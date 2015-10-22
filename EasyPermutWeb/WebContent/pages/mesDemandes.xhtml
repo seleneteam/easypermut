@@ -58,9 +58,6 @@
 				paginator="true"
 				paginatorTemplate="{CurrentPageReport} {PreviousPageLink} {PageLinks} {NextPageLink}"
 				id="permutationTable">
-				<p:column headerText="Nom">
-					<h:outputText value="#{permutation.utilisateurCreateur}" />
-				</p:column>
 
 				<p:column headerText="Zmr">
 					<h:outputText value="#{permutation.zmr}" />
@@ -72,6 +69,16 @@
 
 				<p:column headerText="Unite">
 					<h:outputText value="#{permutation.unite}" />
+				</p:column>
+
+				<p:column headerText="Poste">
+					<h:outputText value="#{permutation.poste}" />
+				</p:column>
+
+				<p:column headerText="Date de création">
+					<h:outputText value="#{permutation.dateCreation}">
+						<f:convertDateTime pattern="dd/MM/yyyy" />
+					</h:outputText>
 				</p:column>
 			</p:dataTable>
 		</div>

@@ -1,5 +1,7 @@
 package etrs.selene.easypermut.model.entities;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -8,6 +10,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 import lombok.AccessLevel;
@@ -31,13 +35,13 @@ import etrs.selene.easypermut.model.commons.AbstractEntity;
 @Entity
 @Table(name = "UTILISATEUR")
 @NamedQueries({ @NamedQuery(name = "Utilisateur.qtParGrade",
-query = "SELECT COUNT(u) FROM Utilisateur u WHERE u.grade = :grade AND u.estValide = 1"), @NamedQuery(name = "Utilisateur.qtTotal",
-query = "SELECT COUNT(u) FROM Utilisateur u WHERE u.estValide = 1") })
+		query = "SELECT COUNT(u) FROM Utilisateur u WHERE u.grade = :grade AND u.estValide = 1"), @NamedQuery(name = "Utilisateur.qtTotal",
+		query = "SELECT COUNT(u) FROM Utilisateur u WHERE u.estValide = 1") })
 public class Utilisateur extends AbstractEntity
 {
-
+	
 	private static final long serialVersionUID = 1L;
-
+	
 	/**
 	 * Identifiant Anudef de l'utilisateur.
 	 */
@@ -47,7 +51,7 @@ public class Utilisateur extends AbstractEntity
 	@Getter
 	@Setter
 	String identifiantAnudef;
-
+	
 	/**
 	 * Nom de l'utilisateur.
 	 */
@@ -55,7 +59,7 @@ public class Utilisateur extends AbstractEntity
 	@Getter
 	@Setter
 	String nom;
-
+	
 	/**
 	 * Prenom de l'utiisateur.
 	 */
@@ -63,7 +67,7 @@ public class Utilisateur extends AbstractEntity
 	@Getter
 	@Setter
 	String prenom;
-
+	
 	/**
 	 * NIA de l'utilisateur.
 	 */
@@ -71,7 +75,7 @@ public class Utilisateur extends AbstractEntity
 	@Getter
 	@Setter
 	String nia;
-
+	
 	/**
 	 * Mail de l'utilisateur.
 	 */
@@ -80,7 +84,7 @@ public class Utilisateur extends AbstractEntity
 	@Getter
 	@Setter
 	String mail;
-
+	
 	/**
 	 * Grade de l'utilisateur.
 	 */
@@ -89,7 +93,7 @@ public class Utilisateur extends AbstractEntity
 	@Getter
 	@Setter
 	Grade grade;
-
+	
 	/**
 	 * Specialite de l'utilisateur.
 	 */
@@ -98,7 +102,7 @@ public class Utilisateur extends AbstractEntity
 	@Getter
 	@Setter
 	Specialite specialite;
-
+	
 	/**
 	 * Poste occupé par l'utilisateur.
 	 */
@@ -107,7 +111,7 @@ public class Utilisateur extends AbstractEntity
 	@Getter
 	@Setter
 	Poste poste;
-
+	
 	/**
 	 * Definit si l'utilisateur peut se connecter a l'application ou non. false
 	 * si les données de l'utilisateur on été importées. true si il doit
@@ -117,7 +121,7 @@ public class Utilisateur extends AbstractEntity
 	@Getter
 	@Setter
 	Boolean estValide;
-
+	
 	/**
 	 * Definit si l'utilisateur est deja en cours de transaction pour une
 	 * permutation.
@@ -126,7 +130,7 @@ public class Utilisateur extends AbstractEntity
 	@Getter
 	@Setter
 	Boolean estInteresse;
-
+	
 	/**
 	 * Definit si l'utilisateur à validé ses informations.
 	 */
@@ -135,6 +139,16 @@ public class Utilisateur extends AbstractEntity
 	@Setter
 	Boolean informationsValide;
 
+	/**
+	 * Date d'inscription.
+	 */
+	@Temporal(TemporalType.DATE)
+	@Column(name = "date_inscription")
+	@NotNull
+	@Getter
+	@Setter
+	Date dateInscription;
+	
 	@Override
 	public String toString()
 	{

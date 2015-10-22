@@ -1,5 +1,6 @@
 package etrs.selene.easypermut.init;
 
+import java.io.FileNotFoundException;
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
@@ -19,6 +20,7 @@ import etrs.selene.easypermut.model.sessions.UniteSession;
 import etrs.selene.easypermut.model.sessions.UtilisateurSession;
 import etrs.selene.easypermut.model.sessions.VilleSession;
 import etrs.selene.easypermut.model.sessions.ZMRSession;
+import etrs.selene.easypermut.singleton.ImportSingleton;
 
 @Singleton
 @Startup
@@ -222,6 +224,12 @@ public class InitSingleton {
 
         } else {
             log.info("La table utilisateur contient déja des éléments");
+        }
+
+        try {
+            ImportSingleton.getInstance().recupereDonnees();
+        } catch (FileNotFoundException e) {
+            log.info("Aucune nouvelle donnée a importer.");
         }
 
     }

@@ -1,11 +1,12 @@
 package etrs.selene.easypermut.singleton;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Date;
+import javax.annotation.PostConstruct;
 import javax.ejb.DependsOn;
 import javax.ejb.Singleton;
+import javax.ejb.Startup;
 import javax.inject.Inject;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -37,6 +38,7 @@ import etrs.selene.easypermut.model.sessions.ZMRSession;
  * @author SGT Mora Leo
  */
 @Singleton
+@Startup
 @DependsOn("InitSingleton")
 public class ImportSingleton {
 
@@ -67,7 +69,8 @@ public class ImportSingleton {
      * les ajoute en BDD.
      */
     // @Schedule(hour = "3")
-    public void recupereDonnees() throws FileNotFoundException {
+    @PostConstruct
+    public void recupereDonnees() {
 
         File fXmlFile;
 

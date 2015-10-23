@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletResponse;
 import etrs.selene.easypermut.model.entities.DemandePermutation;
 import etrs.selene.easypermut.model.entities.Utilisateur;
 import etrs.selene.easypermut.model.sessions.DemandePermutationSession;
-import etrs.selene.easypermut.model.sessions.UtilisateurSession;
 
 /**
  * Servlet permettant d'exporter les demandes concernant l'utilisateur.
@@ -24,21 +23,18 @@ import etrs.selene.easypermut.model.sessions.UtilisateurSession;
 public class ExportServlet extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Inject
 	private DemandePermutationSession facadeDemandePermutation;
-	
-	@Inject
-	private UtilisateurSession facadeUtilisateur;
-	
+
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
 	public ExportServlet()
 	{
-		
+
 	}
-	
+
 	/**
 	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse
 	 *      response)
@@ -47,14 +43,14 @@ public class ExportServlet extends HttpServlet
 	protected void service(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException
 	{
 		String utilisateur_id = request.getParameter("id");
-
+		
 		if (utilisateur_id != null)
 		{
-			
+
 			response.setContentType("text/csv");
 			response.addHeader("Content-Disposition", "attachment; filename=export.csv");
 			PrintWriter pw = response.getWriter();
-			
+
 			List<DemandePermutation> lst = this.facadeDemandePermutation.readAll();
 			pw.println("Grade,Createur,Specialite,ZMR,Ville,Unite,Poste,ZMR souhaite,Ville souhaite,Unite souhaite,Poste souhaite,Mail");
 			for (DemandePermutation demandePermutation : lst)
@@ -70,7 +66,7 @@ public class ExportServlet extends HttpServlet
 			RequestDispatcher rd = request.getRequestDispatcher("connexion.xhtml");
 			rd.forward(request, response);
 		}
-		
+
 	}
-	
+
 }

@@ -1,7 +1,5 @@
 /**
- * 
- */
-/**
+ * Package des beans de l'application.
  * @author SGT Mora Leo
  *
  */

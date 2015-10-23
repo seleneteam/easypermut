@@ -13,7 +13,8 @@ import etrs.selene.easypermut.model.entities.Utilisateur;
 import etrs.selene.easypermut.model.sessions.UtilisateurSession;
 
 /**
- * Bean de la sessin utilisateur.
+ * Bean de la session utilisateur. Cette bean sert a transporter l'utilisateur
+ * connecté a travers toue l'application.
  * 
  * @author SGT Mora Leo
  *
@@ -27,11 +28,21 @@ public class UtilisateurSessionBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    /**
+     * {@link UtilisateurSession}
+     */
     @Inject
     UtilisateurSession facadeUtilisateur;
 
+    /**
+     * L'utilisateur connecté.
+     */
     Utilisateur utilisateur;
 
+    /**
+     * Methode de post-construction. Recupere une nouvelle instance
+     * d'Utilisateur.
+     */
     @PostConstruct
     public void init() {
         this.utilisateur = facadeUtilisateur.newInstance();

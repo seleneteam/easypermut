@@ -42,33 +42,59 @@ import etrs.selene.easypermut.model.sessions.ZMRSession;
 @DependsOn("InitSingleton")
 public class ImportSingleton {
 
+    /**
+     * {@link GradeSession}
+     */
     @Inject
-    GradeSession facadeGrade;
+    private GradeSession facadeGrade;
 
+    /**
+     * {@link PosteSession}
+     */
     @Inject
-    PosteSession facadePoste;
+    private PosteSession facadePoste;
 
+    /**
+     * {@link SpecialiteSession}
+     */
     @Inject
-    SpecialiteSession facadeSpecialite;
+    private SpecialiteSession facadeSpecialite;
 
+    /**
+     * {@link UniteSession}
+     */
     @Inject
-    UniteSession facadeUnite;
+    private UniteSession facadeUnite;
 
+    /**
+     * {@link UtilisateurSession}
+     */
     @Inject
-    UtilisateurSession facadeUtilisateur;
+    private UtilisateurSession facadeUtilisateur;
 
+    /**
+     * {@link VilleSession}
+     */
     @Inject
-    VilleSession facadeVille;
+    private VilleSession facadeVille;
 
+    /**
+     * {@link ZMRSession}
+     */
     @Inject
-    ZMRSession facadeZMR;
+    private ZMRSession facadeZMR;
 
     /**
      * Methode d'import des données. Cette methode parse le XML. Si elle
      * rencontre des informations non présentes dans la base, elle les crée et
      * les ajoute en BDD.
      */
-    // @Schedule(hour = "3")
+    /**
+     * Le @PostConstruct doit etre remplacé par un @Schedule(hour = "3") lors du
+     * lancement de l'application. Pour les tests, on utilisera un @PostConstruct
+     * avec un @DependsOn("InitSingleton") pour que la méthode soit exécuté
+     * apres l'init.
+     */
     @PostConstruct
     public void recupereDonnees() {
 
@@ -152,7 +178,6 @@ public class ImportSingleton {
                             utilisateur.setSpecialite(specialite);
                             utilisateur.setPoste(poste);
                             utilisateur.setEstValide(true);
-                            // TODO Put False !
                             utilisateur.setInformationsValide(true);
                             utilisateur.setDateInscription(new Date());
                             this.facadeUtilisateur.update(utilisateur);

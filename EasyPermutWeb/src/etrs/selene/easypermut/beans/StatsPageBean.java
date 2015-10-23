@@ -2,6 +2,8 @@ package etrs.selene.easypermut.beans;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -100,7 +102,7 @@ public class StatsPageBean implements Serializable {
         this.creerGraphUtilisateursParGrade();
         this.creerGraphDemandesParZMR();
         this.creerGraphDemandesParSpe();
-        this.creerGraphUtilisateursParDate();
+        this.creerGraphUtilisateursParMois();
     }
 
     /**
@@ -136,7 +138,7 @@ public class StatsPageBean implements Serializable {
         Axis yAxis = this.graphUtilisateursParGrade.getAxis(AxisType.Y);
         yAxis.setLabel("Utilisateurs");
         yAxis.setMin(0);
-        yAxis.setMax(this.facadeUtilisateur.quantiteUtilisateurTotal());
+        yAxis.setMax(this.facadeUtilisateur.calculerUtilisateurTotal());
     }
 
     /**
@@ -151,7 +153,7 @@ public class StatsPageBean implements Serializable {
         utilisateurs.setLabel("Utilisateurs");
 
         for (Grade grade : this.facadeGrade.readAll()) {
-            utilisateurs.set(grade.getGrade(), this.facadeUtilisateur.quantiteUtilisateurParGrade(grade));
+            utilisateurs.set(grade.getGrade(), this.facadeUtilisateur.calculerUtilisateurParGrade(grade));
         }
         model.addSeries(utilisateurs);
 
@@ -160,13 +162,13 @@ public class StatsPageBean implements Serializable {
     }
 
     /**
-     * Cré et remplit de graphique des demandes par ZMR.
+     * Cré et remplit le graphique des demandes par ZMR.
      */
     private void creerGraphDemandesParZMR() {
         this.graphDemandesParZMR = new PieChartModel();
 
         for (DemandePermutation demande : this.facadeDemande.readAll()) {
-            this.graphDemandesParZMR.set(demande.getZmr().getLibelle(), this.facadeDemande.quantiteDemandesParZMR(demande.getZmr()));
+            this.graphDemandesParZMR.set(demande.getZmr().getLibelle(), this.facadeDemande.calculerDemandesParZMR(demande.getZmr()));
         }
 
         this.graphDemandesParZMR.setTitle("Nombre de demandes par ZMR");
@@ -176,13 +178,13 @@ public class StatsPageBean implements Serializable {
     }
 
     /**
-     * Cré et remplit de graphique des demandes par Specilite.
+     * Cré et remplit le graphique des demandes par Specilite.
      */
     private void creerGraphDemandesParSpe() {
         this.graphDemandesParSpe = new PieChartModel();
 
         for (DemandePermutation demande : this.facadeDemande.readAll()) {
-            this.graphDemandesParSpe.set(demande.getUtilisateurCreateur().getSpecialite().getLibelle(), this.facadeDemande.quantiteDemandesParSpe(demande.getUtilisateurCreateur().getSpecialite()));
+            this.graphDemandesParSpe.set(demande.getUtilisateurCreateur().getSpecialite().getLibelle(), this.facadeDemande.calculerDemandesParSpe(demande.getUtilisateurCreateur().getSpecialite()));
         }
 
         this.graphDemandesParSpe.setTitle("Nombre de demandes par spécilités");
@@ -191,29 +193,40 @@ public class StatsPageBean implements Serializable {
         this.graphDemandesParSpe.setDiameter(300);
     }
 
-    private void creerGraphUtilisateursParDate() {
+    /**
+     * Cré et remplit le graphique du nombre d'utilisateur par mois.
+     */
+    private void creerGraphUtilisateursParMois() {
         graphUtilisateursParDate = new LineChartModel();
+        LineChartSeries serie = new LineChartSeries();
+        LocalDate d = LocalDate.of(2015, 01, 01);
 
-        Long nbUtilisateursTotal = this.facadeUtilisateur.count();
-
-        LineChartSeries utilisateursTotal = new LineChartSeries();
-        utilisateursTotal.setLabel("Utilisateurs");
-
-        for (Utilisateur utilisateur : this.facadeUtilisateur.readAll()) {
-            utilisateursTotal.set(utilisateur.getDateInscription(), nbUtilisateursTotal);
+        while (d.isBefore(LocalDate.now())) {
+            d = d.plusMonths(1);
+            serie.set(d.toString(), facadeUtilisateur.calculerUtilisateurAvantLaDate(asDate(d)));
         }
 
-        graphUtilisateursParDate.addSeries(utilisateursTotal);
+        graphUtilisateursParDate.addSeries(serie);
 
-        graphUtilisateursParDate.setTitle("Nombre d'utilisateurs par dates d'inscription");
+        graphUtilisateursParDate.setTitle("Nombre d'utilisateurs inscrit par mois");
         graphUtilisateursParDate.setZoom(true);
         graphUtilisateursParDate.getAxis(AxisType.Y).setLabel("Nombre d'utilisateurs");
-        DateAxis axis = new DateAxis("Dates d'inscription");
-        axis.setTickAngle(-50);
+
+        DateAxis axis = new DateAxis("Mois");
         axis.setMax(LocalDate.now().toString());
-        axis.setMax("2015-10-22");
-        axis.setTickFormat("%#d %b %y");
+        axis.setTickFormat("%d/%m/%y");
+
         graphUtilisateursParDate.getAxes().put(AxisType.X, axis);
     }
 
+    /**
+     * Methode de converssion d'une LocalDate en util.Date
+     * 
+     * @param localDate
+     *            La date a convertir.
+     * @return une util.Date.
+     */
+    public static Date asDate(LocalDate localDate) {
+        return Date.from(localDate.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
+    }
 }

@@ -101,7 +101,7 @@ public class ImportSingleton {
         File fXmlFile;
 
         try {
-            if ((fXmlFile = new File("/home/codeur/Bureau/test/data.xml")) != null) {
+            if ((fXmlFile = new File("/home/codeur/Bureau/test/data.xml")).exists()) {
                 DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
                 DocumentBuilder dBuilder;
 

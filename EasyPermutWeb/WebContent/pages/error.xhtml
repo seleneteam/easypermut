@@ -6,11 +6,16 @@
 	xmlns:p="http://primefaces.org/ui"
 	template="/WEB-INF/templates/basic.xhtml">
 
-	<ui:define name="title">EasyPermut' - Validation</ui:define>
+	<ui:define name="title">EasyPermut' - Erreur</ui:define>
 
-	<ui:define name="indication">Votre compte est en cours d'activation</ui:define>
+	<ui:define name="indication">Erreur</ui:define>
 
 	<ui:define name="content">
-		<p>Veuillez vous reconnecter d'ici 24 heures.</p>
+			<p:graphicImage url="#{resource['img:interrogation_vectorized.png']}"
+				width="400" styleClass="error-img" />
+
+		<div class="error-txt">
+			<h2>Oups, vous vous etes perdu ?</h2>
+		</div>
 	</ui:define>
 </ui:composition>

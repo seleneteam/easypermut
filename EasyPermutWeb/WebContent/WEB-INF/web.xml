@@ -21,4 +21,7 @@
     <extension>csv</extension>
     <mime-type>text/csv</mime-type>
   </mime-mapping>
+  <error-page>
+    <location>/pages/error.xhtml</location>
+</error-page>
 </web-app>

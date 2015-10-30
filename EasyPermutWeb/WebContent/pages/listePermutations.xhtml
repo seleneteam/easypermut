@@ -62,7 +62,8 @@
 						<h:outputText value="#{permutation.unite}" />
 					</p:column>
 
-					<p:column styleClass="text-center" headerText="Action" exportable="false">
+					<p:column styleClass="text-center" headerText="Action"
+						exportable="false">
 						<p:commandButton value="Details"
 							styleClass="btn-primary center-elem"
 							onclick="PF('detailPermut').show();"
@@ -74,7 +75,7 @@
 			</h:form>
 		</div>
 		<p:dialog header="Detail d'une permutation" styleClass="center"
-			widgetVar="detailPermut" modal="true" height="280" width="400"
+			widgetVar="detailPermut" modal="true" height="300" width="400"
 			closable="false" resizable="false">
 			<h:form id="testId">
 
@@ -158,15 +159,28 @@
 					</div>
 				</div>
 
+				<div class="row">
+					<div class="col-md-6">
+						<p:outputLabel value="Date de création : " />
+					</div>
+					<div class="col-md-6">
+						<p:outputLabel
+							value="#{listerPermutationsPageBean.demandePermutationSelectionee.dateCreation}">
+							<f:convertDateTime pattern="dd/MM/yyyy" timeZone="CET" />
+						</p:outputLabel>
+					</div>
+				</div>
+
 				<br />
 
 				<div class="row">
 					<div class="col-md-6">
-						<p:commandButton value="Fermer"
-							styleClass="text-center" onclick="PF('detailPermut').hide();" />
+						<p:commandButton value="Fermer" styleClass="text-center"
+							onclick="PF('detailPermut').hide();" />
 					</div>
 					<div class="col-md-6">
-						<p:commandButton value="Choisir" styleClass="btn-primary text-center"
+						<p:commandButton value="Choisir"
+							styleClass="btn-primary text-center"
 							action="#{listerPermutationsPageBean.choisirPermutation()}"
 							update=":permutations_datatable" ajax="false" />
 					</div>

@@ -78,10 +78,10 @@ public class InitSingleton {
     String[] tabPoste = { "Mecanicien", "Electrotechnichien", "Previsionniste" };
     String[] tabNomSpecialite = { "Programmeur", "Admin-Reseaux", "Communication" };
     String[] tabSpecialite = { "8300", "8200", "8100" };
-    String[] tabUnite = { "EDCM", "ESTA", "DSI" };
+    String[] tabUnite = { "DRM", "ETRS", "CNMO-SI" };
     String[] tabUtilisateur = { "Didier", "Serge", "Cecile" };
-    String[] tabVille = { "Paris", "Rennes", "Bordeaux" };
-    String[] tabZMR = { "Creil", "Angers-Rennes", "Bordeaux-Cazaux" };
+    String[] tabVille = { "Creil", "Rennes", "Bordeaux" };
+    String[] tabZMR = { "Creil", "Angers - Rennes", "Bordeaux - Cazaux" };
 
     @PostConstruct
     /**
@@ -221,7 +221,7 @@ public class InitSingleton {
             utilisateur4.setIdentifiantAnudef("Bob");
             utilisateur4.setDateInscription(new Date());
             this.facadeUtilisateur.create(utilisateur4);
-            log.info("Utilisateur 4 créé");
+            log.info("Utilisateur Bob créé");
 
             Utilisateur utilisateur5 = this.facadeUtilisateur.newInstance();
             utilisateur5.setEstValide(false);
@@ -230,7 +230,7 @@ public class InitSingleton {
             utilisateur5.setIdentifiantAnudef("John");
             utilisateur5.setDateInscription(new Date());
             this.facadeUtilisateur.create(utilisateur5);
-            log.info("Utilisateur 5 créé");
+            log.info("Utilisateur John créé");
 
         } else {
             log.info("La table utilisateur contient déja des éléments");

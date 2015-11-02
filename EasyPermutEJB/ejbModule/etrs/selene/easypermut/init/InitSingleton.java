@@ -218,7 +218,7 @@ public class InitSingleton {
             utilisateur4.setEstValide(false);
             utilisateur4.setEstInteresse(false);
             utilisateur4.setInformationsValide(true);
-            utilisateur4.setIdentifiantAnudef("bob");
+            utilisateur4.setIdentifiantAnudef("Bob");
             utilisateur4.setDateInscription(new Date());
             this.facadeUtilisateur.create(utilisateur4);
             log.info("Utilisateur 4 créé");
@@ -227,7 +227,7 @@ public class InitSingleton {
             utilisateur5.setEstValide(false);
             utilisateur5.setInformationsValide(true);
             utilisateur5.setEstInteresse(false);
-            utilisateur5.setIdentifiantAnudef("john");
+            utilisateur5.setIdentifiantAnudef("John");
             utilisateur5.setDateInscription(new Date());
             this.facadeUtilisateur.create(utilisateur5);
             log.info("Utilisateur 5 créé");

@@ -58,8 +58,9 @@ public class VerifierDonneesPageBean implements Serializable {
      */
     public String sauvegarderDonnees() {
 
-        if (this.utilisateur == null)
+        if (this.utilisateur == null) {
             return "/connexion.xhtml";
+        }
         System.out.println(this.utilisateur.getNom());
         this.utilisateur.setInformationsValide(true);
         this.facadeUtilisateur.update(this.utilisateur);

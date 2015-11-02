@@ -14,41 +14,29 @@
 	<ui:define name="content">
 		<div class="container">
 			<div id="myCarousel" class="carousel slide" data-ride="carousel" >
-				<!-- Indicators -->
+
 				<ol class="carousel-indicators">
 					<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
 					<li data-target="#myCarousel" data-slide-to="1"></li>
 					<li data-target="#myCarousel" data-slide-to="2"></li>
 				</ol>
 
-				<!-- Wrapper for slides -->
 				<div class="carousel-inner" role="listbox">
 					<div class="item active">
-						<p:graphicImage url="#{resource['img:demo1.jpg']}" width="80%"/>
+						<img src="#{resource['img:demo1.jpg']}" alt="Image demo" />
 					</div>
 
 					<div class="item">
-						<p:graphicImage url="#{resource['img:demo1.jpg']}" width="80%"/>
+						<img src="#{resource['img:demo2.jpg']}" alt="Image demo" />
 					</div>
-					
+
 					<div class="item">
-						<p:graphicImage url="#{resource['img:demo1.jpg']}" width="80%"/>
+						<img src="#{resource['img:demo3.jpg']}" alt="Image demo" />
 					</div>
 				</div>
 
-				<!-- Left and right controls -->
-				<a class="left carousel-control" href="#myCarousel" role="button"
-					data-slide="prev"> <span
-					class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-					<span class="sr-only">Précedent</span>
-				</a> <a class="right carousel-control" href="#myCarousel" role="button"
-					data-slide="next"> <span
-					class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-					<span class="sr-only">Suivant</span>
-				</a>
+				
 			</div>
 		</div>
-
 	</ui:define>
-
 </ui:composition>

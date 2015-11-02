@@ -4,15 +4,14 @@ body {
 	padding-bottom: 60px;
 }
 
-article
-{
+article {
 	margin-bottom: 50px;
 }
 
 h1 {
 	font-size: 63px;
 	font-weight: 700;
-    text-transform: uppercase;
+	text-transform: uppercase;
 }
 
 nav {
@@ -20,13 +19,12 @@ nav {
 }
 
 .intro-p {
-    font-size: 21px;
-    font-weight: 200;
-    margin-bottom: 15px;
+	font-size: 21px;
+	font-weight: 200;
+	margin-bottom: 15px;
 }
 
-.centre
-{
+.centre {
 	text-align: center;
 }
 
@@ -36,14 +34,15 @@ nav {
 
 .btn-primary {
 	border: none !important;
-    background: #384553 !important;
-    color: #fff !important;
-    text-shadow: none !important;
+	background: #384553 !important;
+	color: #fff !important;
+	text-shadow: none !important;
 }
 
-.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active {
-    background: #4e5a66 !important;
-    text-shadow: none !important;
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active,
+	.btn-primary.active {
+	background: #4e5a66 !important;
+	text-shadow: none !important;
 }
 
 .color-white {
@@ -81,15 +80,14 @@ nav {
 }
 
 .ui-selectonemenu {
-     width: 100% !important;
+	width: 100% !important;
 }
 
 .ui-selectonemenu-label {
-     width: 100% !important;
-}  
+	width: 100% !important;
+}
 
-.titre
-{
+.titre {
 	font-size: 30px;
 	text-align: center;
 }

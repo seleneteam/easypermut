@@ -88,7 +88,7 @@ public class StatsPageBean implements Serializable
 	PieChartModel graphDemandesParZMR;
 	
 	/**
-	 * Graphique des demandes en fonction des Spécialitées.
+	 * Graphique des demandes en fonction des Spécialités.
 	 */
 	PieChartModel graphDemandesParSpe;
 	
@@ -122,7 +122,7 @@ public class StatsPageBean implements Serializable
 	}
 	
 	/**
-	 * Retourne le nombre de demandes de permuations.
+	 * Retourne le nombre de demandes de permutations.
 	 *
 	 * @return le nombre de demandes.
 	 */
@@ -191,7 +191,7 @@ public class StatsPageBean implements Serializable
 	}
 	
 	/**
-	 * Cré et remplit le graphique des demandes par Specilite.
+	 * Cré et remplit le graphique des demandes par Specialité.
 	 */
 	private void creerGraphDemandesParSpe()
 	{
@@ -237,8 +237,8 @@ public class StatsPageBean implements Serializable
 	}
 	
 	/**
-	 * Methode de converssion d'une LocalDate en util.Date
-	 * 
+	 * Methode de convertion d'une LocalDate en util.Date
+	 *
 	 * @param localDate
 	 *            La date a convertir.
 	 * @return une util.Date.

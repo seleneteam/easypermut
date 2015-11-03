@@ -134,6 +134,8 @@ public class StatsPageBean implements Serializable {
 
         Axis xAxis = this.graphUtilisateursParGrade.getAxis(AxisType.X);
         xAxis.setLabel("Grade");
+        xAxis.setTickCount(14);
+        xAxis.setTickAngle(60);
 
         Axis yAxis = this.graphUtilisateursParGrade.getAxis(AxisType.Y);
         yAxis.setLabel("Utilisateurs");

@@ -12,5 +12,11 @@
 
 	<ui:define name="content">
 		<p>Veuillez vous reconnecter d'ici 24 heures.</p>
+		<br />
+		<h:form>
+		<p:commandButton ajax="false" value="Accueil"
+				action="/connexion.xhtml"
+				styleClass="btn-lg btn-default" />
+		</h:form>
 	</ui:define>
 </ui:composition>

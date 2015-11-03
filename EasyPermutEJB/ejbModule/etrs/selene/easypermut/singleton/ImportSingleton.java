@@ -254,6 +254,8 @@ public class ImportSingleton {
                                     eVille.setZmr(eZmr);
                                     this.facadeVille.create(eVille);
                                     log.info(String.format("Ajout de la ville %s", ville.getAttribute("nom")));
+                                } else {
+                                    eVille.setZmr(eZmr);
                                 }
 
                                 NodeList listUnite = ville.getElementsByTagName("unite");
@@ -270,6 +272,8 @@ public class ImportSingleton {
                                             eUnite.setVille(eVille);
                                             this.facadeUnite.create(eUnite);
                                             log.info(String.format("Ajout de l'unitée %s", unite.getAttribute("nom")));
+                                        } else {
+                                            eUnite.setVille(eVille);
                                         }
                                     }
                                 }

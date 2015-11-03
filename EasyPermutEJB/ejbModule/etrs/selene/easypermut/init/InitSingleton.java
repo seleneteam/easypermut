@@ -76,8 +76,8 @@ public class InitSingleton {
 
     String[] tabGrade = { "Caporal", "Caporal-Chef", "Sergent", "Sergent-chef", "Adjudant", "Adjudant-chef", "Major", "Sous-lieutenant", "Lieutenant", "Capitaine", "Commandant", "Lieutenant-colonel", "Colonel", "Général" };
     String[] tabPoste = { "Mecanicien", "Electrotechnichien", "Previsionniste" };
-    String[] tabNomSpecialite = { "Programmeur", "Admin-Reseaux", "Communication" };
-    String[] tabSpecialite = { "8300", "8200", "8100" };
+    String[] tabNomSpecialite = { "Administrateur Reseau", "Programmeur", "Communication" };
+    String[] tabSpecialite = { "8220", "8200", "8100" };
     String[] tabUnite = { "DRM", "ETRS", "CNMO-SI" };
     String[] tabUtilisateur = { "Didier", "Serge", "Cecile" };
     String[] tabVille = { "Creil", "Rennes", "Bordeaux" };

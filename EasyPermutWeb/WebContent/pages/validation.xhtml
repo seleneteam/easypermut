@@ -13,5 +13,11 @@
 	<ui:define name="content">
 		<p>Votre compte à été créé et est en cours de validation.</p>
 		<p>Veuillez vous reconnecter d'ici 24 heures.</p>
+		<br />
+		<h:form>
+		<p:commandButton ajax="false" value="Accueil"
+				action="/connexion.xhtml"
+				styleClass="btn-lg btn-default" />
+		</h:form>
 	</ui:define>
 </ui:composition>
